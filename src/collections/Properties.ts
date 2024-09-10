@@ -11,7 +11,7 @@ import {
   STATES,
   SUB_AREAS,
 } from './options'
-import formatSlug from '@/libs/formatSlug'
+import formatSlug from '@/libs/payload/formatSlug'
 
 const PropertyInfo: CollectionConfig['fields'] = [
   {

@@ -1,19 +1,6 @@
-import { Metadata, ResolvingMetadata } from 'next'
 import ContextProvider from './providers'
-import { getProperty } from './getProperty'
 
-export async function generateMetadata(
-  { params, searchParams }: any,
-  parent: ResolvingMetadata,
-): Promise<Metadata> {
-  const property = await getProperty(params)
-  return {
-    title: property.title,
-    description: property.description,
-  }
-}
-
-export default async function Layout({
+export default function Layout({
   children,
 }: Readonly<{
   children: React.ReactNode

@@ -2,8 +2,8 @@
 
 import React from 'react'
 import { Typography, Box, Button, Skeleton } from '@mui/material'
-import ShareButtons from './ShareButtons.tsx.bak'
-import { useLayoutContext } from '../../providers'
+import ShareButtons from './ShareButtons.tsx'
+import { useLayoutContext } from '../providers'
 
 interface PriceDisplayProps {
   price: string
