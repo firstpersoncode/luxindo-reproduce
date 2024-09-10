@@ -1,6 +1,5 @@
 import { Metadata, ResolvingMetadata } from 'next'
 import ContextProvider from './providers'
-import { get } from 'http'
 import { getProperty } from './getProperty'
 
 export async function generateMetadata(
