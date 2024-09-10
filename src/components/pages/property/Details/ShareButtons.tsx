@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Typography, Skeleton } from '@mui/material'
+import { Box, Text, Skeleton } from '@chakra-ui/react'
 import Image from 'next/image'
 
 interface ShareButtonsProps {
@@ -28,19 +28,17 @@ const ShareButtons: React.FC<ShareButtonsProps> = ({ isLoading = false }) => {
   return (
     <Box
       className="share-container"
-      sx={{
-        display: 'flex',
-        gap: '20px',
-        fontWeight: 400,
-        textAlign: 'right',
-        justifyContent: 'space-between',
-      }}
+      display="flex"
+      gap="20px"
+      fontWeight="400"
+      textAlign="right"
+      justifyContent="space-between"
     >
-      <Typography variant="body2" sx={{ margin: 'auto 0' }}>
-        {isLoading ? <Skeleton variant="text" width={60} /> : 'Share this:'}
-      </Typography>
+      <Text fontSize="sm" margin="auto 0">
+        {isLoading ? <Skeleton height="20px" width="60px" /> : 'Share this:'}
+      </Text>
       {shareIcons.map((icon, index) => (
-        <Box key={index} sx={{height: "20px", width: "20px"}}>
+        <Box key={index} height="20px" width="20px">
           <Image src={icon.src} alt={icon.alt} fill objectFit="cover" />
         </Box>
       ))}

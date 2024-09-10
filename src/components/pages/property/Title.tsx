@@ -1,48 +1,30 @@
-import React from 'react'
-import { Typography, Skeleton, Box } from '@mui/material'
+import React from 'react';
+import { Heading, Text, Skeleton, Box } from '@chakra-ui/react';
 
 interface VillaListingProps {
-  title: string
-  location: string
-  isLoading?: boolean
+  title: string;
+  location: string;
+  isLoading?: boolean;
 }
 
 const VillaListing: React.FC<VillaListingProps> = ({ title, location, isLoading = false }) => {
   return (
     <Box
-      component="header"
-      sx={{
-        textAlign: 'left',
-        padding: '20px',
-        '@media (max-width: 991px)': {
-          maxWidth: '100%',
-        },
-      }}
+      as="header"
+      textAlign="left"
+      p="20px"
+      maxW={{ base: '100%' }}
     >
-      {isLoading && <Skeleton variant="text" width="100%" height={80} />}
+      {isLoading && <Skeleton height="80px" width="100%" />}
 
-      <Box sx={{ contentVisibility: isLoading ? 'hidden' : 'visible' }}>
-        <Typography
-          variant="h1"
-          sx={{
-            fontSize: '24px',
-            fontWeight: 'bold',
-            marginBottom: '8px',
-          }}
-        >
+      <Box visibility={isLoading ? 'hidden' : 'visible'}>
+        <Heading as="h1" fontSize="24px" fontWeight="bold" mb="8px">
           {title}
-        </Typography>
-        <Typography
-          variant="subtitle1"
-          sx={{
-            fontWeight: 400,
-          }}
-        >
-          {location}
-        </Typography>
+        </Heading>
+        <Text fontWeight="400">{location}</Text>
       </Box>
     </Box>
-  )
+  );
 }
 
-export default VillaListing
+export default VillaListing;

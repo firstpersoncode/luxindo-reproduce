@@ -1,7 +1,5 @@
-'use client'
-
 import React from 'react'
-import { Box, Skeleton, Typography } from '@mui/material'
+import { Box, Skeleton, Text } from '@chakra-ui/react'
 import { useLayoutContext } from '../Providers'
 
 interface PropertyDetailProps {
@@ -13,21 +11,22 @@ const PropertyDetail: React.FC<PropertyDetailProps> = ({ label, value }) => {
   const { isLoading } = useLayoutContext()
 
   return (
-    <Box sx={{ fontWeight: 400 }}>
+    <Box fontWeight="400">
       {isLoading && (
         <Box>
-          <Skeleton variant="text" width="100%" height={80} />
-          <Skeleton variant="text" width="100%" height={80} />
+          <Skeleton height="80px" width="100%" />
+          <Skeleton height="80px" width="100%" />
         </Box>
       )}
 
-      <Box sx={{ contentVisibility: isLoading ? 'hidden' : 'visible' }}>
-        <Typography component="span">{label}: </Typography>
-        <Typography component="span" sx={{ fontWeight: 700 }}>
+      <Box visibility={isLoading ? 'hidden' : 'visible'}>
+        <Text as="span">{label}: </Text>
+        <Text as="span" fontWeight="700">
           {value}
-        </Typography>
+        </Text>
       </Box>
     </Box>
   )
 }
+
 export default PropertyDetail

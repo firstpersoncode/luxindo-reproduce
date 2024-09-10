@@ -1,17 +1,16 @@
 import { AppProps } from 'next/app'
-import { ThemeProvider } from '@mui/material/styles'
-import theme from '@/libs/theme'
 import Layout from '@/components/Layout'
 import { useRouter } from 'next/router'
+import { ChakraProvider } from '@chakra-ui/react'
 
 function App({ Component, pageProps }: AppProps) {
   const { asPath } = useRouter()
   return (
-    <ThemeProvider theme={theme}>
+    <ChakraProvider>
       <Layout>
         <Component key={asPath} {...pageProps} />
       </Layout>
-    </ThemeProvider>
+    </ChakraProvider>
   )
 }
 
