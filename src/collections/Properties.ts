@@ -1,0 +1,295 @@
+import { CollectionConfig } from 'payload'
+import {
+  AMENITIES,
+  AREAS,
+  COUNTRIES,
+  CURRENCIES,
+  PLANS,
+  PROPERTY_OWNERSHIP,
+  PROPERTY_TYPES,
+  SPACES,
+  STATES,
+  SUB_AREAS,
+} from './options'
+import { useEffect, useState } from 'react'
+
+const PropertyInfo: CollectionConfig['fields'] = [
+  {
+    name: 'title',
+    label: 'Title',
+    type: 'text',
+    required: true,
+  },
+
+  {
+    name: 'description',
+    label: 'Description',
+    type: 'textarea',
+    required: true,
+  },
+  {
+    name: 'sku',
+    label: 'SKU',
+    type: 'text',
+    required: true,
+  },
+
+  {
+    name: 'type',
+    label: 'Type',
+    type: 'select',
+    required: false,
+    options: PROPERTY_TYPES,
+  },
+
+  {
+    name: 'ownership',
+    label: 'Ownership',
+    type: 'select',
+    required: false,
+    options: PROPERTY_OWNERSHIP,
+  },
+
+  {
+    name: 'price',
+    label: 'Price',
+    type: 'number',
+    required: false,
+    defaultValue: 0,
+  },
+
+  {
+    name: 'currency',
+    label: 'Currency',
+    type: 'select',
+    required: false,
+    options: CURRENCIES,
+  },
+
+  {
+    name: 'agent',
+    label: 'Agent',
+    type: 'relationship',
+    relationTo: 'agents',
+    hasMany: false,
+    required: true,
+  },
+]
+
+const PropertyDetails: CollectionConfig['fields'] = [
+  {
+    name: 'plans',
+    label: 'Plans',
+    type: 'array',
+    fields: [
+      {
+        name: 'title',
+        label: 'Title',
+        type: 'select',
+        required: true,
+        options: PLANS,
+      },
+      {
+        name: 'value',
+        label: 'Value',
+        type: 'text',
+        required: false,
+      },
+    ],
+  },
+  {
+    name: 'spaces',
+    label: 'Spaces',
+    type: 'array',
+    fields: [
+      {
+        name: 'title',
+        label: 'Title',
+        type: 'select',
+        required: true,
+        options: SPACES,
+      },
+      {
+        name: 'value',
+        label: 'Value',
+        type: 'text',
+        required: false,
+      },
+    ],
+  },
+  {
+    name: 'amenities',
+    label: 'Amenities',
+    type: 'array',
+    fields: [
+      {
+        name: 'title',
+        label: 'Title',
+        type: 'select',
+        required: true,
+        options: AMENITIES,
+      },
+      {
+        name: 'value',
+        label: 'Value',
+        type: 'text',
+        required: false,
+      },
+    ],
+  },
+  {
+    name: 'descriptions',
+    label: 'Descriptions',
+    type: 'richText',
+    required: false,
+  },
+]
+
+const PropertyLocation: CollectionConfig['fields'] = [
+  {
+    name: 'area_1',
+    label: 'Area',
+    type: 'select',
+    required: false,
+    options: AREAS,
+  },
+  {
+    name: 'area_2',
+    label: 'Sub Area',
+    type: 'select',
+    required: false,
+    options: SUB_AREAS,
+  },
+  {
+    name: 'address',
+    label: 'Address',
+    type: 'text',
+    required: false,
+  },
+
+  {
+    label: 'Geolocation',
+    type: 'collapsible',
+    admin: {
+      initCollapsed: true,
+    },
+    fields: [
+      {
+        name: 'lat',
+        label: 'Latitude',
+        type: 'number',
+        required: false,
+        defaultValue: 0,
+      },
+      {
+        name: 'lng',
+        label: 'Longitude',
+        type: 'number',
+        required: false,
+        defaultValue: 0,
+      },
+      {
+        name: 'country',
+        label: 'Country',
+        type: 'select',
+        required: false,
+        options: COUNTRIES,
+      },
+      {
+        name: 'state',
+        label: 'State',
+        type: 'select',
+        required: false,
+        options: STATES,
+      },
+      {
+        name: 'street_name',
+        label: 'Street Name',
+        type: 'text',
+        required: false,
+      },
+      {
+        name: 'street_number',
+        label: 'Street Number',
+        type: 'text',
+        required: false,
+      },
+      {
+        name: 'post_code',
+        label: 'Post Code',
+        type: 'text',
+        required: false,
+      },
+    ],
+  },
+]
+
+const PropertyGallery: CollectionConfig['fields'] = [
+  {
+    name: 'images',
+    label: 'Images',
+    type: 'array',
+    fields: [
+      {
+        name: 'file',
+        label: 'File',
+        type: 'upload',
+        relationTo: 'media',
+        required: true,
+      },
+      {
+        name: 'alt',
+        label: 'Alt',
+        type: 'text',
+        required: false,
+      },
+    ],
+  },
+
+  {
+    name: 'video',
+    label: 'Video',
+    type: 'text',
+    required: false,
+  },
+]
+
+export const Properties: CollectionConfig = {
+  slug: 'properties',
+  admin: {
+    useAsTitle: 'title',
+  },
+  access: {
+    create: () => true,
+    update: () => true,
+    read: () => true,
+    delete: () => true,
+  },
+  fields: [
+    {
+      type: 'tabs',
+      tabs: [
+        {
+          label: 'Info',
+          description: 'Property Information',
+          fields: PropertyInfo,
+        },
+        {
+          label: 'Details',
+          description: 'Property Details',
+          fields: PropertyDetails,
+        },
+        {
+          label: 'Location',
+          description: 'Property Location',
+          fields: PropertyLocation,
+        },
+        {
+          label: 'Gallery',
+          description: 'Property Gallery',
+          fields: PropertyGallery,
+        },
+      ],
+    },
+  ],
+}
