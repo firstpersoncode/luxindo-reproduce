@@ -10,8 +10,8 @@ const getProperty = async (searchParams: any) => {
     collection: 'properties', // required
     where: { slug: { equals: searchParams.slug } },
     // depth: 2,
-    // locale: 'en',
-    // fallbackLocale: false,
+    locale: searchParams.locale,
+    fallbackLocale: 'en',
     // user: dummyUser,
     // overrideAccess: false,
     // showHiddenFields: true,

@@ -18,8 +18,8 @@ const PropertyInfo: CollectionConfig['fields'] = [
     name: 'title',
     label: 'Title',
     type: 'text',
-    required: true,
-    localized: true
+    required: false,
+    localized: true,
   },
 
   {
@@ -27,7 +27,7 @@ const PropertyInfo: CollectionConfig['fields'] = [
     label: 'Slug',
     type: 'text',
     index: true,
-    required: true,
+    required: false,
     hooks: {
       beforeValidate: [formatSlug('title')],
     },
@@ -37,14 +37,14 @@ const PropertyInfo: CollectionConfig['fields'] = [
     name: 'description',
     label: 'Description',
     type: 'textarea',
-    required: true,
+    required: false,
     localized: true
   },
   {
     name: 'sku',
     label: 'SKU',
     type: 'text',
-    required: true,
+    required: false,
   },
 
   {
@@ -85,7 +85,7 @@ const PropertyInfo: CollectionConfig['fields'] = [
     type: 'relationship',
     relationTo: 'agents',
     hasMany: false,
-    required: true,
+    required: false,
     admin: {
       position: 'sidebar',
     },
@@ -102,7 +102,7 @@ const PropertyDetails: CollectionConfig['fields'] = [
         name: 'title',
         label: 'Title',
         type: 'select',
-        required: true,
+        required: false,
         options: PLANS,
         localized: true
       },
@@ -124,7 +124,7 @@ const PropertyDetails: CollectionConfig['fields'] = [
         name: 'title',
         label: 'Title',
         type: 'select',
-        required: true,
+        required: false,
         options: SPACES,
         localized: true
       },
@@ -146,7 +146,7 @@ const PropertyDetails: CollectionConfig['fields'] = [
         name: 'title',
         label: 'Title',
         type: 'select',
-        required: true,
+        required: false,
         options: AMENITIES,
         localized: true
       },
