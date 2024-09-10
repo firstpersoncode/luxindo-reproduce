@@ -106,6 +106,7 @@ export interface Agent {
 export interface Property {
   id: number;
   title: string;
+  slug: string;
   description: string;
   sku: string;
   type?:

@@ -1285,7 +1285,7 @@ export const AMENITIES = [
     value: 'Reversed osmosis filtered water',
   },
   {
-    label: 'Solar power heating water (backed up with instant gas water heater)',
+    label: 'Solar power heating water',
     value: 'Solar power heating water',
   },
   {

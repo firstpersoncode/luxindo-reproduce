@@ -11,7 +11,7 @@ import {
   STATES,
   SUB_AREAS,
 } from './options'
-import { useEffect, useState } from 'react'
+import formatSlug from '@/libs/formatSlug'
 
 const PropertyInfo: CollectionConfig['fields'] = [
   {
@@ -19,6 +19,17 @@ const PropertyInfo: CollectionConfig['fields'] = [
     label: 'Title',
     type: 'text',
     required: true,
+  },
+
+  {
+    name: 'slug',
+    label: 'Slug',
+    type: 'text',
+    index: true,
+    required: true,
+    hooks: {
+      beforeValidate: [formatSlug('title')],
+    },
   },
 
   {
@@ -73,6 +84,9 @@ const PropertyInfo: CollectionConfig['fields'] = [
     relationTo: 'agents',
     hasMany: false,
     required: true,
+    admin: {
+      position: 'sidebar',
+    },
   },
 ]
 
