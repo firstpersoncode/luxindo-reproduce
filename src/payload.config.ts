@@ -53,6 +53,11 @@ export default buildConfig({
     // },
   },
   collections: [Users, Media, Agents, Properties],
+  localization: {
+    locales: ['en', 'id', 'fr'],
+    defaultLocale: 'en',
+    fallback: true,
+  },
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

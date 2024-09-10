@@ -19,6 +19,7 @@ const PropertyInfo: CollectionConfig['fields'] = [
     label: 'Title',
     type: 'text',
     required: true,
+    localized: true
   },
 
   {
@@ -37,6 +38,7 @@ const PropertyInfo: CollectionConfig['fields'] = [
     label: 'Description',
     type: 'textarea',
     required: true,
+    localized: true
   },
   {
     name: 'sku',
@@ -102,12 +104,14 @@ const PropertyDetails: CollectionConfig['fields'] = [
         type: 'select',
         required: true,
         options: PLANS,
+        localized: true
       },
       {
         name: 'value',
         label: 'Value',
         type: 'text',
         required: false,
+        localized: true
       },
     ],
   },
@@ -122,12 +126,14 @@ const PropertyDetails: CollectionConfig['fields'] = [
         type: 'select',
         required: true,
         options: SPACES,
+        localized: true
       },
       {
         name: 'value',
         label: 'Value',
         type: 'text',
         required: false,
+        localized: true
       },
     ],
   },
@@ -142,12 +148,14 @@ const PropertyDetails: CollectionConfig['fields'] = [
         type: 'select',
         required: true,
         options: AMENITIES,
+        localized: true
       },
       {
         name: 'value',
         label: 'Value',
         type: 'text',
         required: false,
+        localized: true
       },
     ],
   },
@@ -156,6 +164,7 @@ const PropertyDetails: CollectionConfig['fields'] = [
     label: 'Descriptions',
     type: 'richText',
     required: false,
+    localized: true
   },
 ]
 

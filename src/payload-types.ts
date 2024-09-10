@@ -22,7 +22,7 @@ export interface Config {
     defaultIDType: number;
   };
   globals: {};
-  locale: null;
+  locale: 'en' | 'id' | 'fr';
   user: User & {
     collection: 'users';
   };
