@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { Box, Skeleton } from '@mui/material'
-import PropertyDetail from './PropertyDetail.tsx'
+import PropertyDetail from './PropertyDetail'
 
 interface PropertyDetailsProps {
   sku: string

@@ -1,9 +1,6 @@
 import type { Metadata, ResolvingMetadata } from 'next'
 import localFont from 'next/font/local'
 import './globals.css'
-import Header from './components/Header'
-import Footer from './components/Footer'
-import { Providers } from './providers'
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -16,17 +13,17 @@ const geistMono = localFont({
 
 export async function generateMetadata(
   { params, searchParams }: any,
-  parent: ResolvingMetadata
+  parent: ResolvingMetadata,
 ): Promise<Metadata> {
   // // read route params
   // const id = params.id
- 
+
   // // fetch data
   // const product = await fetch(`https://.../${id}`).then((res) => res.json())
- 
+
   // // optionally access and extend (rather than replace) parent metadata
   // const previousImages = (await parent).openGraph?.images || []
- 
+
   // return {
   //   title: product.title,
   //   openGraph: {
@@ -34,7 +31,7 @@ export async function generateMetadata(
   //   },
   // }
   return {
-    title: "Hello"
+    title: 'Hello',
   }
 }
 
@@ -45,13 +42,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <Providers>
-          <Header />
-          {children}
-          <Footer />
-        </Providers>
-      </body>
+      <body className={`${geistSans.variable} ${geistMono.variable}`}>{children}</body>
     </html>
   )
 }

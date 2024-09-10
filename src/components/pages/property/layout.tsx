@@ -1,4 +1,4 @@
-import ContextProvider from './providers'
+import ContextProvider from './Providers'
 
 export default function Layout({
   children,

@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { Box, Skeleton, Typography } from '@mui/material'
-import { useLayoutContext } from '../providers'
+import { useLayoutContext } from '../Providers'
 
 interface PropertyDetailProps {
   label: string
