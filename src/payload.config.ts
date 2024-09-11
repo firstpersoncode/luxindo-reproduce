@@ -5,15 +5,33 @@ import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
+import { s3Storage } from '@payloadcms/storage-s3'
+
+// import { S3Client } from '@aws-sdk/client-s3'
+// import s3Upload from 'payload-s3-upload'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { Agents } from './collections/Agents'
 import { Properties } from './collections/Properties'
 
+const storagePlugin = s3Storage({
+  collections: {
+    media: true,
+  },
+  bucket: process.env.S3_BUCKET_NAME as string,
+  config: {
+    endpoint: process.env.S3_ENDPOINT,
+    region: process.env.S3_REGION,
+    credentials: {
+      accessKeyId: process.env.S3_ACCESS_KEY as string,
+      secretAccessKey: process.env.S3_SECRET_KEY as string,
+    },
+  },
+})
+
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
-
 
 export default buildConfig({
   admin: {
@@ -21,36 +39,6 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
-    // livePreview: {
-    //   url: ({
-    //     data,
-    //     documentInfo,
-    //     locale
-    //   }) => `${data.tenant.url}${ // Multi-tenant top-level domain
-    //     documentInfo.slug === 'posts' ? `/posts/${data.slug}` : `${data.slug !== 'home' ? `/${data.slug}` : ''}`
-    //   }${locale ? `?locale=${locale?.code}` : ''}`,
-    //   collections: ['pages', 'properties', 'agents'],
-    //   breakpoints: [
-    //     {
-    //       label: 'Mobile',
-    //       name: 'mobile',
-    //       width: 375,
-    //       height: 667,
-    //     },
-    //     {
-    //       label: 'Tablet',
-    //       name: 'tablet',
-    //       width: 768,
-    //       height: 1024,
-    //     },
-    //     {
-    //       label: 'Desktop',
-    //       name: 'desktop',
-    //       width: 1440,
-    //       height: 900,
-    //     },
-    //   ],
-    // },
   },
   collections: [Users, Media, Agents, Properties],
   localization: {
@@ -70,7 +58,17 @@ export default buildConfig({
   }),
   sharp,
   plugins: [
-    // storage-adapter-placeholder
+    storagePlugin,
+
+    // s3Upload(
+    //   new S3Client({
+    //     endpoint: process.env.S3_ENDPOINT,
+    //     region: process.env.S3_REGION,
+    //     credentials: {
+    //       accessKeyId: process.env.S3_ACCESS_KEY as string,
+    //       secretAccessKey: process.env.S3_SECRET_KEY as string,
+    //     },
+    //   }),
+    // ),
   ],
-  
 })

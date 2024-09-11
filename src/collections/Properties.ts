@@ -281,6 +281,13 @@ export const Properties: CollectionConfig = {
   slug: 'properties',
   admin: {
     useAsTitle: 'title',
+    preview: (doc, { locale }) => {
+      if (doc?.slug) {
+        return `${process.env.APP_URL}/property/${locale}/${doc.slug}?mode=preview`
+      }
+
+      return null
+    },
   },
   access: {
     create: () => true,
