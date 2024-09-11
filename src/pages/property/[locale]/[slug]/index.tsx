@@ -1,9 +1,9 @@
 import VillaTitle from '@/components/pages/property/Title'
 import VillaDetails from '@/components/pages/property/Details'
 import PropertyDetails from '@/components/pages/property/PropertyDetails'
-import Layout from "@/components/pages/property/Layout"
-import { getProperty } from "@/libs/payload/getProperty"
-import Head from "next/head"
+import Layout from '@/components/pages/property/Layout'
+import { getProperty } from '@/libs/payload/getProperty'
+import Head from 'next/head'
 
 export default function Page({ property }: any) {
   return (
@@ -21,7 +21,7 @@ export default function Page({ property }: any) {
         currency={property.currency as string}
       />
       <PropertyDetails sku={property.sku as string} propertyType={property.type as string} />
-      
+
       {property ? <pre>{JSON.stringify(property, null, 2)}</pre> : 'Property not found'}
     </Layout>
   )
