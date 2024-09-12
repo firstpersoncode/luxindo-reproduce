@@ -3,12 +3,12 @@ import { Box, Text, Skeleton, Button } from '@chakra-ui/react'
 import ShareButtons from './ShareButtons'
 import { useLayoutContext } from '../Providers'
 
-interface PriceDisplayProps {
+interface PriceInfoProps {
   price: string
   currency: string
 }
 
-const PriceDisplay: React.FC<PriceDisplayProps> = ({ price, currency }) => {
+const PriceInfo: React.FC<PriceInfoProps> = ({ price, currency }) => {
   const { isLoading } = useLayoutContext()
 
   return (
@@ -96,4 +96,4 @@ const PriceDisplay: React.FC<PriceDisplayProps> = ({ price, currency }) => {
   )
 }
 
-export default PriceDisplay
+export default PriceInfo

@@ -2,12 +2,12 @@ import React from 'react'
 import { Box } from '@chakra-ui/react'
 import PropertyDetail from './PropertyDetail'
 
-interface PropertyDetailsProps {
+interface PropertyInfosProps {
   sku: string
   propertyType: string
 }
 
-const PropertyDetails: React.FC<PropertyDetailsProps> = ({ sku, propertyType }) => {
+const PropertyInfos: React.FC<PropertyInfosProps> = ({ sku, propertyType }) => {
   const details = [
     { label: 'SKU', value: sku },
     { label: 'Property type', value: propertyType },
@@ -35,4 +35,4 @@ const PropertyDetails: React.FC<PropertyDetailsProps> = ({ sku, propertyType }) 
   )
 }
 
-export default PropertyDetails
+export default PropertyInfos

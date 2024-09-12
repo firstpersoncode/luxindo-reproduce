@@ -38,7 +38,7 @@ const PropertyInfo: CollectionConfig['fields'] = [
     label: 'Description',
     type: 'textarea',
     required: false,
-    localized: true
+    localized: true,
   },
   {
     name: 'sku',
@@ -99,19 +99,34 @@ const PropertyDetails: CollectionConfig['fields'] = [
     type: 'array',
     fields: [
       {
+        name: 'icon',
+        label: 'Icon',
+        type: 'upload',
+        relationTo: 'media',
+        required: false,
+      },
+      {
+        name: 'icon_placeholder',
+        admin: {
+          hidden: true,
+        },
+        type: 'text',
+        required: false,
+      },
+      {
         name: 'title',
         label: 'Title',
         type: 'select',
         required: false,
         options: PLANS,
-        localized: true
+        localized: true,
       },
       {
         name: 'value',
         label: 'Value',
         type: 'text',
         required: false,
-        localized: true
+        localized: true,
       },
     ],
   },
@@ -121,19 +136,26 @@ const PropertyDetails: CollectionConfig['fields'] = [
     type: 'array',
     fields: [
       {
+        name: 'icon',
+        label: 'Icon',
+        type: 'upload',
+        relationTo: 'media',
+        required: false,
+      },
+      {
         name: 'title',
         label: 'Title',
         type: 'select',
         required: false,
         options: SPACES,
-        localized: true
+        localized: true,
       },
       {
         name: 'value',
         label: 'Value',
         type: 'text',
         required: false,
-        localized: true
+        localized: true,
       },
     ],
   },
@@ -143,19 +165,26 @@ const PropertyDetails: CollectionConfig['fields'] = [
     type: 'array',
     fields: [
       {
+        name: 'icon',
+        label: 'Icon',
+        type: 'upload',
+        relationTo: 'media',
+        required: false,
+      },
+      {
         name: 'title',
         label: 'Title',
         type: 'select',
         required: false,
         options: AMENITIES,
-        localized: true
+        localized: true,
       },
       {
         name: 'value',
         label: 'Value',
         type: 'text',
         required: false,
-        localized: true
+        localized: true,
       },
     ],
   },
@@ -164,7 +193,7 @@ const PropertyDetails: CollectionConfig['fields'] = [
     label: 'Descriptions',
     type: 'richText',
     required: false,
-    localized: true
+    localized: true,
   },
 ]
 
@@ -259,12 +288,6 @@ const PropertyGallery: CollectionConfig['fields'] = [
         type: 'upload',
         relationTo: 'media',
         required: true,
-      },
-      {
-        name: 'alt',
-        label: 'Alt',
-        type: 'text',
-        required: false,
       },
     ],
   },

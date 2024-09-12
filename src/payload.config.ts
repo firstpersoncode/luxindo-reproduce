@@ -5,8 +5,9 @@ import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
-import { s3Storage } from '@payloadcms/storage-s3'
+import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 
+// import { s3Storage } from '@payloadcms/storage-s3'
 // import { S3Client } from '@aws-sdk/client-s3'
 // import s3Upload from 'payload-s3-upload'
 
@@ -15,20 +16,20 @@ import { Media } from './collections/Media'
 import { Agents } from './collections/Agents'
 import { Properties } from './collections/Properties'
 
-const storagePlugin = s3Storage({
-  collections: {
-    media: true,
-  },
-  bucket: process.env.S3_BUCKET_NAME as string,
-  config: {
-    endpoint: process.env.S3_ENDPOINT,
-    region: process.env.S3_REGION,
-    credentials: {
-      accessKeyId: process.env.S3_ACCESS_KEY as string,
-      secretAccessKey: process.env.S3_SECRET_KEY as string,
-    },
-  },
-})
+// const storagePlugin = s3Storage({
+//   collections: {
+//     media: true,
+//   },
+//   bucket: process.env.S3_BUCKET_NAME as string,
+//   config: {
+//     endpoint: process.env.S3_ENDPOINT,
+//     region: process.env.S3_REGION,
+//     credentials: {
+//       accessKeyId: process.env.S3_ACCESS_KEY as string,
+//       secretAccessKey: process.env.S3_SECRET_KEY as string,
+//     },
+//   },
+// })
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -58,7 +59,7 @@ export default buildConfig({
   }),
   sharp,
   plugins: [
-    storagePlugin,
+    // storagePlugin,
 
     // s3Upload(
     //   new S3Client({
@@ -70,5 +71,12 @@ export default buildConfig({
     //     },
     //   }),
     // ),
+
+    vercelBlobStorage({
+      collections: {
+        [Media.slug]: true,
+      },
+      token: process.env.BLOB_READ_WRITE_TOKEN || '',
+    }),
   ],
 })

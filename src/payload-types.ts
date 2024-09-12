@@ -118,6 +118,8 @@ export interface Property {
   agent?: (number | null) | Agent;
   plans?:
     | {
+        icon?: (number | null) | Media;
+        icon_placeholder?: string | null;
         title?: ('Area (M 2)' | 'Bedrooms' | 'Bathrooms' | 'Garages' | 'Rooms') | null;
         value?: string | null;
         id?: string | null;
@@ -125,6 +127,7 @@ export interface Property {
     | null;
   spaces?:
     | {
+        icon?: (number | null) | Media;
         title?:
           | (
               | 'Land Size'
@@ -301,6 +304,7 @@ export interface Property {
     | null;
   amenities?:
     | {
+        icon?: (number | null) | Media;
         title?:
           | (
               | 'City Center View'
@@ -493,7 +497,6 @@ export interface Property {
   images?:
     | {
         file: number | Media;
-        alt?: string | null;
         id?: string | null;
       }[]
     | null;
