@@ -1,15 +1,16 @@
+'use client'
+
 import React from 'react'
 import { Box, Text, Skeleton, Button } from '@chakra-ui/react'
 import ShareButtons from './ShareButtons'
-import { useLayoutContext } from '../Providers'
+import { useContextProvider } from '../../libs/providers'
+import Image from 'next/image'
 
-interface PriceInfoProps {
-  price: string
-  currency: string
-}
-
-const PriceInfo: React.FC<PriceInfoProps> = ({ price, currency }) => {
-  const { isLoading } = useLayoutContext()
+const PriceInfo: React.FC = () => {
+  const {
+    isLoading,
+    data: { price, currency },
+  } = useContextProvider()
 
   return (
     <Box
@@ -70,11 +71,11 @@ const PriceInfo: React.FC<PriceInfoProps> = ({ price, currency }) => {
             isLoading ? (
               <Skeleton height="14px" width="14px" />
             ) : (
-              <img
+              <Image
                 src="https://cdn.builder.io/api/v1/image/assets/TEMP/5aa858373064b1cdf1dd578ff5eae01c115e97bc193cf3aca4e2b4b51af14a2d?placeholderIfAbsent=true&apiKey=a9b95505e95b4a99931826297eec4185"
                 alt=""
-                width="14px"
-                height="14px"
+                width={14}
+                height={14}
               />
             )
           }

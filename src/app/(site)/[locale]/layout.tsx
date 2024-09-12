@@ -1,6 +1,8 @@
 import type { Metadata, ResolvingMetadata } from 'next'
 import localFont from 'next/font/local'
 import './globals.css'
+import Header from './components/Header'
+import Footer from './components/Footer'
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -37,12 +39,18 @@ export async function generateMetadata(
 
 export default function RootLayout({
   children,
+  params: { locale },
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode;
+  params: { locale: string };
 }>) {
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>{children}</body>
+    <html lang={locale}>
+      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        <Header />
+        {children}
+        <Footer />
+      </body>
     </html>
   )
 }

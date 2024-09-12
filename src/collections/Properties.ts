@@ -10,8 +10,8 @@ import {
   SPACES,
   STATES,
   SUB_AREAS,
-} from './options'
-import formatSlug from '@/libs/payload/formatSlug'
+} from '@/libs/options'
+import { formatSlug } from '@/libs/utils'
 
 const PropertyInfo: CollectionConfig['fields'] = [
   {
@@ -306,7 +306,7 @@ export const Properties: CollectionConfig = {
     useAsTitle: 'title',
     preview: (doc, { locale }) => {
       if (doc?.slug) {
-        return `${process.env.APP_URL}/property/${locale}/${doc.slug}?mode=preview`
+        return `${process.env.APP_URL}/${locale}/properties/${doc.slug}?mode=preview`
       }
 
       return null

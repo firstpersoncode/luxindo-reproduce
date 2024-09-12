@@ -16,6 +16,8 @@ import { Media } from './collections/Media'
 import { Agents } from './collections/Agents'
 import { Properties } from './collections/Properties'
 
+import { locales, defaultLocale } from './libs/locales'
+
 // const storagePlugin = s3Storage({
 //   collections: {
 //     media: true,
@@ -43,8 +45,8 @@ export default buildConfig({
   },
   collections: [Users, Media, Agents, Properties],
   localization: {
-    locales: ['en', 'id', 'fr'],
-    defaultLocale: 'en',
+    locales,
+    defaultLocale,
     fallback: true,
   },
   editor: lexicalEditor(),

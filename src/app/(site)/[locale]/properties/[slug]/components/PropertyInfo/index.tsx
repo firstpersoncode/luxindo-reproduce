@@ -1,13 +1,15 @@
+'use client'
+
 import React from 'react'
 import { Box } from '@chakra-ui/react'
 import PropertyDetail from './PropertyDetail'
+import { useContextProvider } from '../../libs/providers'
 
-interface PropertyInfosProps {
-  sku: string
-  propertyType: string
-}
+const PropertyInfos: React.FC = () => {
+  const {
+    data: { sku, type: propertyType },
+  } = useContextProvider()
 
-const PropertyInfos: React.FC<PropertyInfosProps> = ({ sku, propertyType }) => {
   const details = [
     { label: 'SKU', value: sku },
     { label: 'Property type', value: propertyType },
@@ -29,7 +31,7 @@ const PropertyInfos: React.FC<PropertyInfosProps> = ({ sku, propertyType }) => {
       lineHeight="1.6"
     >
       {details.map((detail, index) => (
-        <PropertyDetail key={index} label={detail.label} value={detail.value} />
+        <PropertyDetail key={index} label={detail.label} value={detail.value as string} />
       ))}
     </Box>
   )

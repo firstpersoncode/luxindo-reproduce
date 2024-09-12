@@ -1,6 +1,8 @@
+'use client'
+
 import React from 'react'
 import { Box, Skeleton, Text } from '@chakra-ui/react'
-import { useLayoutContext } from '../Providers'
+import { useContextProvider } from '../../libs/providers'
 
 interface PropertyDetailProps {
   label: string
@@ -8,7 +10,7 @@ interface PropertyDetailProps {
 }
 
 const PropertyDetail: React.FC<PropertyDetailProps> = ({ label, value }) => {
-  const { isLoading } = useLayoutContext()
+  const { isLoading } = useContextProvider()
 
   return (
     <Box fontWeight="400">

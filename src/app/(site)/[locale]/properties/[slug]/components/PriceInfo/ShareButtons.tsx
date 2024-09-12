@@ -1,6 +1,6 @@
 import React from 'react'
-import { Box, Text, Skeleton } from '@chakra-ui/react'
 import Image from 'next/image'
+import { Box, HStack, Text } from '@chakra-ui/react'
 
 interface ShareButtonsProps {
   isLoading?: boolean
@@ -26,23 +26,14 @@ const ShareButtons: React.FC<ShareButtonsProps> = ({ isLoading = false }) => {
   ]
 
   return (
-    <Box
-      className="share-container"
-      display="flex"
-      gap="20px"
-      fontWeight="400"
-      textAlign="right"
-      justifyContent="space-between"
-    >
-      <Text fontSize="sm" margin="auto 0">
-        {isLoading ? <Skeleton height="20px" width="60px" /> : 'Share this:'}
-      </Text>
+    <HStack>
+      <Text>Share this:</Text>
       {shareIcons.map((icon, index) => (
-        <Box key={index} height="20px" width="20px">
-          <Image src={icon.src} alt={icon.alt} fill objectFit="cover" />
+        <Box key={index}h="20px" w="20px" position="relative">
+          <Image src={icon.src} alt={icon.alt} fill className="object-cover" />
         </Box>
       ))}
-    </Box>
+    </HStack>
   )
 }
 
