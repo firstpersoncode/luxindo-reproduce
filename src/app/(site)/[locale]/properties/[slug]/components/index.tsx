@@ -30,7 +30,7 @@ export default function Components() {
       <Agent />
       <Related />
 
-      {data ? <pre style={{fontSize: "10px"}}>{JSON.stringify(data, null, 2)}</pre> : 'Property not found'}
+      {/* {data ? <pre style={{fontSize: "10px"}}>{JSON.stringify(data, null, 2)}</pre> : 'Property not found'} */}
     </Container>
   )
 }
