@@ -4,7 +4,7 @@ import Title from './Title'
 import PriceInfo from './PriceInfo'
 import PropertyInfo from './PropertyInfo'
 import Gallery from './Gallery'
-import { useContextProvider } from '../libs/providers'
+// import { useContextProvider } from '../libs/providers'
 import Video from './Video'
 import Map from './Map'
 import PropertyDetails from './PropertyDetails'
@@ -15,7 +15,7 @@ import { Container } from '@chakra-ui/react'
 import Amenities from './Amenities'
 
 export default function Components() {
-  const { data } = useContextProvider()
+  // const { data } = useContextProvider()
   return (
     <Container>
       <Title />
