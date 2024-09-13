@@ -2,14 +2,12 @@
 
 import { CacheProvider } from '@chakra-ui/next-js'
 import { ChakraProvider } from '@chakra-ui/react'
-import { Agent, Property } from '@/payload-types'
+import { Agent, Media, Property } from '@/payload-types'
 import { createContext, useContext, useEffect, useState } from 'react'
 
 export interface IContext {
   isLoading?: boolean
-  data: Property & {
-    agent?: Agent
-  }
+  data: any
 }
 
 const context: IContext = {

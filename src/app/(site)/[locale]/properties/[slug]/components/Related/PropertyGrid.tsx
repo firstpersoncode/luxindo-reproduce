@@ -10,6 +10,7 @@ interface Property {
   currency: string
   imageSrc: string
   image: { url: string }
+  slug: string
 }
 
 interface PropertyGridProps {

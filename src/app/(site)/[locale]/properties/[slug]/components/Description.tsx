@@ -32,7 +32,7 @@ const DescriptionSection: React.FC = ({}) => {
 
       <VStack spacing="20px" align="start">
         <Skeleton isLoaded={!isLoading}>
-          <div dangerouslySetInnerHTML={{ __html: descriptions_html }} />
+          <div dangerouslySetInnerHTML={{ __html: descriptions_html as string }} />
         </Skeleton>
       </VStack>
     </Box>

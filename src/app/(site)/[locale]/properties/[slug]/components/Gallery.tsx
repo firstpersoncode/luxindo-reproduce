@@ -34,7 +34,7 @@ const Gallery: React.FC = () => {
   return (
     hydratedImages.length > 0 && (
       <Slider {...settings}>
-        {hydratedImages.map((image, index) => (
+        {hydratedImages.map((image: any, index: number) => (
           <Box
             key={index}
             border="1px solid #666"

@@ -40,8 +40,8 @@ const ContactAgent: React.FC = () => {
           )}
         </Skeleton>
         <Box w="50%">
-          <AgentInfo isLoading={isLoading} />
-          <ContactDetails isLoading={isLoading} />
+          <AgentInfo isLoading={isLoading as boolean} />
+          <ContactDetails isLoading={isLoading as boolean} />
         </Box>
       </Flex>
     </Box>

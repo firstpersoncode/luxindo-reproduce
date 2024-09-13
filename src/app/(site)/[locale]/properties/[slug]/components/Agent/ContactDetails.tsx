@@ -19,7 +19,7 @@ const ContactDetails: React.FC<ContactDetailsProps> = ({ isLoading }) => {
       lineHeight="1.6"
       alignItems="flex-start"
     >
-      {agent?.contacts?.map((c) => (
+      {agent?.contacts?.map((c: any) => (
         <HStack key={c.id} color="rgba(44, 62, 80, 1)" fontWeight="400">
           <Skeleton isLoaded={!isLoading}>
             <Text>{c.title}</Text>

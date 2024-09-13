@@ -1,26 +1,26 @@
-import React from "react";
-import { VStack } from "@chakra-ui/react";
-import ArchitectureCard from "./Card";
+import React from 'react'
+import { VStack } from '@chakra-ui/react'
+import ArchitectureCard from './Card'
+import { useContextProvider } from '../../libs/providers'
 
-interface ArchitectureListProps {
-  isLoading?: boolean;
-}
-
-const ArchitectureList: React.FC<ArchitectureListProps> = ({ isLoading = false }) => {
-  const architectureStyles = [
-    "Modern Balinese",
-    "Contemporary Tropical",
-    "Minimalist Asian",
-    "Eco-Friendly Bamboo",
-  ];
+const ArchitectureList: React.FC = () => {
+  const {
+    data: { amenities },
+    isLoading,
+  } = useContextProvider()
 
   return (
     <VStack spacing={4} align="stretch">
-      {architectureStyles.map((style, index) => (
-        <ArchitectureCard key={index} title={style} isLoading={isLoading} />
+      {amenities?.map((amenity: any, index: number) => (
+        <ArchitectureCard
+          key={index}
+          title={amenity.title}
+          value={amenity.value}
+          isLoading={isLoading}
+        />
       ))}
     </VStack>
-  );
-};
+  )
+}
 
-export default ArchitectureList;
+export default ArchitectureList

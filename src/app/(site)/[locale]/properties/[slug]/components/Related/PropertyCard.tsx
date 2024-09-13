@@ -9,6 +9,7 @@ interface PropertyCardProps {
   currency: string
   imageSrc: string
   image: { url: string }
+  slug: string
 }
 
 const PropertyCard: React.FC<PropertyCardProps> = ({
