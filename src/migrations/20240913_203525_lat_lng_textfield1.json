@@ -1,0 +1,1990 @@
+{
+  "id": "29434ffe-b0d8-4a00-9b1f-fa8dbfecf04b",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.users": {
+      "name": "users",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "email": {
+          "name": "email",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "reset_password_token": {
+          "name": "reset_password_token",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "reset_password_expiration": {
+          "name": "reset_password_expiration",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "salt": {
+          "name": "salt",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "hash": {
+          "name": "hash",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "login_attempts": {
+          "name": "login_attempts",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false,
+          "default": 0
+        },
+        "lock_until": {
+          "name": "lock_until",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "users_created_at_idx": {
+          "name": "users_created_at_idx",
+          "columns": [
+            {
+              "expression": "created_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "users_email_idx": {
+          "name": "users_email_idx",
+          "columns": [
+            {
+              "expression": "email",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.media": {
+      "name": "media",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "alt": {
+          "name": "alt",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "url": {
+          "name": "url",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "thumbnail_u_r_l": {
+          "name": "thumbnail_u_r_l",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "filename": {
+          "name": "filename",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "mime_type": {
+          "name": "mime_type",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "filesize": {
+          "name": "filesize",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "width": {
+          "name": "width",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "height": {
+          "name": "height",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "focal_x": {
+          "name": "focal_x",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "focal_y": {
+          "name": "focal_y",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "media_created_at_idx": {
+          "name": "media_created_at_idx",
+          "columns": [
+            {
+              "expression": "created_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "media_filename_idx": {
+          "name": "media_filename_idx",
+          "columns": [
+            {
+              "expression": "filename",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.agents_contacts": {
+      "name": "agents_contacts",
+      "schema": "",
+      "columns": {
+        "_order": {
+          "name": "_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "varchar",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "title": {
+          "name": "title",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "value": {
+          "name": "value",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {
+        "agents_contacts_order_idx": {
+          "name": "agents_contacts_order_idx",
+          "columns": [
+            {
+              "expression": "_order",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "agents_contacts_parent_id_idx": {
+          "name": "agents_contacts_parent_id_idx",
+          "columns": [
+            {
+              "expression": "_parent_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "agents_contacts_parent_id_fk": {
+          "name": "agents_contacts_parent_id_fk",
+          "tableFrom": "agents_contacts",
+          "tableTo": "agents",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.agents": {
+      "name": "agents",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "image_id": {
+          "name": "image_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "agents_created_at_idx": {
+          "name": "agents_created_at_idx",
+          "columns": [
+            {
+              "expression": "created_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "agents_image_id_media_id_fk": {
+          "name": "agents_image_id_media_id_fk",
+          "tableFrom": "agents",
+          "tableTo": "media",
+          "columnsFrom": [
+            "image_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.properties_plans": {
+      "name": "properties_plans",
+      "schema": "",
+      "columns": {
+        "_order": {
+          "name": "_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "varchar",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "icon_id": {
+          "name": "icon_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "icon_placeholder": {
+          "name": "icon_placeholder",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "properties_plans_order_idx": {
+          "name": "properties_plans_order_idx",
+          "columns": [
+            {
+              "expression": "_order",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "properties_plans_parent_id_idx": {
+          "name": "properties_plans_parent_id_idx",
+          "columns": [
+            {
+              "expression": "_parent_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "properties_plans_icon_id_media_id_fk": {
+          "name": "properties_plans_icon_id_media_id_fk",
+          "tableFrom": "properties_plans",
+          "tableTo": "media",
+          "columnsFrom": [
+            "icon_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "properties_plans_parent_id_fk": {
+          "name": "properties_plans_parent_id_fk",
+          "tableFrom": "properties_plans",
+          "tableTo": "properties",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.properties_plans_locales": {
+      "name": "properties_plans_locales",
+      "schema": "",
+      "columns": {
+        "title": {
+          "name": "title",
+          "type": "enum_properties_plans_title",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "value": {
+          "name": "value",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "_locale": {
+          "name": "_locale",
+          "type": "_locales",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "properties_plans_locales_parent_id_fk": {
+          "name": "properties_plans_locales_parent_id_fk",
+          "tableFrom": "properties_plans_locales",
+          "tableTo": "properties_plans",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "properties_plans_locales_locale_parent_id_unique": {
+          "name": "properties_plans_locales_locale_parent_id_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "_locale",
+            "_parent_id"
+          ]
+        }
+      }
+    },
+    "public.properties_spaces": {
+      "name": "properties_spaces",
+      "schema": "",
+      "columns": {
+        "_order": {
+          "name": "_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "varchar",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "icon_id": {
+          "name": "icon_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "properties_spaces_order_idx": {
+          "name": "properties_spaces_order_idx",
+          "columns": [
+            {
+              "expression": "_order",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "properties_spaces_parent_id_idx": {
+          "name": "properties_spaces_parent_id_idx",
+          "columns": [
+            {
+              "expression": "_parent_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "properties_spaces_icon_id_media_id_fk": {
+          "name": "properties_spaces_icon_id_media_id_fk",
+          "tableFrom": "properties_spaces",
+          "tableTo": "media",
+          "columnsFrom": [
+            "icon_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "properties_spaces_parent_id_fk": {
+          "name": "properties_spaces_parent_id_fk",
+          "tableFrom": "properties_spaces",
+          "tableTo": "properties",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.properties_spaces_locales": {
+      "name": "properties_spaces_locales",
+      "schema": "",
+      "columns": {
+        "title": {
+          "name": "title",
+          "type": "enum_properties_spaces_title",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "value": {
+          "name": "value",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "_locale": {
+          "name": "_locale",
+          "type": "_locales",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "properties_spaces_locales_parent_id_fk": {
+          "name": "properties_spaces_locales_parent_id_fk",
+          "tableFrom": "properties_spaces_locales",
+          "tableTo": "properties_spaces",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "properties_spaces_locales_locale_parent_id_unique": {
+          "name": "properties_spaces_locales_locale_parent_id_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "_locale",
+            "_parent_id"
+          ]
+        }
+      }
+    },
+    "public.properties_amenities": {
+      "name": "properties_amenities",
+      "schema": "",
+      "columns": {
+        "_order": {
+          "name": "_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "varchar",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "icon_id": {
+          "name": "icon_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "properties_amenities_order_idx": {
+          "name": "properties_amenities_order_idx",
+          "columns": [
+            {
+              "expression": "_order",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "properties_amenities_parent_id_idx": {
+          "name": "properties_amenities_parent_id_idx",
+          "columns": [
+            {
+              "expression": "_parent_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "properties_amenities_icon_id_media_id_fk": {
+          "name": "properties_amenities_icon_id_media_id_fk",
+          "tableFrom": "properties_amenities",
+          "tableTo": "media",
+          "columnsFrom": [
+            "icon_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "properties_amenities_parent_id_fk": {
+          "name": "properties_amenities_parent_id_fk",
+          "tableFrom": "properties_amenities",
+          "tableTo": "properties",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.properties_amenities_locales": {
+      "name": "properties_amenities_locales",
+      "schema": "",
+      "columns": {
+        "title": {
+          "name": "title",
+          "type": "enum_properties_amenities_title",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "value": {
+          "name": "value",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "_locale": {
+          "name": "_locale",
+          "type": "_locales",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "properties_amenities_locales_parent_id_fk": {
+          "name": "properties_amenities_locales_parent_id_fk",
+          "tableFrom": "properties_amenities_locales",
+          "tableTo": "properties_amenities",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "properties_amenities_locales_locale_parent_id_unique": {
+          "name": "properties_amenities_locales_locale_parent_id_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "_locale",
+            "_parent_id"
+          ]
+        }
+      }
+    },
+    "public.properties_images": {
+      "name": "properties_images",
+      "schema": "",
+      "columns": {
+        "_order": {
+          "name": "_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "varchar",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "file_id": {
+          "name": "file_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {
+        "properties_images_order_idx": {
+          "name": "properties_images_order_idx",
+          "columns": [
+            {
+              "expression": "_order",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "properties_images_parent_id_idx": {
+          "name": "properties_images_parent_id_idx",
+          "columns": [
+            {
+              "expression": "_parent_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "properties_images_file_id_media_id_fk": {
+          "name": "properties_images_file_id_media_id_fk",
+          "tableFrom": "properties_images",
+          "tableTo": "media",
+          "columnsFrom": [
+            "file_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "properties_images_parent_id_fk": {
+          "name": "properties_images_parent_id_fk",
+          "tableFrom": "properties_images",
+          "tableTo": "properties",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.properties": {
+      "name": "properties",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "slug": {
+          "name": "slug",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "sku": {
+          "name": "sku",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "type": {
+          "name": "type",
+          "type": "enum_properties_type",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ownership": {
+          "name": "ownership",
+          "type": "enum_properties_ownership",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "price": {
+          "name": "price",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false,
+          "default": 0
+        },
+        "currency": {
+          "name": "currency",
+          "type": "enum_properties_currency",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "descriptions_html": {
+          "name": "descriptions_html",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "area_1": {
+          "name": "area_1",
+          "type": "enum_properties_area_1",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "area_2": {
+          "name": "area_2",
+          "type": "enum_properties_area_2",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "address": {
+          "name": "address",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "lat_str": {
+          "name": "lat_str",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "lng_str": {
+          "name": "lng_str",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "country": {
+          "name": "country",
+          "type": "enum_properties_country",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "state": {
+          "name": "state",
+          "type": "enum_properties_state",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "street_name": {
+          "name": "street_name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "street_number": {
+          "name": "street_number",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "post_code": {
+          "name": "post_code",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "video": {
+          "name": "video",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "agent_id": {
+          "name": "agent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "properties_slug_idx": {
+          "name": "properties_slug_idx",
+          "columns": [
+            {
+              "expression": "slug",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "properties_created_at_idx": {
+          "name": "properties_created_at_idx",
+          "columns": [
+            {
+              "expression": "created_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "properties_agent_id_agents_id_fk": {
+          "name": "properties_agent_id_agents_id_fk",
+          "tableFrom": "properties",
+          "tableTo": "agents",
+          "columnsFrom": [
+            "agent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.properties_locales": {
+      "name": "properties_locales",
+      "schema": "",
+      "columns": {
+        "title": {
+          "name": "title",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "description": {
+          "name": "description",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "descriptions": {
+          "name": "descriptions",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "_locale": {
+          "name": "_locale",
+          "type": "_locales",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "properties_locales_parent_id_fk": {
+          "name": "properties_locales_parent_id_fk",
+          "tableFrom": "properties_locales",
+          "tableTo": "properties",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "properties_locales_locale_parent_id_unique": {
+          "name": "properties_locales_locale_parent_id_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "_locale",
+            "_parent_id"
+          ]
+        }
+      }
+    },
+    "public.properties_rels": {
+      "name": "properties_rels",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "order": {
+          "name": "order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "parent_id": {
+          "name": "parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "path": {
+          "name": "path",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "properties_id": {
+          "name": "properties_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "properties_rels_order_idx": {
+          "name": "properties_rels_order_idx",
+          "columns": [
+            {
+              "expression": "order",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "properties_rels_parent_idx": {
+          "name": "properties_rels_parent_idx",
+          "columns": [
+            {
+              "expression": "parent_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "properties_rels_path_idx": {
+          "name": "properties_rels_path_idx",
+          "columns": [
+            {
+              "expression": "path",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "properties_rels_parent_fk": {
+          "name": "properties_rels_parent_fk",
+          "tableFrom": "properties_rels",
+          "tableTo": "properties",
+          "columnsFrom": [
+            "parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "properties_rels_properties_fk": {
+          "name": "properties_rels_properties_fk",
+          "tableFrom": "properties_rels",
+          "tableTo": "properties",
+          "columnsFrom": [
+            "properties_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.payload_preferences": {
+      "name": "payload_preferences",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "key": {
+          "name": "key",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "value": {
+          "name": "value",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "payload_preferences_key_idx": {
+          "name": "payload_preferences_key_idx",
+          "columns": [
+            {
+              "expression": "key",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "payload_preferences_created_at_idx": {
+          "name": "payload_preferences_created_at_idx",
+          "columns": [
+            {
+              "expression": "created_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.payload_preferences_rels": {
+      "name": "payload_preferences_rels",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "order": {
+          "name": "order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "parent_id": {
+          "name": "parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "path": {
+          "name": "path",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "users_id": {
+          "name": "users_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "payload_preferences_rels_order_idx": {
+          "name": "payload_preferences_rels_order_idx",
+          "columns": [
+            {
+              "expression": "order",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "payload_preferences_rels_parent_idx": {
+          "name": "payload_preferences_rels_parent_idx",
+          "columns": [
+            {
+              "expression": "parent_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "payload_preferences_rels_path_idx": {
+          "name": "payload_preferences_rels_path_idx",
+          "columns": [
+            {
+              "expression": "path",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "payload_preferences_rels_parent_fk": {
+          "name": "payload_preferences_rels_parent_fk",
+          "tableFrom": "payload_preferences_rels",
+          "tableTo": "payload_preferences",
+          "columnsFrom": [
+            "parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "payload_preferences_rels_users_fk": {
+          "name": "payload_preferences_rels_users_fk",
+          "tableFrom": "payload_preferences_rels",
+          "tableTo": "users",
+          "columnsFrom": [
+            "users_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.payload_migrations": {
+      "name": "payload_migrations",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "batch": {
+          "name": "batch",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "payload_migrations_created_at_idx": {
+          "name": "payload_migrations_created_at_idx",
+          "columns": [
+            {
+              "expression": "created_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    }
+  },
+  "enums": {
+    "public._locales": {
+      "name": "_locales",
+      "schema": "public",
+      "values": [
+        "en",
+        "id",
+        "fr"
+      ]
+    },
+    "public.enum_properties_type": {
+      "name": "enum_properties_type",
+      "schema": "public",
+      "values": [
+        "Land",
+        "Villa Rental",
+        "Villa / House / Apartment",
+        "Hotel, Resort, Villa Complex",
+        "Commercial Space"
+      ]
+    },
+    "public.enum_properties_ownership": {
+      "name": "enum_properties_ownership",
+      "schema": "public",
+      "values": [
+        "Rental",
+        "Freehold",
+        "Leasehold"
+      ]
+    },
+    "public.enum_properties_currency": {
+      "name": "enum_properties_currency",
+      "schema": "public",
+      "values": [
+        "IDR",
+        "USD"
+      ]
+    },
+    "public.enum_properties_plans_title": {
+      "name": "enum_properties_plans_title",
+      "schema": "public",
+      "values": [
+        "Area (M 2)",
+        "Bedrooms",
+        "Bathrooms",
+        "Garages",
+        "Rooms"
+      ]
+    },
+    "public.enum_properties_spaces_title": {
+      "name": "enum_properties_spaces_title",
+      "schema": "public",
+      "values": [
+        "Land Size",
+        "Price/are/year",
+        "Leasehold valid until",
+        "Year Built",
+        "Price per m2",
+        "Lease until ",
+        "Electricity",
+        "Title",
+        "Year of renovation ",
+        "Road Access",
+        "Leasehold Valid Until",
+        "Swimming Pool ",
+        "Electricity ",
+        "Road Access ",
+        "Leasehold Valid Until ",
+        "Price / Are / Year",
+        "Title ",
+        "Renovated ",
+        "Leasehold valid until ",
+        "Price / Are ",
+        "Villa Unit",
+        "Price / Year / Unit",
+        "Leasehold",
+        "Price / Are/ Year",
+        "Swimming Pool",
+        "Leasedhold Valid until ",
+        "Price/are",
+        "Price / Are",
+        "Price / Are / Years",
+        "Price/Are/Year",
+        "Leasehold ",
+        "Beach frontage ",
+        "Mainroad frontage",
+        "PRICE / ARE ",
+        "ROAD ACCESS",
+        "PRICE / ARE",
+        "Sauna for ",
+        "Architecture",
+        "LEASEHOLD VALID UNTIL ",
+        "BUILDING SIZE",
+        "Price / m2",
+        "TITLE STATUS ",
+        "LEASEHOLD VALID UNTIL",
+        "ELECTRICITY",
+        "BUILDING SIZE ",
+        "ELECTRICITY ",
+        "SWIMMING POOL ",
+        "PRICE/ARE",
+        "SWIMMING POOL",
+        "Available On",
+        "PRICE/ARE/YEAR",
+        "Building Size",
+        "Price/Are",
+        "Building Size ",
+        "Garden",
+        "TITLE STATUS",
+        "Price /are ",
+        "Leasehold until",
+        "Price / are / year",
+        "Open for leasehold ",
+        "Price / year",
+        "Price/ are",
+        "Price / are ",
+        "Price / are",
+        "Price / are / year ",
+        "Extension ",
+        "Car park",
+        "lease valid until ",
+        "Available on ",
+        "Swimmimg Pool",
+        "Available on",
+        "ELectricity",
+        "swimming pool",
+        "Swimming pool",
+        "RENTED",
+        "Staffs",
+        "No",
+        "Available after",
+        "IDR",
+        "Measurement",
+        "Leasehold until ",
+        "Available for Monthly Rental",
+        "Available for yearly rental",
+        "3 and 5 years ",
+        "20 years",
+        "Elecricity",
+        "The construction will be completed by ",
+        "Swimming pool ",
+        "Construction starting ",
+        "Available for monthly rental",
+        "This villa will be available and completion ",
+        "Available for",
+        "Price per are ",
+        "Price per are (per year)",
+        "Available ",
+        "Available for leasehold ",
+        "Available for Freehold",
+        "View",
+        "Leasehold Valid until",
+        "Selling price of ",
+        "Price/are ",
+        "Living Area ",
+        "Rented until",
+        "Leasehold valid for",
+        "Valid until",
+        "Swimming Pool Size",
+        "Price/year",
+        "Complex of",
+        "Renovated",
+        "Unit Available",
+        "Internet",
+        "Leasehold for",
+        "Swimming pool size",
+        "LEASEHOLD UNTIL",
+        "PLN",
+        "Restaurant Size",
+        "Staff Building Size",
+        "Bar",
+        "Reception hall",
+        "Villa 2 Bedrooms",
+        "Bungalows",
+        "Free to Build",
+        "Swimming Pool size",
+        "Parking size",
+        "Unit",
+        "Access ",
+        "Leaehold valid until",
+        "Available for ",
+        "Booked until ",
+        "Price/m2",
+        "PRICE PER M2",
+        "Swimming Pool Size ",
+        "Swimming pool size ",
+        "Leasehold valid",
+        "Lease valid until",
+        "LEASE UNTIL",
+        "OPTION TO EXTEND",
+        "PRICE / M2 / YEAR",
+        "Long lease valid until ",
+        "Title Status",
+        "Monthly ",
+        "Yearly",
+        "Lesehold until",
+        "LEASEHOLD ",
+        "FREEHOLD LAND",
+        "LEASEHOLD LAND 1",
+        "LEASEHOLD LAND 2 ",
+        "LICENSE",
+        "PRICE PER ARE",
+        "Price per Are",
+        "BEACH FRONTAGE",
+        "SWIMMING POOL SIZE",
+        "Water",
+        "LEASEHOLD UNTIL ",
+        "Price per m2 ",
+        "Surf spot ",
+        "Land shape",
+        "EXPIRATION DATE ",
+        "LEASE EXPIRATION DATE",
+        "Price / m2 ",
+        "Lease ends ",
+        "Floor",
+        "Access",
+        "Ownership Type",
+        "Electricity Capacity",
+        "Price per Are "
+      ]
+    },
+    "public.enum_properties_amenities_title": {
+      "name": "enum_properties_amenities_title",
+      "schema": "public",
+      "values": [
+        "City Center View",
+        "Commercial Zoning",
+        "Fully Furnished",
+        "Kitchen",
+        "Living Area",
+        "Modern Minimalist",
+        "Residential Zoning",
+        "Swimming Pool",
+        "Water",
+        "Architecture",
+        "Dryer Machine & washing machine",
+        "Garden",
+        "Guest Toilet",
+        "Gym",
+        "Laundry Space",
+        "Outdoor Terrace and Bar",
+        "Pantry",
+        "Parking",
+        "River Front View",
+        "Security",
+        "Smart Tv",
+        "Staff Room",
+        "Terrace",
+        "Wifi",
+        "Parking Area",
+        "Pondok Wisata Zoning",
+        "Rental license",
+        "Surf Spot",
+        "Beachside",
+        "Internet",
+        "Spa",
+        "Beachfront View",
+        "Cliff Front View",
+        "Ocean View",
+        "Garage",
+        "Tropical Architecture",
+        "TV Cable",
+        "Jungle View",
+        "Partly Furnished",
+        "Rice Field View",
+        "Unfurnished",
+        "Mediterranean",
+        "Mountains View",
+        "Rooftop",
+        "Koi Ponds",
+        "Village",
+        "VIP Room",
+        "Wedding Area",
+        "Solar Panels",
+        "Tourism Zoning",
+        "CCTV",
+        "Powder Room",
+        "Water filter",
+        "Wet kitchen",
+        "Water Supply",
+        "Rooftop Gazebo",
+        "Fiber Optic Internet",
+        "lobby",
+        "Android TV",
+        "splitable",
+        "Traditional Joglo",
+        "Banquet Area",
+        "Additional",
+        "Reversed osmosis filtered water",
+        "Solar power heating water",
+        "Water softener",
+        "Zoning",
+        "Furniture"
+      ]
+    },
+    "public.enum_properties_area_1": {
+      "name": "enum_properties_area_1",
+      "schema": "public",
+      "values": [
+        "TABANAN AREA",
+        "CANGGU AREA",
+        "NORTH BALI AREA",
+        "UMALAS AND KEROBOKAN AREA",
+        "BUKIT AREA",
+        "SANUR AND EAST COAST AREA",
+        "ROTE ISLAND",
+        "SEMINYAK AREA",
+        "DENPASAR",
+        "UBUD AREA",
+        "MENGWI",
+        "SUMBAWA",
+        "NUSA LEMBONGAN / CENINGAN / PENIDA",
+        "LOMBOK",
+        "BADUNG AREA",
+        "SUMBA",
+        "WEST SUMATERA",
+        "FLORES",
+        "EAST JAVA",
+        "Kintamani",
+        "GIANYAR",
+        "NUSA DUA",
+        "JEMBRANA AREA",
+        "WEST JAVA",
+        "OTHERS"
+      ]
+    },
+    "public.enum_properties_area_2": {
+      "name": "enum_properties_area_2",
+      "schema": "public",
+      "values": [
+        "Kedungu",
+        "Berawa",
+        "Buleleng",
+        "Umalas",
+        "Tegal Cupek",
+        "Sanur",
+        "Seminyak",
+        "Jimbaran",
+        "Cemagi",
+        "Pecatu",
+        "Pererenan",
+        "Mas",
+        "Keramas",
+        "Nyanyi",
+        "Tibubeneng",
+        "Tumbak Bayuh",
+        "Batu Bolong / Echo Beach",
+        "Payangan",
+        "Gili Islands",
+        "Buduk",
+        "Petitenget",
+        "Mentawai",
+        "GILI TRAWANGAN",
+        "Kerobokan",
+        "Ketewel",
+        "South Bukit",
+        "Padonan",
+        "Tegallalang",
+        "Others",
+        "Amed / Tulamben",
+        "Seseh",
+        "Ungasan",
+        "Kuta",
+        "Kayu Tulang",
+        "Legian",
+        "Mandalika",
+        "Kaba - Kaba",
+        "Batu Belig",
+        "Pantai Lima",
+        "Babakan",
+        "Balian",
+        "Tying Tutul",
+        "Kuta Area",
+        "Medewi",
+        "Singaraja",
+        "Senggigi Area"
+      ]
+    },
+    "public.enum_properties_country": {
+      "name": "enum_properties_country",
+      "schema": "public",
+      "values": [
+        "Indonesia"
+      ]
+    },
+    "public.enum_properties_state": {
+      "name": "enum_properties_state",
+      "schema": "public",
+      "values": [
+        "Bali",
+        "East Nusa Tenggara",
+        "Nusa Tenggara Barat",
+        "West Sumatra",
+        "West Nusa Tenggara",
+        "East Java",
+        "Nusa Tenggara Timur",
+        "West Java"
+      ]
+    }
+  },
+  "schemas": {},
+  "sequences": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  }
+}

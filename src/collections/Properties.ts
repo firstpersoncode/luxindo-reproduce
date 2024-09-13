@@ -234,13 +234,13 @@ const PropertyLocation: CollectionConfig['fields'] = [
     },
     fields: [
       {
-        name: 'lat',
+        name: 'lat_str',
         label: 'Latitude',
         type: 'text',
         required: false,
       },
       {
-        name: 'lng',
+        name: 'lng_str',
         label: 'Longitude',
         type: 'text',
         required: false,

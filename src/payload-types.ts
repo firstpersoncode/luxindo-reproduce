@@ -476,8 +476,8 @@ export interface Property {
       )
     | null;
   address?: string | null;
-  lat?: number | null;
-  lng?: number | null;
+  lat_str?: string | null;
+  lng_str?: string | null;
   country?: 'Indonesia' | null;
   state?:
     | (
