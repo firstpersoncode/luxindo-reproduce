@@ -12,6 +12,7 @@ import Description from './Description'
 import Agent from './Agent'
 import Related from './Related'
 import { Container } from '@chakra-ui/react'
+import Amenities from './Amenities'
 
 export default function Components() {
   const { data } = useContextProvider()
@@ -23,6 +24,7 @@ export default function Components() {
       <Video />
       <PropertyInfo />
       <PropertyDetails />
+      <Amenities />
       <Description />
       <Map />
       <Agent />
