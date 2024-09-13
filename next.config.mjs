@@ -13,7 +13,7 @@ const nextConfig = {
   //   defaultLocale: 'en',
   // },
   images: {
-    domains: [getHostName(process.env.APP_URL ?? ""), "cdn.builder.io"]
+    domains: [getHostName(process.env.NEXT_PUBLIC_APP_URL ?? ""), "cdn.builder.io"]
   },
   reactStrictMode: false,
 }

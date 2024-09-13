@@ -342,7 +342,7 @@ export const Properties: CollectionConfig = {
     useAsTitle: 'title',
     preview: (doc, { locale }) => {
       if (doc?.slug) {
-        return `${process.env.APP_URL}/${locale}/properties/${doc.slug}?mode=preview`
+        return `${process.env.NEXT_PUBLIC_APP_URL}/${locale}/properties/${doc.slug}?mode=preview`
       }
 
       return null
