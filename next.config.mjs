@@ -13,14 +13,9 @@ const nextConfig = {
   //   defaultLocale: 'en',
   // },
   images: {
-    domains: [getHostName(process.env.APP_URL ?? "")],
+    domains: [getHostName(process.env.APP_URL ?? "")]
   },
   reactStrictMode: false,
-  experimental: {
-    turbo: {
-      moduleIdStrategy: 'deterministic',
-    },
-  },
 }
 
 export default withPayload(nextConfig)

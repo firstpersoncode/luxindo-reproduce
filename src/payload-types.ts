@@ -396,6 +396,7 @@ export interface Property {
     };
     [k: string]: unknown;
   } | null;
+  descriptions_html?: string | null;
   area_1?:
     | (
         | 'TABANAN AREA'

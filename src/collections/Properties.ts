@@ -12,6 +12,7 @@ import {
   SUB_AREAS,
 } from '@/libs/options'
 import { formatSlug } from '@/libs/utils'
+import { HTMLConverterFeature, lexicalEditor, lexicalHTML } from '@payloadcms/richtext-lexical'
 
 const PropertyInfo: CollectionConfig['fields'] = [
   {
@@ -188,13 +189,19 @@ const PropertyDetails: CollectionConfig['fields'] = [
       },
     ],
   },
+
   {
     name: 'descriptions',
     label: 'Descriptions',
     type: 'richText',
     required: false,
     localized: true,
+    editor: lexicalEditor({
+      features: ({ defaultFeatures }) => [...defaultFeatures, HTMLConverterFeature({})],
+    }),
   },
+  lexicalHTML('descriptions', { name: 'descriptions_html' }),
+  
 ]
 
 const PropertyLocation: CollectionConfig['fields'] = [
@@ -319,6 +326,7 @@ export const Properties: CollectionConfig = {
     delete: () => true,
   },
   fields: [
+    
     {
       type: 'tabs',
       tabs: [
