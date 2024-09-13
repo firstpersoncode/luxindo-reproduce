@@ -1,40 +1,36 @@
-import React from 'react'
-import Image from 'next/image'
-import { Box, HStack, Text } from '@chakra-ui/react'
+import React from "react";
+import { Flex, Text, Image } from "@chakra-ui/react";
 
-interface ShareButtonsProps {
-  isLoading?: boolean
-}
-
-const ShareButtons: React.FC<ShareButtonsProps> = ({ isLoading = false }) => {
-  const shareIcons = [
-    {
-      src: 'https://cdn.builder.io/api/v1/image/assets/TEMP/17d07e53cfad636b12551e47a9867d7f445536c23310a82f2c26bb2b3588e1e8?placeholderIfAbsent=true&apiKey=a9b95505e95b4a99931826297eec4185',
-      alt: 'Share on social media',
-      width: 12,
-    },
-    {
-      src: 'https://cdn.builder.io/api/v1/image/assets/TEMP/9f490791ee791d210bf82365ad747a4b759f48a87e31bcc22a73592ea221eb6e?placeholderIfAbsent=true&apiKey=a9b95505e95b4a99931826297eec4185',
-      alt: 'Share on social media',
-      width: 18,
-    },
-    {
-      src: 'https://cdn.builder.io/api/v1/image/assets/TEMP/e2bf1ff88f52777cc14ac59601830bd11458814ba27694d2fe1ade9cbf79b576?placeholderIfAbsent=true&apiKey=a9b95505e95b4a99931826297eec4185',
-      alt: 'Share on social media',
-      width: 26,
-    },
-  ]
-
+const ShareButtons: React.FC = () => {
   return (
-    <HStack>
-      <Text>Share this:</Text>
-      {shareIcons.map((icon, index) => (
-        <Box key={index}h="20px" w="20px" position="relative">
-          <Image src={icon.src} alt={icon.alt} fill className="object-cover" />
-        </Box>
-      ))}
-    </HStack>
-  )
-}
+    <Flex gap="20px" fontWeight="400" textAlign="right" justifyContent="space-between">
+      <Text margin="auto 0">Share this:</Text>
+      <Image
+        src="https://cdn.builder.io/api/v1/image/assets/TEMP/e31e710f3d2ca512c521337e53ed9e9dd77de6b3def6c1a8e9e6b9b67bc814d2?placeholderIfAbsent=true&apiKey=a9b95505e95b4a99931826297eec4185"
+        alt=""
+        objectFit="contain"
+        objectPosition="center"
+        width="12px"
+        height="32px"
+      />
+      <Image
+        src="https://cdn.builder.io/api/v1/image/assets/TEMP/37197d6a7b1aea90064d508941d20784077dd8e58b85aeb03db664fd08992c15?placeholderIfAbsent=true&apiKey=a9b95505e95b4a99931826297eec4185"
+        alt=""
+        objectFit="contain"
+        objectPosition="center"
+        width="18px"
+        height="32px"
+      />
+      <Image
+        src="https://cdn.builder.io/api/v1/image/assets/TEMP/927bf52c413b854ec1989df0d21d590043e555ec1cf6147f44e226511beb0534?placeholderIfAbsent=true&apiKey=a9b95505e95b4a99931826297eec4185"
+        alt=""
+        objectFit="contain"
+        objectPosition="center"
+        width="26px"
+        height="32px"
+      />
+    </Flex>
+  );
+};
 
-export default ShareButtons
+export default ShareButtons;

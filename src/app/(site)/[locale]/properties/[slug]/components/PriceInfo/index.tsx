@@ -1,100 +1,52 @@
-'use client'
-
 import React from 'react'
-import { Box, Text, Skeleton, Button } from '@chakra-ui/react'
+import { Box, Flex, Text, Image, Button, SkeletonText } from '@chakra-ui/react'
 import ShareButtons from './ShareButtons'
+import PrintButton from './PrintButton'
 import { useContextProvider } from '../../libs/providers'
-import Image from 'next/image'
 
-const PriceInfo: React.FC = () => {
+const FinancialDisplay: React.FC = ({}) => {
   const {
+    data: { price: amount, currency },
     isLoading,
-    data: { price, currency },
   } = useContextProvider()
-
   return (
-    <Box
-      className="price-display"
-      display="flex"
+    <Flex
+      gap="20px"
+      fontFamily="Source Sans Pro, sans-serif"
       flexWrap="wrap"
       justifyContent="space-between"
-      mt="30px"
-      ml="13px"
-      maxW="100%"
-      w="858px"
+      margin="30px 0 0 13px"
+      maxWidth={{ base: '100%', lg: 'auto' }}
+      marginRight={{ base: '5px', lg: '0' }}
     >
-      <Box
-        className="price-container"
-        display="flex"
-        flexDirection="column"
-        lineHeight="1"
-        my="auto"
-      >
-        {isLoading ? (
-          <Skeleton width="200px" height="60px" />
-        ) : (
-          <>
-            <Text
-              className="price"
-              color="rgba(52, 47, 44, 1)"
-              fontSize={{ base: '40px', md: '46px' }}
-              fontWeight="600"
-            >
-              {new Intl.NumberFormat().format(Number(price))}
-            </Text>
-            <Text
-              className="currency"
-              color="rgba(44, 62, 80, 1)"
-              fontSize="15px"
-              fontWeight="400"
-              alignSelf="start"
-              mt="8px"
-            >
-              /{currency}
-            </Text>
-          </>
-        )}
-      </Box>
-      <Box
-        className="actions-container"
-        display="flex"
-        flexDirection="column"
-        fontSize="15px"
-        color="rgba(44, 62, 80, 1)"
-        lineHeight="1.6"
-      >
-        <ShareButtons isLoading={isLoading} />
-        <Button
-          variant="outline"
-          isLoading={isLoading}
-          leftIcon={
-            isLoading ? (
-              <Skeleton height="14px" width="14px" />
-            ) : (
-              <Image
-                src="https://cdn.builder.io/api/v1/image/assets/TEMP/5aa858373064b1cdf1dd578ff5eae01c115e97bc193cf3aca4e2b4b51af14a2d?placeholderIfAbsent=true&apiKey=a9b95505e95b4a99931826297eec4185"
-                alt=""
-                width={14}
-                height={14}
-              />
-            )
-          }
-          alignSelf="flex-end"
-          mt="15px"
-          gap="11px"
-          fontWeight="700"
-          whiteSpace={{ base: 'initial', md: 'nowrap' }}
-          textAlign="center"
-          textTransform="uppercase"
-          px="17px"
-          py="13px"
-          border="2px solid rgba(44, 62, 80, 1)"
-        >
-          {isLoading ? <Skeleton width="40px" /> : 'Print'}
-        </Button>
-      </Box>
-    </Box>
+      <Flex flexDirection="column" lineHeight="1" margin="auto 0">
+        <SkeletonText isLoaded={!isLoading} noOfLines={1} spacing="4">
+          <Text
+            color="rgba(52, 47, 44, 1)"
+            fontSize={{ base: '40px', lg: '46px' }}
+            fontWeight="600"
+          >
+            {(amount || 0).toLocaleString()}
+          </Text>
+        </SkeletonText>
+        <SkeletonText isLoaded={!isLoading} noOfLines={1} spacing="4">
+          <Text
+            color="rgba(44, 62, 80, 1)"
+            fontSize="15px"
+            fontWeight="400"
+            alignSelf="start"
+            marginTop="8px"
+          >
+            /{currency}
+          </Text>
+        </SkeletonText>
+      </Flex>
+      <Flex flexDirection="column" fontSize="15px" color="rgba(44, 62, 80, 1)" lineHeight="1.6">
+        <ShareButtons />
+        <PrintButton />
+      </Flex>
+    </Flex>
   )
 }
 
-export default PriceInfo
+export default FinancialDisplay

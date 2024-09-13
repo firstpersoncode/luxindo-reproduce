@@ -24,7 +24,7 @@ const Gallery: React.FC = () => {
 
     return images.map((image: any) => {
       const isAbsolutePath = image.file.url.startsWith('http')
-      const url = isAbsolutePath ? image.file.url : `${process.env.APP_URL}${image.file.url}`
+      const url = isAbsolutePath ? image.file.url : `${process.env.NEXT_PUBLIC_APP_URL}${image.file.url}`
       return {
         file: { url, alt: image.file.alt },
       }
@@ -38,8 +38,8 @@ const Gallery: React.FC = () => {
           <Box
             key={index}
             border="1px solid #666"
-            minH={100}
             maxW="100%"
+            pb="56.25%"
             borderRadius="lg"
             position="relative"
           >
