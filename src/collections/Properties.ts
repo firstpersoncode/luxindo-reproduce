@@ -236,16 +236,14 @@ const PropertyLocation: CollectionConfig['fields'] = [
       {
         name: 'lat',
         label: 'Latitude',
-        type: 'number',
+        type: 'text',
         required: false,
-        defaultValue: 0,
       },
       {
         name: 'lng',
         label: 'Longitude',
-        type: 'number',
+        type: 'text',
         required: false,
-        defaultValue: 0,
       },
       {
         name: 'country',
