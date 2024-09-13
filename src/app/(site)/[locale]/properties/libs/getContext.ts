@@ -21,15 +21,7 @@ export const getContext = async (searchParams: any) => {
 
   return {
     ...property,
-    amenities: property.amenities
-      ? property.amenities.map((amenity: any) => ({ ...amenity, value: amenity.value ?? '' }))
-      : [],
-    spaces: property.spaces
-      ? property.spaces.map((space: any) => ({ ...space, value: space.value ?? '' }))
-      : [],
-    plans: property.plans
-      ? property.plans.map((plan: any) => ({ ...plan, value: plan.value ?? '' }))
-      : [],
+    
     
   }
 }
