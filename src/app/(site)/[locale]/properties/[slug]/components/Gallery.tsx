@@ -22,9 +22,13 @@ const Gallery: React.FC = () => {
   const hydratedImages = useMemo(() => {
     if (!images?.length) return []
 
-    return images.map((image: any) => ({
-      file: { url: image.file.url, alt: image.file.alt },
-    }))
+    return images.map((image: any) => {
+      const isAbsolutePath = image.file.url.startsWith('http')
+      const url = isAbsolutePath ? image.file.url : `${process.env.APP_URL}${image.file.url}`
+      return {
+        file: { url, alt: image.file.alt },
+      }
+    })
   }, [images])
 
   return (
