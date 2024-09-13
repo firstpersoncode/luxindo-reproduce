@@ -80,21 +80,9 @@ const PropertyInfo: CollectionConfig['fields'] = [
     required: false,
     options: CURRENCIES,
   },
-
-  {
-    name: 'agent',
-    label: 'Agent',
-    type: 'relationship',
-    relationTo: 'agents',
-    hasMany: false,
-    required: false,
-    admin: {
-      position: 'sidebar',
-    },
-  },
 ]
 
-const PropertyDetails: CollectionConfig['fields'] = [
+const PropertyPlans: CollectionConfig['fields'] = [
   {
     name: 'plans',
     label: 'Plans',
@@ -132,6 +120,9 @@ const PropertyDetails: CollectionConfig['fields'] = [
       },
     ],
   },
+]
+
+const PropertySpaces: CollectionConfig['fields'] = [
   {
     name: 'spaces',
     label: 'Spaces',
@@ -161,6 +152,9 @@ const PropertyDetails: CollectionConfig['fields'] = [
       },
     ],
   },
+]
+
+const PropertyAmenities: CollectionConfig['fields'] = [
   {
     name: 'amenities',
     label: 'Amenities',
@@ -190,7 +184,9 @@ const PropertyDetails: CollectionConfig['fields'] = [
       },
     ],
   },
+]
 
+const PropertyDetails: CollectionConfig['fields'] = [
   {
     name: 'descriptions',
     label: 'Descriptions',
@@ -198,11 +194,14 @@ const PropertyDetails: CollectionConfig['fields'] = [
     required: false,
     localized: true,
     editor: lexicalEditor({
-      features: ({ defaultFeatures }) => [...defaultFeatures, SlateToLexicalFeature({}), HTMLConverterFeature({})],
+      features: ({ defaultFeatures }) => [
+        ...defaultFeatures,
+        SlateToLexicalFeature({}),
+        HTMLConverterFeature({}),
+      ],
     }),
   },
   lexicalHTML('descriptions', { name: 'descriptions_html' }),
-  
 ]
 
 const PropertyLocation: CollectionConfig['fields'] = [
@@ -286,6 +285,13 @@ const PropertyLocation: CollectionConfig['fields'] = [
 
 const PropertyGallery: CollectionConfig['fields'] = [
   {
+    name: 'video',
+    label: 'Video',
+    type: 'text',
+    required: false,
+  },
+
+  {
     name: 'images',
     label: 'Images',
     type: 'array',
@@ -299,12 +305,34 @@ const PropertyGallery: CollectionConfig['fields'] = [
       },
     ],
   },
+]
 
+const PropertyAgent: CollectionConfig['fields'] = [
   {
-    name: 'video',
-    label: 'Video',
-    type: 'text',
+    name: 'agent',
+    label: 'Agent',
+    type: 'relationship',
+    relationTo: 'agents',
+    hasMany: false,
     required: false,
+    admin: {
+      position: 'sidebar',
+    },
+  },
+]
+
+const PropertyRelated: CollectionConfig['fields'] = [
+  {
+    name: 'related_properties',
+    label: 'Related Properties',
+    type: 'relationship',
+    relationTo: 'properties',
+    hasMany: true,
+    required: false,
+    maxRows: 3,
+    admin: {
+      position: 'sidebar',
+    },
   },
 ]
 
@@ -327,7 +355,6 @@ export const Properties: CollectionConfig = {
     delete: () => true,
   },
   fields: [
-    
     {
       type: 'tabs',
       tabs: [
@@ -335,6 +362,21 @@ export const Properties: CollectionConfig = {
           label: 'Info',
           description: 'Property Information',
           fields: PropertyInfo,
+        },
+        {
+          label: 'Plans',
+          description: 'Property Plans',
+          fields: PropertyPlans,
+        },
+        {
+          label: 'Spaces',
+          description: 'Property Spaces',
+          fields: PropertySpaces,
+        },
+        {
+          label: 'Amenities',
+          description: 'Property Amenities',
+          fields: PropertyAmenities,
         },
         {
           label: 'Details',
@@ -350,6 +392,16 @@ export const Properties: CollectionConfig = {
           label: 'Gallery',
           description: 'Property Gallery',
           fields: PropertyGallery,
+        },
+        {
+          label: 'Agent',
+          description: 'Property Agent',
+          fields: PropertyAgent,
+        },
+        {
+          label: 'Related',
+          description: 'Related Properties',
+          fields: PropertyRelated,
         },
       ],
     },

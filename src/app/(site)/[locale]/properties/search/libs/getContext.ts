@@ -30,5 +30,6 @@ export const getContext = async (searchParams: any) => {
     plans: property.plans
       ? property.plans.map((plan: any) => ({ ...plan, value: plan.value ?? '' }))
       : [],
+    
   }
 }

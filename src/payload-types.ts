@@ -115,7 +115,6 @@ export interface Property {
   ownership?: ('Rental' | 'Freehold' | 'Leasehold') | null;
   price?: number | null;
   currency?: ('IDR' | 'USD') | null;
-  agent?: (number | null) | Agent;
   plans?:
     | {
         icon?: (number | null) | Media;
@@ -495,13 +494,15 @@ export interface Property {
   street_name?: string | null;
   street_number?: string | null;
   post_code?: string | null;
+  video?: string | null;
   images?:
     | {
         file: number | Media;
         id?: string | null;
       }[]
     | null;
-  video?: string | null;
+  agent?: (number | null) | Agent;
+  related_properties?: (number | Property)[] | null;
   updatedAt: string;
   createdAt: string;
 }

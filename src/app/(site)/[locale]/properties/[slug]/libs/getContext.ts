@@ -19,6 +19,16 @@ export const getContext = async (searchParams: any) => {
 
   const property = res.docs[0]
 
+  // const { docs: relatedProperties } = await payload.find({
+  //   collection: 'properties', // required
+  //   where: { type: { equals: property.type } },
+  //   // depth: 2,
+  //   locale: searchParams.locale,
+  //   fallbackLocale: 'en',
+  //   page: 1,
+  //   limit: 3,
+  // })
+
   return {
     ...property,
     amenities: property.amenities
@@ -30,5 +40,6 @@ export const getContext = async (searchParams: any) => {
     plans: property.plans
       ? property.plans.map((plan: any) => ({ ...plan, value: plan.value ?? '' }))
       : [],
+    // relatedProperties,
   }
 }
