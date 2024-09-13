@@ -13,6 +13,7 @@ import {
 } from '@/libs/options'
 import { formatSlug } from '@/libs/utils'
 import { HTMLConverterFeature, lexicalEditor, lexicalHTML } from '@payloadcms/richtext-lexical'
+import { SlateToLexicalFeature } from '@payloadcms/richtext-lexical/migrate'
 
 const PropertyInfo: CollectionConfig['fields'] = [
   {
@@ -197,7 +198,7 @@ const PropertyDetails: CollectionConfig['fields'] = [
     required: false,
     localized: true,
     editor: lexicalEditor({
-      features: ({ defaultFeatures }) => [...defaultFeatures, HTMLConverterFeature({})],
+      features: ({ defaultFeatures }) => [...defaultFeatures, SlateToLexicalFeature({}), HTMLConverterFeature({})],
     }),
   },
   lexicalHTML('descriptions', { name: 'descriptions_html' }),
