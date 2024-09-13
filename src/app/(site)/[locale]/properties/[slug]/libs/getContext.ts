@@ -31,15 +31,18 @@ export const getContext = async (searchParams: any) => {
 
   return {
     ...property,
-    amenities: property.amenities
+    amenities: property?.amenities
       ? property.amenities.map((amenity: any) => ({ ...amenity, value: amenity.value ?? '' }))
       : [],
-    spaces: property.spaces
+    spaces: property?.spaces
       ? property.spaces.map((space: any) => ({ ...space, value: space.value ?? '' }))
       : [],
-    plans: property.plans
+    plans: property?.plans
       ? property.plans.map((plan: any) => ({ ...plan, value: plan.value ?? '' }))
       : [],
+    images: property?.images ? property.images.filter((image: any) => !!image.file) : [],
+    related_properties: property?.related_properties ? property.related_properties : [],
+
     // relatedProperties,
   }
 }

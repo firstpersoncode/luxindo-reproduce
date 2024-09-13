@@ -9,12 +9,13 @@
 //   variable: '--font-geist-mono',
 // })
 
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
 
 import { Property } from '@/payload-types'
 import { getContext } from './libs/getContext'
 import Providers from './libs/providers'
+import { notFound } from 'next/navigation'
 
 export async function generateMetadata({
   params,
@@ -37,6 +38,13 @@ export async function generateMetadata({
 
   const data = await getContext(params)
 
+  if (!data?.id) {
+    return {
+      title: 'Not Found',
+      description: '',
+    }
+  }
+
   return {
     title: data.title,
     description: data.description,
@@ -51,5 +59,8 @@ export default async function RootLayout({
   params: { slug: string; locale: string }
 }>) {
   const data = await getContext(params)
+  if (!data?.id) {
+    notFound()
+  }
   return <Providers context={{ data }}>{children}</Providers>
 }
