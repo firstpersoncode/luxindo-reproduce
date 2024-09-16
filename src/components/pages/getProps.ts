@@ -8,7 +8,7 @@ export const getRootPaths = async () => {
     paths: locales.map((locale) => ({
       params: { locale },
     })),
-    fallback: false,
+    fallback: 'blocking',
   }
 }
 
@@ -20,7 +20,7 @@ export const getPaths = async () => {
   const data = await payload.find({
     collection: 'pages',
     page: 1,
-    limit: 1000,
+    limit: 10,
     locale: 'en',
     fallbackLocale: 'en',
   })
@@ -34,7 +34,7 @@ export const getPaths = async () => {
         }))
       })
       .flat(),
-    fallback: false,
+    fallback: 'blocking',
   }
 }
 
@@ -71,6 +71,8 @@ export const getProps = (cb: any) => async (ctx: GetStaticPropsContext) => {
   _getProps.props.page = JSON.parse(
     JSON.stringify({ metadata, data, locale: ctx.params?.locale || '' }),
   )
+
+  // _getProps.revalidate = 60
 
   return _getProps
 }

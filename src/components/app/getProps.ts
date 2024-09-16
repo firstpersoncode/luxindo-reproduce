@@ -32,6 +32,7 @@ export const appProps = (cb: any) => async (ctx: GetStaticPropsContext) => {
     JSON.stringify({ data: { appUrl: process.env.NEXT_PUBLIC_APP_URL } }),
   )
 
+  getProps.revalidate = 60
 
   return getProps
 }
