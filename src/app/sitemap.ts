@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next'
-import configPromise from '@payload-config'
+import configPromise from '@/app/payload.config'
 import { getPayload } from 'payload'
 
 const generateSite = (path: string) => {

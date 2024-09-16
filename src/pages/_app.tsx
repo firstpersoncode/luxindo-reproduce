@@ -1,4 +1,4 @@
-import AppLayout from '@/components/app'
+import AppLayout from '@/frontend/globals'
 import type { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
 

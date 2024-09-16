@@ -1,8 +1,8 @@
 import { GetStaticPropsContext } from 'next'
 import dynamic from 'next/dynamic'
-import { getProps, getRootPaths } from '@/components/pages/getProps'
-import { appProps } from '@/components/app/getProps'
-const Page = dynamic(() => import('@/components/pages/Page'))
+import { getProps, getRootPaths } from '@/frontend/collections/Pages/libs/getProps'
+import { appProps } from '@/frontend/globals/libs/getProps'
+const Page = dynamic(() => import('@/frontend/collections/Pages/Page'))
 
 export default function _Page({ ...props }) {
   return <Page {...props} />
