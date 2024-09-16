@@ -1,21 +1,11 @@
-import dynamic from 'next/dynamic'
-import Head from 'next/head'
 
-const pages: { [x: string]: any } = {
-  default: dynamic(() => import('./Default')),
-  collection: dynamic(() => import('./Collection')),
-}
+import Layout from './Layout'
+import Providers from './providers'
 
 export default function Page({ ...props }: any) {
-  const { page } = props
-  const Page = pages[page?.data?.template ?? 'default']
   return (
-    <>
-      <Head>
-        <title>{page?.metadata?.title}</title>
-        <meta name="description" content={page?.metadata?.description} />
-      </Head>
-      <Page context={{ ...page }} />
-    </>
+    <Providers context={{ ...props.page }}>
+      <Layout />
+    </Providers>
   )
 }

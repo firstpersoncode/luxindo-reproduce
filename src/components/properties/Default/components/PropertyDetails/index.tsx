@@ -3,7 +3,7 @@ import { Box, Flex, Image, Text, VStack, HStack, SimpleGrid } from '@chakra-ui/r
 import { css } from '@emotion/react'
 import PropertyFeature from './PropertyFeature'
 import PropertyStat from './PropertyStat'
-import { useContextProvider } from '../../providers'
+import { useContextProvider } from '../../../providers'
 
 const PropertyDetails: React.FC = ({}) => {
   const {

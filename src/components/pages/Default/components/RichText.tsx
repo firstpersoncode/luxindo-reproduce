@@ -1,5 +1,5 @@
 import React from 'react'
-import { useContextProvider } from '../providers'
+import { useContextProvider } from '../../providers'
 
 const RichText: React.FC<{ sectionId: string }> = ({ sectionId }) => {
   const {

@@ -2,7 +2,7 @@ import React from 'react'
 import { Box, Flex, Text, Image, Button, SkeletonText } from '@chakra-ui/react'
 import ShareButtons from './ShareButtons'
 import PrintButton from './PrintButton'
-import { useContextProvider } from '../../providers'
+import { useContextProvider } from '../../../providers'
 
 const FinancialDisplay: React.FC = ({}) => {
   const {

@@ -1,7 +1,7 @@
 import React from 'react'
 import { HStack, VStack, Text, Skeleton } from '@chakra-ui/react'
 import { css } from '@emotion/react'
-import { useContextProvider } from '../../providers'
+import { useContextProvider } from '../../../providers'
 
 interface ContactDetailsProps {
   isLoading: boolean

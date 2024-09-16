@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import React, { useMemo } from 'react'
 import Slider from 'react-slick'
-import { useContextProvider } from '../providers'
+import { useContextProvider } from '../../providers'
 import { Box } from '@chakra-ui/react'
 
 const Gallery: React.FC = () => {

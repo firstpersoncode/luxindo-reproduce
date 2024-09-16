@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import { Box } from '@chakra-ui/react'
 import PropertyGrid from './PropertyGrid'
-import { useContextProvider } from '../../providers'
+import { useContextProvider } from '../../../providers'
 
 const PropertyListing: React.FC = () => {
   const {

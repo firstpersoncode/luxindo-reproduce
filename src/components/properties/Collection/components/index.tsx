@@ -17,8 +17,10 @@ import PropertyList from './PropertyList'
 import PopularAreas from './PopularAreas'
 import FAQSection from './FAQSection'
 import FilterSection from './FIlterSection'
+import { useContextProvider } from '../../providers'
 
 const PropertySearch: React.FC = () => {
+  const { data } = useContextProvider()
   return (
     <Box bg="white" pt={{ base: '100px', md: '458px' }}>
       <Container maxW="container.xl">
@@ -65,6 +67,7 @@ const PropertySearch: React.FC = () => {
           <PopularAreas />
           <FAQSection />
         </VStack>
+        <pre>{JSON.stringify(data, null, 2)}</pre>
       </Container>
     </Box>
   )

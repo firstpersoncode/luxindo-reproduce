@@ -1,7 +1,7 @@
 import React from 'react'
 import { Box, Text, Skeleton } from '@chakra-ui/react'
 import { css } from '@emotion/react'
-import { useContextProvider } from '../../providers'
+import { useContextProvider } from '../../../providers'
 
 interface AgentInfoProps {
   isLoading: boolean

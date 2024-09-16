@@ -3,7 +3,7 @@ import { Box, Flex, Image, Text, VStack, HStack, Skeleton } from '@chakra-ui/rea
 import { css } from '@emotion/react'
 import AgentInfo from './AgentInfo'
 import ContactDetails from './ContactDetails'
-import { useContextProvider } from '../../providers'
+import { useContextProvider } from '../../../providers'
 
 const ContactAgent: React.FC = () => {
   const {

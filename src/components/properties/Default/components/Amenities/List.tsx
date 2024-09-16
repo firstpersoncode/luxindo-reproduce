@@ -1,7 +1,7 @@
 import React from 'react'
 import { VStack } from '@chakra-ui/react'
 import ArchitectureCard from './Card'
-import { useContextProvider } from '../../providers'
+import { useContextProvider } from '../../../providers'
 
 const ArchitectureList: React.FC = () => {
   const {

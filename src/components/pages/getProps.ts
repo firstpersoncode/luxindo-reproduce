@@ -12,7 +12,6 @@ export const getRootPaths = async () => {
   }
 }
 
-
 export const getPaths = async () => {
   const payload = await getPayload({
     config: configPromise,

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box, Heading, Text, VStack, Skeleton } from '@chakra-ui/react'
-import { useContextProvider } from '../providers'
+import { useContextProvider } from '../../providers'
 
 const DescriptionSection: React.FC = ({}) => {
   const {

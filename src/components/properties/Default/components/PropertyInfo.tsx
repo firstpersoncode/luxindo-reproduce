@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box, Text, Skeleton } from '@chakra-ui/react'
-import { useContextProvider } from '../providers'
+import { useContextProvider } from '../../providers'
 
 const PropertyDetail: React.FC = () => {
   const {
