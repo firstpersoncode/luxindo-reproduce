@@ -10,8 +10,9 @@ import {
   SPACES,
   STATES,
   SUB_AREAS,
-} from '@/libs/options'
-import { formatSlug } from '@/libs/utils'
+  PROPERTY_TEMPLATES
+} from './options'
+import { formatSlug } from './utils'
 import { HTMLConverterFeature, lexicalEditor, lexicalHTML } from '@payloadcms/richtext-lexical'
 import { SlateToLexicalFeature } from '@payloadcms/richtext-lexical/migrate'
 
@@ -20,7 +21,7 @@ const PropertyInfo: CollectionConfig['fields'] = [
     name: 'title',
     label: 'Title',
     type: 'text',
-    required: false,
+    required: true,
     localized: true,
   },
 
@@ -80,6 +81,29 @@ const PropertyInfo: CollectionConfig['fields'] = [
     required: false,
     options: CURRENCIES,
   },
+
+  {
+    // description
+    name: 'keywords',
+    label: 'Keywords',
+    type: 'textarea',
+    required: false,
+},
+{
+    name: "template",
+    label: "Template",
+    type: "select",
+    required: false,
+    // defaultValue: "default",
+    options: PROPERTY_TEMPLATES
+},
+{
+  name: 'image',
+  label: 'Image',
+  type: 'upload',
+  relationTo: 'media',
+  required: false,
+},
 ]
 
 const PropertyPlans: CollectionConfig['fields'] = [
@@ -340,7 +364,7 @@ export const Properties: CollectionConfig = {
     useAsTitle: 'title',
     preview: (doc, { locale }) => {
       if (doc?.slug) {
-        return `${process.env.NEXT_PUBLIC_APP_URL}/${locale}/properties/${doc.slug}?mode=preview`
+        return `${process.env.NEXT_PUBLIC_APP_URL}/${locale}/property/${doc.slug}?mode=preview`
       }
 
       return null

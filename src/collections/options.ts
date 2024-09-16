@@ -1,3 +1,33 @@
+export const PAGE_TEMPLATES = [
+  {
+    label: 'Default',
+    value: 'default',
+  },
+  {
+    label: 'Home',
+    value: 'home',
+  },
+  {
+    label: 'About',
+    value: 'about',
+  },
+  {
+    label: 'Contact',
+    value: 'contact',
+  },
+]
+
+export const PROPERTY_TEMPLATES = [
+  {
+    label: 'Default',
+    value: 'default',
+  },
+  {
+    label: 'Collection',
+    value: 'collection',
+  },
+]
+
 export const PROPERTY_TYPES = [
   {
     label: 'Land',

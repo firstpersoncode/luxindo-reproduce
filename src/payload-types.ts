@@ -15,6 +15,7 @@ export interface Config {
     media: Media;
     agents: Agent;
     properties: Property;
+    pages: Page;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
@@ -105,7 +106,7 @@ export interface Agent {
  */
 export interface Property {
   id: number;
-  title?: string | null;
+  title: string;
   slug?: string | null;
   description?: string | null;
   sku?: string | null;
@@ -115,6 +116,9 @@ export interface Property {
   ownership?: ('Rental' | 'Freehold' | 'Leasehold') | null;
   price?: number | null;
   currency?: ('IDR' | 'USD') | null;
+  keywords?: string | null;
+  template?: ('default' | 'collection') | null;
+  image?: (number | null) | Media;
   plans?:
     | {
         icon?: (number | null) | Media;
@@ -505,6 +509,47 @@ export interface Property {
   related_properties?: (number | Property)[] | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages".
+ */
+export interface Page {
+  id: number;
+  title?: string | null;
+  slug?: string | null;
+  description?: string | null;
+  keywords?: string | null;
+  template?: ('default' | 'home' | 'about' | 'contact') | null;
+  image?: (number | null) | Media;
+  sections?: RichTextBlock[] | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "RichTextBlock".
+ */
+export interface RichTextBlock {
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  content_html?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'RichText';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

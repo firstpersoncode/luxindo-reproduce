@@ -5,15 +5,10 @@ const getHostName = (url) => {
   return hostName.startsWith('www.') ? hostName.slice(4) : hostName
 }
 
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // i18n: {
-  //   locales: ['en', 'fr', 'id'],
-  //   defaultLocale: 'en',
-  // },
   images: {
-    domains: [getHostName(process.env.NEXT_PUBLIC_APP_URL ?? ""), "cdn.builder.io"]
+    domains: [getHostName(process.env.NEXT_PUBLIC_APP_URL ?? ''), 'cdn.builder.io'],
   },
   reactStrictMode: false,
 }

@@ -16,6 +16,7 @@ import { Agents } from './collections/Agents'
 import { Properties } from './collections/Properties'
 
 import { locales, defaultLocale } from './libs/locales'
+import { Pages } from './collections/Pages'
 
 // const storagePlugin = s3Storage({
 //   collections: {
@@ -42,7 +43,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Agents, Properties],
+  collections: [Users, Media, Agents, Properties, Pages],
   localization: {
     locales,
     defaultLocale,
