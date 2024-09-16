@@ -3,12 +3,12 @@ import { Box, Button, Flex, Select, Input } from '@chakra-ui/react'
 import { AREAS, PROPERTY_OWNERSHIP, PROPERTY_TYPES, SUB_AREAS } from '@/libs/options'
 import { useContextProvider } from './libs/providers'
 
-const SearchFilters: React.FC = () => {
+const SearchFilters: React.FC<any> = ({ onSubmit }) => {
   const [filter, setFilter] = useState({
-    type: "",
-    ownership: "",
-    area_2: "",
-    area_1: "",
+    type: '',
+    ownership: '',
+    area_2: '',
+    area_1: '',
     sku: '',
   })
 
@@ -83,7 +83,10 @@ const SearchFilters: React.FC = () => {
         />
 
         <Button
-          onClick={() => handleSearch({ ...filter })}
+          onClick={() => {
+            handleSearch({ ...filter })
+            onSubmit()
+          }}
           bg="rgba(171, 116, 95, 1)"
           color="white"
           fontWeight="700"

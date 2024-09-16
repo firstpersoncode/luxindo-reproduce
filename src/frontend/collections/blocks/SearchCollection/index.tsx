@@ -6,7 +6,6 @@ import PropertyList from './PropertyList'
 import Tune from '@mui/icons-material/Tune'
 import BottomSheet from './BottomSheet'
 import Providers from './libs/providers'
-import StickyBox from 'react-sticky-box'
 
 const Layout: React.FC<any> = ({ ...props }) => {
   const [openFilter, setOpenFilter] = useState(false)
@@ -14,18 +13,22 @@ const Layout: React.FC<any> = ({ ...props }) => {
   return (
     <Providers context={{ ...props }}>
       <VStack spacing={8} align="stretch">
-        <SearchFilters />
+        <SearchFilters onSubmit={() => setOpenFilter(false)} />
 
-        <HStack display="flex" gap={2} alignItems={'flex-start'} position="relative">
-          <StickyBox offsetTop={20} offsetBottom={20}>
-            <Box position="sticky" top={20} minW="350px" visibility={['hidden', 'visible']} h={[0, 'auto']}>
-              <FilterSection />
-            </Box>
-          </StickyBox>
+        <Box
+          display="flex"
+          gap={2}
+          alignItems={'flex-start'}
+          position="relative"
+          flexDirection={['column', 'row']}
+        >
+          <Box minW="350px" visibility={['hidden', 'visible']} h={[0, 'auto']}>
+            <FilterSection />
+          </Box>
           <Box flex={1}>
             <PropertyList />
           </Box>
-        </HStack>
+        </Box>
       </VStack>
 
       <IconButton
@@ -53,7 +56,7 @@ const Layout: React.FC<any> = ({ ...props }) => {
         action={<Button onClick={() => setOpenFilter(false)}>Update</Button>}
         actionSecondary="Cancel"
       >
-        <SearchFilters />
+        <SearchFilters onSubmit={() => setOpenFilter(false)} />
         <FilterSection />
       </BottomSheet>
     </Providers>
