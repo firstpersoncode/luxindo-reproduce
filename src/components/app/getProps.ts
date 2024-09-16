@@ -3,9 +3,9 @@ import { GetStaticPropsContext } from 'next'
 import { getPayload } from 'payload'
 
 export const appProps = (cb: any) => async (ctx: GetStaticPropsContext) => {
-  const payload = await getPayload({
-    config: configPromise,
-  })
+  // const payload = await getPayload({
+  //   config: configPromise,
+  // })
 
   // const slug =
   //   ctx.params?.slugs?.[0] === 'property'

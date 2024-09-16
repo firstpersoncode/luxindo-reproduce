@@ -28,8 +28,6 @@ export default function Components() {
       <Map />
       <Agent />
       <Related />
-
-      {data ? <pre style={{fontSize: "10px"}}>{JSON.stringify(data, null, 2)}</pre> : 'Data not found'}
     </Container>
   )
 }

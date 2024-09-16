@@ -6,7 +6,7 @@ import { getPayload } from 'payload'
 export const getRootPaths = async () => {
   return {
     paths: locales.map((locale) => ({
-      params: { locale },
+      params: { locale, slugs: ['property'] },
     })),
     fallback: false,
   }
@@ -27,9 +27,10 @@ export const getPaths = async () => {
 
   return {
     paths: data.docs
+      .filter(d => d.slug !== 'index')
       .map((d: any) => {
         return locales.map((locale) => ({
-          params: { locale, slugs: d.slug === 'index' ? [] : d.slug.split('/') },
+          params: { locale, slugs: d.slug.split('/') },
         }))
       })
       .flat(),
