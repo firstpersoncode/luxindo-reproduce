@@ -110,7 +110,7 @@ export interface Agent {
 export interface Property {
   id: number;
   title: string;
-  slug?: string | null;
+  slug: string;
   description?: string | null;
   sku?: string | null;
   type?:
@@ -555,8 +555,8 @@ export interface SearchCollectionBlock {
  */
 export interface Page {
   id: number;
-  title?: string | null;
-  slug?: string | null;
+  title: string;
+  slug: string;
   description?: string | null;
   keywords?: string | null;
   template?: ('default' | 'home' | 'about' | 'contact') | null;

@@ -120,7 +120,7 @@ const PropertyList: React.FC = () => {
       {properties.map((property, index) => (
         <Link
           key={index}
-          href={`/${[locale, 'property', property.slug].filter(Boolean).join('/')}`}
+          href={`/${['property', property.slug].filter(Boolean).join('/')}`}
           locale={locale}
         >
           <PropertyCard key={index} {...property} />

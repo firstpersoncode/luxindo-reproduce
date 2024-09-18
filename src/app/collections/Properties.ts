@@ -31,7 +31,7 @@ const PropertyInfo: CollectionConfig['fields'] = [
     label: 'Slug',
     type: 'text',
     index: true,
-    required: false,
+    required: true,
     hooks: {
       beforeValidate: [formatSlug('title')],
     },

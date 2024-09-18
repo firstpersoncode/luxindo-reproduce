@@ -8,7 +8,7 @@ const PageInfo: CollectionConfig['fields'] = [
     name: 'title',
     label: 'Title',
     type: 'text',
-    required: false,
+    required: true,
     localized: true,
   },
 
@@ -17,7 +17,7 @@ const PageInfo: CollectionConfig['fields'] = [
     label: 'Slug',
     type: 'text',
     index: true,
-    required: false,
+    required: true,
     hooks: {
       beforeValidate: [formatSlug('title')],
     },

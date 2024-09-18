@@ -24,6 +24,6 @@ function MapTheme({ ...data }: any) {
   const View = useMemo(() => {
     const Theme = themes[data.template ?? 'default']
     return Theme
-  }, [data.blockType, data.template])
+  }, [data.template])
   return <View />
 }

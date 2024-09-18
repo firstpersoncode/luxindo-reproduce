@@ -15,7 +15,7 @@ export const getSectionSearchProps = async (
       collection: 'properties', // required
       // where: { slug: { equals: !!slug && slug !== '/' ? slug : 'index' } },
       // depth: 2,
-      locale: (ctx.params?.locale || '') as 'en' | 'id' | 'fr' | 'all' | undefined,
+      locale: (ctx.locale || '') as 'en' | 'id' | 'fr' | 'all' | undefined,
       fallbackLocale: 'en',
       // user: dummyUser,
       // overrideAccess: false,

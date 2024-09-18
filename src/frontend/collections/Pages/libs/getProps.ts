@@ -6,7 +6,7 @@ import { getPayload } from 'payload'
 export const getRootPaths = async () => {
   return {
     paths: locales.map((locale) => ({
-      params: { locale },
+      locale,
     })),
     fallback: 'blocking',
   }
@@ -30,7 +30,8 @@ export const getPaths = async () => {
       .filter((d) => d.slug !== 'index')
       .map((d: any) => {
         return locales.map((locale) => ({
-          params: { locale, slugs: d.slug.split('/') },
+          params: { slugs: d.slug.split('/') },
+          locale
         }))
       })
       .flat(),
@@ -49,7 +50,7 @@ export const getProps = (cb: any) => async (ctx: GetStaticPropsContext) => {
     collection: 'pages', // required
     where: { slug: { equals: slug && slug !== '/' ? slug : 'index' } },
     // depth: 2,
-    locale: (ctx.params?.locale || 'en') as 'en' | 'id' | 'fr' | 'all' | undefined,
+    locale: (ctx.locale || 'en') as 'en' | 'id' | 'fr' | 'all' | undefined,
     fallbackLocale: 'en',
     // user: dummyUser,
     // overrideAccess: false,
@@ -69,7 +70,7 @@ export const getProps = (cb: any) => async (ctx: GetStaticPropsContext) => {
   if (_getProps.notFound) return { notFound: true }
 
   _getProps.props.page = JSON.parse(
-    JSON.stringify({ metadata, data, locale: ctx.params?.locale || '' }),
+    JSON.stringify({ metadata, data, locale: ctx.locale || '' }),
   )
 
   // _getProps.revalidate = 60
