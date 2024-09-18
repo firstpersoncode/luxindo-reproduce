@@ -3,6 +3,7 @@ import * as migration_20240913_202754_lat_lng_textfield from './20240913_202754_
 import * as migration_20240913_203525_lat_lng_textfield1 from './20240913_203525_lat_lng_textfield1';
 import * as migration_20240915_191449_page_collection from './20240915_191449_page_collection';
 import * as migration_20240916_142422_sections from './20240916_142422_sections';
+import * as migration_20240918_113318_required_fields from './20240918_113318_required_fields';
 
 export const migrations = [
   {
@@ -28,6 +29,11 @@ export const migrations = [
   {
     up: migration_20240916_142422_sections.up,
     down: migration_20240916_142422_sections.down,
-    name: '20240916_142422_sections'
+    name: '20240916_142422_sections',
+  },
+  {
+    up: migration_20240918_113318_required_fields.up,
+    down: migration_20240918_113318_required_fields.down,
+    name: '20240918_113318_required_fields'
   },
 ];
