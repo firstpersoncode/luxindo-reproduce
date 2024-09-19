@@ -2,9 +2,11 @@ import { ChakraProvider } from '@chakra-ui/react'
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 import { LOCALES } from '@/modules/Property/libs/locales'
+import { useRouter } from 'next/router'
 
 export interface IContext {
   isLoading?: boolean
+  isRouteChanging?: boolean
   locale: string
   locales: { [x: string]: { [y: string]: string } }
   data: any
@@ -13,6 +15,7 @@ export interface IContext {
 
 const context: IContext = {
   isLoading: true,
+  isRouteChanging: false,
   locale: 'en',
   locales: {},
   data: {
@@ -25,9 +28,12 @@ const Context = createContext(context)
 
 const useController = (_context: IContext) => {
   const [isLoading, setIsLoading] = useState(_context.isLoading)
+  const [isRouteChanging, setIsRouteChanging] = useState(_context.isRouteChanging)
   const [locale, setLocale] = useState(_context.locale)
   const [locales, setLocales] = useState(_context.locales)
   const [data, setData] = useState<any>(_context.data)
+
+  const router = useRouter()
 
   const getLocale = useMemo(() => {
     return (key: string) => locales[key]?.[locale as string] || locales[key]?.['en'] || key
@@ -39,8 +45,25 @@ const useController = (_context: IContext) => {
     }, 1000)
   }, [])
 
+  useEffect(() => {
+    const handleRouteChange = () => {
+      setIsRouteChanging(true)
+    }
+    const handleRouteChangeComplete = () => {
+      setIsRouteChanging(false)
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+    router.events.on('routeChangeStart', handleRouteChange)
+    router.events.on('routeChangeComplete', handleRouteChangeComplete)
+    return () => {
+      router.events.off('routeChangeStart', handleRouteChange)
+      router.events.off('routeChangeComplete', handleRouteChangeComplete)
+    }
+  }, [router])
+
   return {
     isLoading,
+    isRouteChanging,
     locale,
     locales,
     data,
