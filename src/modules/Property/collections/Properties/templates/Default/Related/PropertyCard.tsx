@@ -1,7 +1,7 @@
 import React from 'react'
 import { Box, Text, Image, Flex } from '@chakra-ui/react'
 import Link from 'next/link'
-import { useContextProvider } from '../../../providers'
+import { useContextProvider } from '@/modules/Property/globals/providers'
 
 interface PropertyCardProps {
   title: string
