@@ -4,7 +4,7 @@ import { buildConfig, Config } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
 import { defaultLocale, locales } from '@/libs/locales'
-import { Module_buildConfig } from '@/modules/payload.modules'
+import { Module_payloadConfig } from '@/modules/cms.modules'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -32,4 +32,6 @@ const config: Config = {
   },
 }
 
-export default buildConfig(Module_buildConfig("Property")(config))
+const payloadConfig = Module_payloadConfig('Property')
+
+export default buildConfig(payloadConfig(config))

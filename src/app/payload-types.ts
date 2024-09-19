@@ -120,7 +120,7 @@ export interface Property {
   price?: number | null;
   currency?: ('IDR' | 'USD') | null;
   keywords?: string | null;
-  template?: ('default' | 'collection') | null;
+  template?: ('Default' | 'Search') | null;
   image?: (number | null) | Media;
   plans?:
     | {
@@ -559,7 +559,7 @@ export interface Page {
   slug: string;
   description?: string | null;
   keywords?: string | null;
-  template?: ('default' | 'home' | 'about' | 'contact') | null;
+  template?: ('Default' | 'Home' | 'About' | 'Contact') | null;
   image?: (number | null) | Media;
   sections?: (RichTextBlock | SearchPropertiesBlock)[] | null;
   updatedAt: string;
