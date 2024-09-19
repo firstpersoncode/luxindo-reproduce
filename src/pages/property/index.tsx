@@ -1,13 +1,4 @@
-import { GetStaticPropsContext } from 'next'
-import dynamic from 'next/dynamic'
-import { getProps } from '@/frontend/collections/Properties/libs/getProps'
-import { appProps } from '@/frontend/globals/libs/getProps'
-const Page = dynamic(() => import('@/frontend/collections/Properties/Page'))
-
-export default function _Page({ ...props }) {
-  return <Page {...props} />
-}
-
-export const getStaticProps = appProps(
-  getProps(async (ctx: GetStaticPropsContext) => ({ props: {} })),
-)
+import { Module_getStaticProps } from '@/modules/props.modules'
+import { Module_view } from '@/modules/view.modules'
+export default Module_view('Property')('Properties')
+export const getStaticProps = Module_getStaticProps('Property')('Properties')
