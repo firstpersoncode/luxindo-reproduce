@@ -1,10 +1,9 @@
-import { createContext, Dispatch, SetStateAction, useContext, useEffect, useState } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 import { search, SearchParams } from './search.service'
 
 export interface IContext {
   isReady?: boolean
   isLoading?: boolean
-  locale?: string
   docs: any[]
   filter?: SearchParams
   handleSearch: () => void
@@ -14,7 +13,6 @@ export interface IContext {
 const context: IContext = {
   isReady: false,
   isLoading: true,
-  locale: 'en',
   docs: [],
   filter: {
     type: '',
@@ -32,7 +30,6 @@ const Context = createContext(context)
 const useController = (_context: IContext) => {
   const [isReady, setIsReady] = useState(_context.isReady)
   const [isLoading, setIsLoading] = useState(_context.isLoading)
-  const [locale, setLocale] = useState(_context.locale)
   const [docs, setDocs] = useState(_context.docs)
   const [filter, _setFilter] = useState(_context.filter)
 
@@ -59,7 +56,6 @@ const useController = (_context: IContext) => {
   return {
     isReady,
     isLoading,
-    locale,
     docs,
     filter,
     handleSearch,
@@ -73,7 +69,11 @@ export default function Providers({
 }: Readonly<{ children: React.ReactNode; context?: IContext }>) {
   const value = useController({ ...context, ..._context })
 
-  return <Context.Provider value={value}>{children}</Context.Provider>
+  return (
+    <Context.Provider value={value}>
+      {children}
+    </Context.Provider>
+  )
 }
 
 export const useContextProvider = () => useContext(Context)

@@ -1,10 +1,13 @@
 import React from "react";
 import { Flex, Text, Image } from "@chakra-ui/react";
+import { useContextProvider as useGlobalContextProvider } from '@/modules/Property/globals/providers'
 
 const ShareButtons: React.FC = () => {
+  const { getLocale } = useGlobalContextProvider()
+
   return (
     <Flex gap="20px" fontWeight="400" textAlign="right" justifyContent="space-between">
-      <Text margin="auto 0">Share this:</Text>
+      <Text margin="auto 0">{getLocale("Share this")}:</Text>
       <Image
         src="https://cdn.builder.io/api/v1/image/assets/TEMP/e31e710f3d2ca512c521337e53ed9e9dd77de6b3def6c1a8e9e6b9b67bc814d2?placeholderIfAbsent=true&apiKey=a9b95505e95b4a99931826297eec4185"
         alt=""

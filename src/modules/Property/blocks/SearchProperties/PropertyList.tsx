@@ -2,6 +2,7 @@ import React, { useMemo } from 'react'
 import { Box, SimpleGrid, Text, Image, Flex, Badge } from '@chakra-ui/react'
 import { useContextProvider } from './providers'
 import Link from 'next/link'
+import { useContextProvider as useGlobalContextProvider } from '@/modules/Property/globals/providers'
 
 interface PropertyCardProps {
   image: string
@@ -28,6 +29,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
   area,
   leaseYears,
 }) => {
+  const { getLocale } = useGlobalContextProvider()
   return (
     <Box borderRadius="5px" boxShadow="0px 5px 10px rgba(0, 0, 0, 0.09)" overflow="hidden">
       <Box position="relative">
@@ -88,7 +90,9 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
               w="15px"
               h="15px"
             />
-            <Text fontSize="12px">{leaseYears} years</Text>
+            <Text fontSize="12px">
+              {leaseYears} {getLocale('years')}
+            </Text>
           </Flex>
         </Flex>
       </Box>
@@ -97,7 +101,8 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
 }
 
 const PropertyList: React.FC = () => {
-  const { docs, locale } = useContextProvider()
+  const { docs } = useContextProvider()
+  const { locale } = useGlobalContextProvider()
 
   const properties = useMemo(() => {
     return docs.map((doc) => ({

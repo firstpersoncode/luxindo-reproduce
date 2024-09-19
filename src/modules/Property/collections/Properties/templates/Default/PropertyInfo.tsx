@@ -1,12 +1,16 @@
 import React from 'react'
 import { Box, Text, Skeleton, Container } from '@chakra-ui/react'
 import { useContextProvider } from '../../providers'
+import { useContextProvider as useGlobalContextProvider } from '@/modules/Property/globals/providers'
+
 
 const PropertyDetail: React.FC = () => {
   const {
     data: { sku, type: propertyType },
     isLoading,
   } = useContextProvider()
+  const { getLocale } = useGlobalContextProvider()
+
   return (
     <Box bg="white">
       <Container maxW="container.xl">
@@ -32,7 +36,7 @@ const PropertyDetail: React.FC = () => {
             </Skeleton>
           </Box>
           <Box>
-            Property type:
+            {getLocale("Property type")}:
             <Skeleton isLoaded={!isLoading} display="inline-block" ml={1}>
               <Text as="span" fontWeight={700}>
                 {propertyType}

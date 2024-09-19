@@ -1,15 +1,18 @@
 import React from 'react'
-import { Box, Flex, Image, Text, VStack, HStack, Skeleton, Container } from '@chakra-ui/react'
+import { Box, Flex, Image, Text, Skeleton, Container } from '@chakra-ui/react'
 import { css } from '@emotion/react'
 import AgentInfo from './AgentInfo'
 import ContactDetails from './ContactDetails'
 import { useContextProvider } from '../../../providers'
+import { useContextProvider as useGlobalContextProvider } from '@/modules/Property/globals/providers'
 
 const ContactAgent: React.FC = () => {
   const {
     data: { agent },
     isLoading,
   } = useContextProvider()
+  const { getLocale } = useGlobalContextProvider()
+
   return (
     <Box bg="white">
       <Container maxW="container.xl">
@@ -20,7 +23,7 @@ const ContactAgent: React.FC = () => {
           lineHeight="1.1"
           fontFamily="Source Sans Pro, sans-serif"
         >
-          Contact the Agent
+          {getLocale('Contact the Agent')}
         </Text>
         <Flex
           css={css`

@@ -508,7 +508,7 @@ export interface Property {
         id?: string | null;
       }[]
     | null;
-  sections?: (RichTextBlock | SearchCollectionBlock | SearchPropertiesBlock)[] | null;
+  sections?: (RichTextBlock | SearchPropertiesBlock)[] | null;
   agent?: (number | null) | Agent;
   related_properties?: (number | Property)[] | null;
   updatedAt: string;
@@ -541,16 +541,6 @@ export interface RichTextBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "SearchCollectionBlock".
- */
-export interface SearchCollectionBlock {
-  search_collection?: string | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'SearchCollection';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "SearchPropertiesBlock".
  */
 export interface SearchPropertiesBlock {
@@ -571,7 +561,7 @@ export interface Page {
   keywords?: string | null;
   template?: ('default' | 'home' | 'about' | 'contact') | null;
   image?: (number | null) | Media;
-  sections?: (RichTextBlock | SearchCollectionBlock | SearchPropertiesBlock)[] | null;
+  sections?: (RichTextBlock | SearchPropertiesBlock)[] | null;
   updatedAt: string;
   createdAt: string;
 }

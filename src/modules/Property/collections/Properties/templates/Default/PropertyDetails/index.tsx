@@ -1,20 +1,21 @@
-import React, { useMemo } from 'react'
-import { Box, Flex, Image, Text, VStack, HStack, SimpleGrid, Container } from '@chakra-ui/react'
-import { css } from '@emotion/react'
+import { Box, Flex, Image, Text, VStack, SimpleGrid, Container } from '@chakra-ui/react'
 import PropertyFeature from './PropertyFeature'
 import PropertyStat from './PropertyStat'
 import { useContextProvider } from '../../../providers'
+import { useContextProvider as useGlobalContextProvider } from '@/modules/Property/globals/providers'
 
 const PropertyDetails: React.FC = ({}) => {
   const {
     data: { plans, spaces },
   } = useContextProvider()
 
+  const { getLocale } = useGlobalContextProvider()
+
   return (
     <Box bg="white">
       <Container maxW="container.xl">
         <Text fontSize="20px" fontWeight="600" lineHeight="1.1" mt="34px">
-          The space
+          {getLocale('The space')}
         </Text>
 
         <VStack ml={{ base: 0, md: '20px' }} align="stretch">

@@ -1,5 +1,6 @@
-import React from 'react';
-import { VStack, Text, Checkbox } from '@chakra-ui/react';
+import React from 'react'
+import { VStack, Text, Checkbox } from '@chakra-ui/react'
+import { useContextProvider } from '@/modules/Property/globals/providers'
 
 const propertyLabels = [
   'Finest Collection Villa',
@@ -9,14 +10,15 @@ const propertyLabels = [
   'Ready Soon',
   'Selection of the month',
   'Sold',
-  'Exclusive Properties'
-];
+  'Exclusive Properties',
+]
 
 const PropertyLabelFilter: React.FC = () => {
+  const { getLocale } = useContextProvider()
   return (
     <VStack align="stretch" spacing={4} width="100%" mt={6}>
       <Text fontSize="16px" fontWeight="400">
-        Property Label
+        {getLocale('Property Label')}
       </Text>
       {propertyLabels.map((label) => (
         <Checkbox key={label} colorScheme="gray">
@@ -24,7 +26,7 @@ const PropertyLabelFilter: React.FC = () => {
         </Checkbox>
       ))}
     </VStack>
-  );
-};
+  )
+}
 
-export default PropertyLabelFilter;
+export default PropertyLabelFilter

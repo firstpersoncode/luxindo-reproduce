@@ -1,10 +1,17 @@
 import { Box, Button, Flex, Select, Input } from '@chakra-ui/react'
-import { AREAS, PROPERTY_OWNERSHIP, PROPERTY_TYPES, SUB_AREAS } from '@/modules/Property/libs/options'
+import {
+  AREAS,
+  PROPERTY_OWNERSHIP,
+  PROPERTY_TYPES,
+  SUB_AREAS,
+} from '@/modules/Property/libs/options'
 import { useContextProvider } from './providers'
 import { SearchParams } from './providers/search.service'
+import { useContextProvider as useGlobalContextProvider } from '@/modules/Property/globals/providers'
 
 const SearchFilters: React.FC<any> = ({ onSubmit }) => {
   const { filter = {} as SearchParams, setFilter } = useContextProvider()
+  const { getLocale } = useGlobalContextProvider()
 
   return (
     <Box mt={8}>
@@ -15,7 +22,7 @@ const SearchFilters: React.FC<any> = ({ onSubmit }) => {
           flex={1}
           minW="200px"
         >
-          <option value="">SELECT TYPE</option>
+          <option value="">{getLocale('SELECT TYPE')}</option>
           {PROPERTY_TYPES.map((type) => (
             <option key={type.value} value={type.value}>
               {type.label}
@@ -29,7 +36,7 @@ const SearchFilters: React.FC<any> = ({ onSubmit }) => {
           flex={1}
           minW="200px"
         >
-          <option value="">SELECT STATUS</option>
+          <option value="">{getLocale('SELECT STATUS')}</option>
           {PROPERTY_OWNERSHIP.map((type) => (
             <option key={type.value} value={type.value}>
               {type.label}
@@ -44,7 +51,7 @@ const SearchFilters: React.FC<any> = ({ onSubmit }) => {
           minW="200px"
         >
           {/* Add area options */}
-          <option value="">SELECT AREA</option>
+          <option value="">{getLocale('SELECT AREA')}</option>
           {AREAS.map((area) => (
             <option key={area.value} value={area.value}>
               {area.label}
@@ -58,7 +65,7 @@ const SearchFilters: React.FC<any> = ({ onSubmit }) => {
           flex={1}
           minW="200px"
         >
-          <option value="">SELECT SUB AREA</option>
+          <option value="">{getLocale('SELECT SUB AREA')}</option>
           {SUB_AREAS.map((area) => (
             <option key={area.value} value={area.value}>
               {area.label}
@@ -67,7 +74,7 @@ const SearchFilters: React.FC<any> = ({ onSubmit }) => {
         </Select>
 
         <Input
-          placeholder="PROPERTY ID"
+          placeholder={getLocale('PROPERTY ID')}
           value={filter.sku}
           onChange={(e) => setFilter({ sku: e.target.value })}
           flex={1}
@@ -82,7 +89,7 @@ const SearchFilters: React.FC<any> = ({ onSubmit }) => {
           px={4}
           py={2}
         >
-          FIND PROPERTIES
+          {getLocale('FIND PROPERTIES')}
         </Button>
       </Flex>
     </Box>

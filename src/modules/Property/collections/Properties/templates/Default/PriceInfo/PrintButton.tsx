@@ -1,14 +1,16 @@
-import React from "react";
-import { Flex, Text, Image } from "@chakra-ui/react";
+import React from 'react'
+import { Flex, Text, Image } from '@chakra-ui/react'
+import { useContextProvider as useGlobalContextProvider } from '@/modules/Property/globals/providers'
 
 const PrintButton: React.FC = () => {
+  const { getLocale } = useGlobalContextProvider()
   return (
     <Flex
       alignSelf="end"
       marginTop="15px"
       gap="11px"
       fontWeight="700"
-      whiteSpace={{ base: "initial", lg: "nowrap" }}
+      whiteSpace={{ base: 'initial', lg: 'nowrap' }}
       textAlign="center"
       textTransform="uppercase"
       padding="13px 17px"
@@ -18,8 +20,8 @@ const PrintButton: React.FC = () => {
       tabIndex={0}
       onClick={() => window.print()}
       onKeyPress={(e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          window.print();
+        if (e.key === 'Enter' || e.key === ' ') {
+          window.print()
         }
       }}
     >
@@ -31,9 +33,9 @@ const PrintButton: React.FC = () => {
         width="14px"
         height="15px"
       />
-      <Text margin="auto 0">Print</Text>
+      <Text margin="auto 0">{getLocale('Print')}</Text>
     </Flex>
-  );
-};
+  )
+}
 
-export default PrintButton;
+export default PrintButton

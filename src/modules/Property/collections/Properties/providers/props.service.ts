@@ -3,7 +3,6 @@ import configPromise from '@/app/payload.config'
 import { GetStaticPropsContext } from 'next'
 import { getPayload } from 'payload'
 
-import { getProps as getSearchCollectionBlockProps } from '@/modules/Property/blocks/SearchCollection/providers/props.service'
 import { getProps as getSearchPropertiesBlockProps } from '@/modules/Property/blocks/SearchProperties/providers/props.service'
 
 export const getRootPaths = async () => {
@@ -43,7 +42,7 @@ export const getPaths = async () => {
   }
 }
 
-const BLOCKS_HANDLERS = [getSearchCollectionBlockProps, getSearchPropertiesBlockProps]
+const BLOCKS_HANDLERS = [getSearchPropertiesBlockProps]
 
 export const getProps = (cb: any, blocksHandlers?: any[]) => async (ctx: GetStaticPropsContext) => {
   const _getProps = await cb(ctx)
@@ -100,7 +99,7 @@ export const getProps = (cb: any, blocksHandlers?: any[]) => async (ctx: GetStat
     description: data?.description ?? '',
   }
 
-  _getProps.props.context = JSON.parse(JSON.stringify({ metadata, data, locale: ctx.locale || '' }))
+  _getProps.props.context = JSON.parse(JSON.stringify({ metadata, data }))
 
   return _getProps
 }

@@ -1,12 +1,15 @@
 import React from 'react'
 import { Box, Heading, Text, VStack, Skeleton, Container } from '@chakra-ui/react'
 import { useContextProvider } from '../../providers'
+import { useContextProvider as useGlobalContextProvider } from '@/modules/Property/globals/providers'
 
 const DescriptionSection: React.FC = ({}) => {
   const {
     data: { descriptions_html },
     isLoading,
   } = useContextProvider()
+  const { getLocale } = useGlobalContextProvider()
+
   return (
     <Box bg="white" as="section">
       <Container maxW="container.xl">
@@ -26,7 +29,7 @@ const DescriptionSection: React.FC = ({}) => {
               lineHeight="1.1"
               mb="35px"
             >
-              Description
+              {getLocale("Description")}
             </Heading>
           </Skeleton>
 

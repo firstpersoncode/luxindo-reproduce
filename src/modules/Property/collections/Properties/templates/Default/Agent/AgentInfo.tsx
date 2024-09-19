@@ -45,16 +45,6 @@ const AgentInfo: React.FC<AgentInfoProps> = ({ isLoading }) => {
       >
         {agent?.name}
       </Text>
-      <Text
-        position="relative"
-        color="rgba(44, 62, 80, 1)"
-        fontSize="15px"
-        fontWeight="400"
-        lineHeight="1.6"
-        marginTop="18px"
-      >
-        Senior Luxindo Agent
-      </Text>
     </Box>
   )
 }

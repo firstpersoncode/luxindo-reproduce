@@ -29,7 +29,10 @@ export const appProps = (cb: any) => async (ctx: GetStaticPropsContext) => {
   if (getProps.notFound) return { notFound: true }
 
   getProps.props.appContext = JSON.parse(
-    JSON.stringify({ data: { appUrl: process.env.NEXT_PUBLIC_APP_URL } }),
+    JSON.stringify({
+      data: { appUrl: process.env.NEXT_PUBLIC_APP_URL },
+      locale: ctx.locale || 'en',
+    }),
   )
 
   getProps.revalidate = 60

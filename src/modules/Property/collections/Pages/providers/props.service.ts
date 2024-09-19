@@ -77,7 +77,7 @@ export const getProps = (cb: any) => async (ctx: GetStaticPropsContext) => {
     description: data?.description ?? '',
   }
 
-  _getProps.props.context = JSON.parse(JSON.stringify({ metadata, data, locale: ctx.locale || '' }))
+  _getProps.props.context = JSON.parse(JSON.stringify({ metadata, data }))
 
   return _getProps
 }
