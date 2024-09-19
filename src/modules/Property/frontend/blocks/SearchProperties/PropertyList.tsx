@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react'
-import { Box, SimpleGrid, Text, Image, Flex, Badge } from '@chakra-ui/react'
+import { Box, SimpleGrid, Text, Image, Flex, Badge, Progress } from '@chakra-ui/react'
 import { useContextProvider } from './providers'
 import Link from 'next/link'
 import { useContextProvider as useGlobalContextProvider } from '@/modules/Property/frontend/globals/providers'
@@ -101,7 +101,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
 }
 
 const PropertyList: React.FC = () => {
-  const { docs } = useContextProvider()
+  const { docs, isLoading } = useContextProvider()
   const { locale } = useGlobalContextProvider()
 
   const properties = useMemo(() => {
@@ -121,17 +121,16 @@ const PropertyList: React.FC = () => {
   }, [docs])
 
   return (
-    <Box mt={8}>
-      {properties.map((property, index) => (
-        <Link
-          key={index}
-          href={`/${['property', property.slug].filter(Boolean).join('/')}`}
-          locale={locale}
-        >
-          <PropertyCard key={index} {...property} />
-        </Link>
-      ))}
-    </Box>
+    <>
+      {isLoading && <Progress size='xs' isIndeterminate />}
+      <Box opacity={isLoading ? 0.3 : 1}>
+        {properties.map((property, index) => (
+          <Link key={index} href={`/${property.slug}`} locale={locale}>
+            <PropertyCard key={index} {...property} />
+          </Link>
+        ))}
+      </Box>
+    </>
   )
 }
 

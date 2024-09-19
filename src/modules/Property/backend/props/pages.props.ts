@@ -16,26 +16,20 @@ export const getPaths = async () => {
     fallbackLocale: 'en',
   })
 
-  return {
-    paths: data.docs
-      .filter((d) => d.slug !== 'index')
-      .map((d: any) => {
-        return locales.map((locale) => ({
-          params: { slugs: d.slug.split('/') },
-          locale,
-        }))
-      })
-      .flat(),
-    fallback: 'blocking',
-  }
+  return data.docs
+    .filter((d) => d.slug !== 'index')
+    .map((d: any) => {
+      return locales.map((locale) => ({
+        params: { slugs: d.slug.split('/') },
+        locale,
+      }))
+    })
+    .flat()
 }
 
 const BLOCKS_HANDLERS: any[] = []
 
-export const getProps = (cb: any) => async (ctx: GetStaticPropsContext) => {
-  const _getProps = await cb(ctx)
-  if (_getProps.notFound) return { notFound: true }
-
+export const getProps = async (resp: any, ctx: GetStaticPropsContext) => {
   const payload = await getPayload({
     config: configPromise,
   })
@@ -68,7 +62,8 @@ export const getProps = (cb: any) => async (ctx: GetStaticPropsContext) => {
     description: data?.description ?? '',
   }
 
-  _getProps.props.context = JSON.parse(JSON.stringify({ metadata, data }))
+  resp.props.context = JSON.parse(JSON.stringify({ metadata, data }))
+  resp.props.collectionName = 'Pages'
 
-  return _getProps
+  return resp
 }

@@ -34,11 +34,6 @@ export const LOCALES = {
     id: 'PILIH AREA',
     fr: 'SÉLECTIONNER LA ZONE',
   },
-  'SELECT SUB AREA': {
-    en: 'SELECT SUB AREA',
-    id: 'PILIH SUB AREA',
-    fr: 'SÉLECTIONNER LA SOUS-ZONE',
-  },
   'PROPERTY ID': {
     en: 'PROPERTY ID',
     id: 'ID PROPERTI',

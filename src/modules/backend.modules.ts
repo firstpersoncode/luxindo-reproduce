@@ -5,34 +5,34 @@ import {
   Property_backend_getStaticProps,
 } from './Property/backend'
 
-export const Module_apiHandler = (module: string) => {
+export const Module_apiHandler = (moduleName: string) => {
   const modules: { [x: string]: any } = {
     Property: Property_backend_apiHandler,
   }
 
-  return modules[module]
+  return modules[moduleName]
 }
 
-export const Module_generateSiteMap = (module: string) => {
+export const Module_generateSiteMap = (moduleName: string) => {
   const modules: { [x: string]: any } = {
     Property: Property_backend_generateSiteMap,
   }
 
-  return modules[module]
+  return modules[moduleName]
 }
 
-export const Module_getStaticPaths = (module: string) => {
+export const Module_getStaticPaths = (moduleName: string) => {
   const modules: { [x: string]: any } = {
     Property: Property_backend_getStaticPaths,
   }
 
-  return modules[module]
+  return modules[moduleName]
 }
 
-export const Module_getStaticProps = (module: string) => {
+export const Module_getStaticProps = (moduleName: string) => {
   const modules: { [x: string]: any } = {
     Property: Property_backend_getStaticProps,
   }
 
-  return modules[module]
+  return modules[moduleName]
 }

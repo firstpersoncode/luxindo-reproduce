@@ -1,21 +1,21 @@
-import { Box, Button, Flex, Select, Input } from '@chakra-ui/react'
+import { Box, Button, Flex, Select, Input, VStack } from '@chakra-ui/react'
 import {
   AREAS,
   PROPERTY_OWNERSHIP,
   PROPERTY_TYPES,
   SUB_AREAS,
 } from '@/modules/Property/libs/options'
-import { useContextProvider } from './providers'
-import { SearchParams } from './providers/search-properties.service'
+import { useContextProvider } from '../providers'
+import { SearchParams } from '../providers/search-properties.service'
 import { useContextProvider as useGlobalContextProvider } from '@/modules/Property/frontend/globals/providers'
 
-const SearchFilters: React.FC<any> = ({ onSubmit }) => {
-  const { filter = {} as SearchParams, setFilter } = useContextProvider()
+const SearchFilters: React.FC<any> = () => {
+  const { filter = {} as SearchParams, setFilter, handleSearch } = useContextProvider()
   const { getLocale } = useGlobalContextProvider()
 
   return (
     <Box mt={8}>
-      <Flex flexWrap="wrap" gap={4}>
+      <VStack gap={4}>
         <Select
           value={filter.type}
           onChange={(e) => setFilter({ type: e.target.value })}
@@ -59,20 +59,6 @@ const SearchFilters: React.FC<any> = ({ onSubmit }) => {
           ))}
         </Select>
 
-        <Select
-          value={filter.area_1}
-          onChange={(e) => setFilter({ area_1: e.target.value })}
-          flex={1}
-          minW="200px"
-        >
-          <option value="">{getLocale('SELECT SUB AREA')}</option>
-          {SUB_AREAS.map((area) => (
-            <option key={area.value} value={area.value}>
-              {area.label}
-            </option>
-          ))}
-        </Select>
-
         <Input
           placeholder={getLocale('PROPERTY ID')}
           value={filter.sku}
@@ -82,7 +68,7 @@ const SearchFilters: React.FC<any> = ({ onSubmit }) => {
         />
 
         <Button
-          onClick={onSubmit}
+          onClick={handleSearch}
           bg="rgba(171, 116, 95, 1)"
           color="white"
           fontWeight="700"
@@ -91,7 +77,7 @@ const SearchFilters: React.FC<any> = ({ onSubmit }) => {
         >
           {getLocale('FIND PROPERTIES')}
         </Button>
-      </Flex>
+      </VStack>
     </Box>
   )
 }

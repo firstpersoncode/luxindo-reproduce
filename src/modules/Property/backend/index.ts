@@ -9,6 +9,14 @@ import {
 } from './props/properties.props'
 import { appProps } from './props/app.props'
 
+const getCollectionName = (ctx: GetStaticPropsContext) => {
+  const slugs = ctx.params?.slugs ?? ([] as string[])
+  const availableCollections = ['Pages', 'Properties']
+  let collectionName = slugs[0] ? slugs[0].charAt(0).toUpperCase() + slugs[0].slice(1) : ''
+  if (!availableCollections.includes(collectionName)) collectionName = availableCollections[0]
+  return collectionName
+}
+
 export const Property_backend_apiHandler =
   (method: string) =>
   async (req: NextRequest, { params, ...rest }: { params: { slugs: string[] } }) => {
@@ -31,14 +39,30 @@ export const Property_backend_apiHandler =
 
 export const Property_backend_generateSiteMap = generateSiteMap
 
-export const Property_backend_getStaticPaths = (collection: string) =>
-  ({
+export const Property_backend_getStaticPaths = async () => {
+  const modules: { [x: string]: any } = {
     Pages: getPagesPaths,
     Properties: getPropertiesPaths,
-  })[collection]
+  }
 
-export const Property_backend_getStaticProps = (collection: string) =>
-  ({
-    Pages: appProps(getPagesProps(async (ctx: GetStaticPropsContext) => ({ props: {} }))),
-    Properties: appProps(getPropertiesProps(async (ctx: GetStaticPropsContext) => ({ props: {} }))),
-  })[collection]
+  const paths = []
+
+  for (const collection in modules) {
+    const _paths = await modules[collection]()
+    paths.push(..._paths)
+  }
+
+  return {
+    paths,
+    fallback: 'blocking',
+  }
+}
+
+export const Property_backend_getStaticProps = async (ctx: GetStaticPropsContext) => {
+  const modules: { [x: string]: any } = {
+    Pages: getPagesProps,
+    Properties: getPropertiesProps,
+  }
+  const res = await appProps(ctx)
+  return modules[getCollectionName(ctx)](res, ctx)
+}

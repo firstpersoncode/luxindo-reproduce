@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Box, Button, Container, IconButton, VStack } from '@chakra-ui/react'
-import SearchFilters from './SearchFilters'
+import SearchFilters from './FIlterSection/SearchFilters'
 import FilterSection from './FIlterSection'
 import PropertyList from './PropertyList'
 import Tune from '@mui/icons-material/Tune'
@@ -21,8 +21,6 @@ const Layout: React.FC<any> = ({ ...props }) => {
     <Box bg="white">
       <Container maxW="container.xl">
         <VStack spacing={8} align="stretch">
-          <SearchFilters onSubmit={() => setOpenFilter(false)} />
-
           <Box
             display="flex"
             gap={2}
@@ -64,7 +62,6 @@ const Layout: React.FC<any> = ({ ...props }) => {
           action={<Button onClick={submitSearch}>Update</Button>}
           actionSecondary="Cancel"
         >
-          <SearchFilters onSubmit={submitSearch} />
           <FilterSection />
         </BottomSheet>
       </Container>

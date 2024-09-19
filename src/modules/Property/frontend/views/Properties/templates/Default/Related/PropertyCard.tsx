@@ -24,7 +24,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
 }) => {
   const { locale } = useContextProvider()
   return (
-    <Link href={`/${['property', slug].filter(Boolean).join('/')}`} locale={locale}>
+    <Link href={`/${slug}`} locale={locale}>
       <Box bg="white" p={6} fontFamily="Source Sans Pro, sans-serif">
         <Image src={image.url} alt={`Gallery image`} objectFit="contain" width="100%" />
 

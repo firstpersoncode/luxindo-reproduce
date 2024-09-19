@@ -32,6 +32,6 @@ const config: Config = {
   },
 }
 
-const payloadConfig = Module_payloadConfig('Property')
+const payloadConfig = Module_payloadConfig('Property')(config)
 
-export default buildConfig(payloadConfig(config))
+export default buildConfig(payloadConfig)

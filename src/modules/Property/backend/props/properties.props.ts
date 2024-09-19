@@ -5,16 +5,6 @@ import { getPayload } from 'payload'
 
 import { getProps as getSearchPropertiesBlockProps } from './block.search-properties.props'
 
-export const getRootPaths = async () => {
-  return {
-    paths: locales.map((locale) => ({
-      params: { slugs: ['property'] },
-      locale,
-    })),
-    fallback: 'blocking',
-  }
-}
-
 export const getPaths = async () => {
   const payload = await getPayload({
     config: configPromise,
@@ -28,34 +18,25 @@ export const getPaths = async () => {
     fallbackLocale: 'en',
   })
 
-  return {
-    paths: data.docs
-      .filter((d) => d.slug !== 'index')
-      .map((d: any) => {
-        return locales.map((locale) => ({
-          params: { slugs: d.slug.split('/') },
-          locale,
-        }))
-      })
-      .flat(),
-    fallback: 'blocking',
-  }
+  return data.docs
+    .filter((d) => d.slug !== 'index')
+    .map((d: any) => {
+      return locales.map((locale) => ({
+        params: { slugs: d.slug.split('/') },
+        locale,
+      }))
+    })
+    .flat()
 }
 
 const BLOCKS_HANDLERS = [getSearchPropertiesBlockProps]
 
-export const getProps = (cb: any, blocksHandlers?: any[]) => async (ctx: GetStaticPropsContext) => {
-  const _getProps = await cb(ctx)
-  if (_getProps.notFound) return { notFound: true }
-
+export const getProps = async (resp: any, ctx: GetStaticPropsContext) => {
   const payload = await getPayload({
     config: configPromise,
   })
 
-  const slug =
-    ctx.params?.slugs?.[0] === 'property'
-      ? (ctx.params.slugs.slice(1) as string[]).join('/')
-      : (ctx.params?.slugs as string[])?.join?.('/')
+  const slug = (ctx.params?.slugs as string[])?.join?.('/')
 
   const res = await payload.find({
     collection: 'properties', // required
@@ -72,7 +53,7 @@ export const getProps = (cb: any, blocksHandlers?: any[]) => async (ctx: GetStat
 
   if (!data) return { notFound: true }
 
-  if (data.template === 'default') {
+  if (data.template === 'Default') {
     data = {
       ...data,
       amenities: data?.amenities
@@ -99,7 +80,8 @@ export const getProps = (cb: any, blocksHandlers?: any[]) => async (ctx: GetStat
     description: data?.description ?? '',
   }
 
-  _getProps.props.context = JSON.parse(JSON.stringify({ metadata, data }))
+  resp.props.context = JSON.parse(JSON.stringify({ metadata, data }))
+  resp.props.collectionName = 'Properties'
 
-  return _getProps
+  return resp
 }
