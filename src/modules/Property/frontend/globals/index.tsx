@@ -5,7 +5,7 @@ import 'slick-carousel/slick/slick-theme.css'
 import Header from './Header'
 import Footer from './Footer'
 import Providers, { IContext } from './providers'
-import { Box, CircularProgress, VStack } from '@chakra-ui/react'
+import { Box, CircularProgress } from '@chakra-ui/react'
 
 export default function AppLayout({
   children,
@@ -17,9 +17,9 @@ export default function AppLayout({
   return (
     <Providers context={{ ...context }}>
       <Header />
-      <VStack as="main" minH="80vh">
+      <Box as="main" minH="80vh">
         {children}
-      </VStack>
+      </Box>
       <Footer />
     </Providers>
   )
