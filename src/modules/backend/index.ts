@@ -52,11 +52,11 @@ export const Backend_getStaticPaths = async () => {
 
 const getCollectionName = (ctx: GetStaticPropsContext) => {
   const slugs = ctx.params?.slugs ?? ([] as string[])
-  // const availableCollections = COLLECTIONS.map((c) => c.slug)
   const availableCollections = ['Pages', 'Properties']
   let collectionName = slugs[0]
     ? slugs[0].charAt(0).toUpperCase() + slugs[0].slice(1)
     : availableCollections[0]
+  if (!availableCollections.includes(collectionName)) collectionName = availableCollections[0]
   return collectionName
 }
 
@@ -66,5 +66,8 @@ export const Backend_getStaticProps = async (ctx: GetStaticPropsContext) => {
     Properties: getPropertiesProps,
   }
   const res = await appProps(ctx)
-  return modules[getCollectionName(ctx)](res, ctx)
+  const collectionName = getCollectionName(ctx)
+  console.log(collectionName)
+  const handler = modules[collectionName]
+  return handler(res, ctx)
 }
