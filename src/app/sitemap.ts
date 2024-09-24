@@ -1,3 +1,3 @@
-import { Module_generateSiteMap } from '@/modules/backend.modules'
+import { Backend_generateSiteMap } from '@/modules/backend'
 
-export default Module_generateSiteMap('Property')
+export default Backend_generateSiteMap

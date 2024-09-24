@@ -1,6 +1,6 @@
-import { Module_getStaticPaths, Module_getStaticProps } from '@/modules/backend.modules'
-import { Module_View } from '@/modules/frontend.modules'
+import { Backend_getStaticPaths, Backend_getStaticProps } from '@/modules/backend'
+import { Frontend_View } from '@/modules/frontend'
 
-export default Module_View('Property')
-export const getStaticPaths = Module_getStaticPaths('Property')
-export const getStaticProps = Module_getStaticProps('Property')
+export default Frontend_View
+export const getStaticPaths = Backend_getStaticPaths
+export const getStaticProps = Backend_getStaticProps

@@ -1,9 +1,7 @@
-import { Module_apiHandler } from '@/modules/backend.modules'
+import { Backend_apiHandler } from '@/modules/backend'
 
-const apiHandler = Module_apiHandler('Property')
-
-export const GET = apiHandler('GET')
-export const POST = apiHandler('POST')
-export const PUT = apiHandler('PUT')
-export const PATCH = apiHandler('PATCH')
-export const DELETE = apiHandler('DELETE')
+export const GET = Backend_apiHandler('GET')
+export const POST = Backend_apiHandler('POST')
+export const PUT = Backend_apiHandler('PUT')
+export const PATCH = Backend_apiHandler('PATCH')
+export const DELETE = Backend_apiHandler('DELETE')
