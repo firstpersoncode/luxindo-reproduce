@@ -15,7 +15,6 @@ const DescriptionSection: React.FC = ({}) => {
         <Box
           flexGrow={1}
           color="rgba(96, 110, 124, 1)"
-          fontFamily="Source Sans Pro, sans-serif"
           fontSize="15px"
           lineHeight="21px"
         >

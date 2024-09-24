@@ -1,26 +1,32 @@
 import { ChakraProvider } from '@chakra-ui/react'
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
-import { ThemeProvider, createTheme } from '@mui/material/styles'
-import { LOCALES } from './locales'
 import { useRouter } from 'next/router'
 import { useSearchParams } from 'next/navigation'
 
 export interface IContext {
   isLoading?: boolean
   isRouteChanging?: boolean
+  isScrolledToTop?: boolean
   locale: string
   data: any
   currency: string
+  setLocale: (locale: string) => void
+  setCurrency: (currency: string) => void
 }
 
 const context: IContext = {
   isLoading: true,
   isRouteChanging: false,
+  isScrolledToTop: true,
   locale: 'en',
-  currency: "IDR",
+  currency: 'IDR',
   data: {
     appUrl: '',
+    header: {},
+    footer: {},
   },
+  setLocale: () => {},
+  setCurrency: () => {},
 }
 
 const Context = createContext(context)
@@ -28,13 +34,13 @@ const Context = createContext(context)
 const useController = (_context: IContext) => {
   const [isLoading, setIsLoading] = useState(_context.isLoading)
   const [isRouteChanging, setIsRouteChanging] = useState(_context.isRouteChanging)
+  const [isScrolledToTop, setIsScrolledToTop] = useState(_context.isScrolledToTop)
   const [locale, setLocale] = useState(_context.locale)
   const [data, setData] = useState<any>(_context.data)
 
   const router = useRouter()
   const searchParams = useSearchParams()
-  const currency = searchParams?.get('currency') ?? _context.currency
-
+  const [currency, setCurrency] = useState(searchParams?.get('currency') ?? _context.currency)
 
   useEffect(() => {
     setTimeout(() => {
@@ -58,12 +64,25 @@ const useController = (_context: IContext) => {
     }
   }, [router])
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolledToTop(window.scrollY === 0)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
+
   return {
     isLoading,
     isRouteChanging,
+    isScrolledToTop,
     locale,
     currency,
     data,
+    setLocale,
+    setCurrency,
   }
 }
 
@@ -73,11 +92,9 @@ export default function Providers({
 }: Readonly<{ children: React.ReactNode; context?: IContext }>) {
   const value = useController({ ...context, ..._context })
   return (
-    <ThemeProvider theme={createTheme({})}>
-      <ChakraProvider>
-        <Context.Provider value={value}>{children}</Context.Provider>
-      </ChakraProvider>
-    </ThemeProvider>
+    <ChakraProvider>
+      <Context.Provider value={value}>{children}</Context.Provider>
+    </ChakraProvider>
   )
 }
 

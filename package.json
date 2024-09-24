@@ -13,14 +13,14 @@
     "lint": "cross-env NODE_OPTIONS=--no-deprecation next lint",
     "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
     "start": "cross-env NODE_OPTIONS=--no-deprecation next start",
-    "prepare": "husky"
+    "prepare": "husky",
+    "dpdm": "cross-env NODE_OPTIONS=--no-deprecation dpdm"
   },
   "dependencies": {
+    "@chakra-ui/icons": "^2.1.1",
     "@chakra-ui/react": "^2.8.2",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
-    "@mui/icons-material": "^6.1.0",
-    "@mui/material": "^6.1.0",
     "@payloadcms/db-postgres": "3.0.0-beta.107",
     "@payloadcms/next": "3.0.0-beta.107",
     "@payloadcms/storage-vercel-blob": "3.0.0-beta.107",
@@ -49,6 +49,7 @@
     "@types/react-dom": "npm:types-react-dom@19.0.0-rc.0",
     "@types/react-slick": "^0.23.13",
     "autoprefixer": "^10.4.20",
+    "dpdm": "^3.14.0",
     "eslint": "^8",
     "eslint-config-next": "15.0.0-canary.158",
     "husky": "^9.1.6",

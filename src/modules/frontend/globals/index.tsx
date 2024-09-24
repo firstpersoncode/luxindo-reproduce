@@ -6,6 +6,7 @@ import Header from './Header'
 import Footer from './Footer'
 import Providers, { IContext } from './providers'
 import { Box, CircularProgress } from '@chakra-ui/react'
+import ContactButton from './ContactButton'
 
 export default function AppLayout({
   children,
@@ -21,6 +22,7 @@ export default function AppLayout({
         {children}
       </Box>
       <Footer />
+      <ContactButton />
     </Providers>
   )
 }

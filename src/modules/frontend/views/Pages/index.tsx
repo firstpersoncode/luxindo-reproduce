@@ -16,18 +16,20 @@ export default function Page({ ...props }: any) {
 function Layout() {
   const { data, metadata, isRouteChanging } = useContextProvider()
   return (
-    <motion.div
-      initial={{ y: 20, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ ease: 'easeInOut', duration: 0.75 }}
-    >
+    // <motion.div
+    //   initial={{ y: 20, opacity: 0 }}
+    //   animate={{ y: 0, opacity: 1 }}
+    //   transition={{ ease: 'easeInOut', duration: 0.75 }}
+    // >
+    <>
       {isRouteChanging && <LoadingLayout />}
       <Head>
         <title>{metadata?.title}</title>
         <meta name="description" content={metadata?.description} />
       </Head>
       <MapTemplate template={data.template} />
-    </motion.div>
+    </>
+    // </motion.div>
   )
 }
 

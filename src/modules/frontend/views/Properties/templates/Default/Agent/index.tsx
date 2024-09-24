@@ -20,7 +20,6 @@ const ContactAgent: React.FC = () => {
           fontSize="20px"
           fontWeight="600"
           lineHeight="1.1"
-          fontFamily="Source Sans Pro, sans-serif"
         >
           {getLocale('Contact the Agent')}
         </Text>

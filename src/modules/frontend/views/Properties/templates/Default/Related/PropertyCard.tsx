@@ -25,7 +25,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
   const { locale } = useContextProvider()
   return (
     <Link href={`/${slug}`} locale={locale}>
-      <Box bg="white" p={6} fontFamily="Source Sans Pro, sans-serif">
+      <Box bg="white" p={6}>
         <Image src={image.url} alt={`Gallery image`} objectFit="contain" width="100%" />
 
         <Text color="rgba(44, 62, 80, 1)" fontSize="17px" fontWeight="600" lineHeight="27px" mb={4}>

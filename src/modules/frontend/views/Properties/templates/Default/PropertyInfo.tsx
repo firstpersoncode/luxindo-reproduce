@@ -20,7 +20,6 @@ const PropertyDetail: React.FC = () => {
           color="rgba(44, 62, 80, 1)"
           flexWrap="wrap"
           justifyContent="space-between"
-          fontFamily="Source Sans Pro, sans-serif"
           fontSize="20px"
           fontWeight={400}
           lineHeight={1.6}

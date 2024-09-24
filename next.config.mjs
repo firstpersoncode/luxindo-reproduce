@@ -13,15 +13,9 @@ const nextConfig = {
     defaultLocale,
   },
   images: {
-    domains: [getHostName(process.env.NEXT_PUBLIC_APP_URL ?? ''), 'cdn.builder.io'],
+    domains: [getHostName(process.env.NEXT_PUBLIC_APP_URL ?? ''), 'cdn.builder.io', 'flagsapi.com'],
   },
   reactStrictMode: false,
-  experimental: {
-    staleTimes: {
-      dynamic: 30,
-      static: 180,
-    },
-  },
 }
 
 export default withPayload(nextConfig)

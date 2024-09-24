@@ -1,16 +1,19 @@
-import React from "react";
-import { Text } from "@chakra-ui/react";
+import { Text, Button } from '@chakra-ui/react'
+import Link from 'next/link'
 
 interface NavItemProps {
-  label: string;
+  title: string
+  value: string
 }
 
-const NavItem: React.FC<NavItemProps> = ({ label }) => {
+const NavItem: React.FC<NavItemProps> = ({ title, value }) => {
   return (
-    <Text as="nav" alignSelf="stretch" margin="auto 0">
-      {label}
-    </Text>
-  );
-};
+    <Link href={value}>
+      <Button as="nav" variant="link" color="inherit">
+        <Text textTransform="uppercase" fontSize="12px">{title}</Text>
+      </Button>
+    </Link>
+  )
+}
 
-export default NavItem;
+export default NavItem

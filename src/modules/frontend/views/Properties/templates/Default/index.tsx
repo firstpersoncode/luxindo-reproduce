@@ -1,7 +1,6 @@
 import { useContextProvider } from '../../providers'
 import { useMemo } from 'react'
 import { BLOCKS } from '@/modules/frontend/blocks'
-
 import Title from './Title'
 import PriceInfo from './PriceInfo'
 import PropertyInfo from './PropertyInfo'
@@ -13,6 +12,7 @@ import Description from './Description'
 import Agent from './Agent'
 import Related from './Related'
 import Amenities from './Amenities'
+import { Text } from '@chakra-ui/react'
 
 const Layout: React.FC = () => {
   const {
@@ -43,7 +43,8 @@ export default Layout
 
 function MapBlock({ ...block }: any) {
   return useMemo(() => {
-    const Block = BLOCKS[block.blockType ?? 'default']
+    const Block = BLOCKS[block.blockType]
+    if (!Block) return <Text>Block {block.blockType} Not found</Text>
     return <Block {...block} />
   }, [block])
 }

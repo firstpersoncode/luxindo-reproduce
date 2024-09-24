@@ -14,7 +14,6 @@ const FinancialDisplay: React.FC = ({}) => {
       <Container maxW="container.xl">
         <Flex
           gap="20px"
-          fontFamily="Source Sans Pro, sans-serif"
           flexWrap="wrap"
           justifyContent="space-between"
           maxWidth={{ base: '100%', lg: 'auto' }}

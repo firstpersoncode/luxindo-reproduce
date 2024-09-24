@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { Box, Button, Container, IconButton, VStack } from '@chakra-ui/react'
 import FilterSection from './FIlterSection'
 import PropertyList from './PropertyList'
-import Tune from '@mui/icons-material/Tune'
 import BottomSheet from './BottomSheet'
 import { useContextProvider } from './providers'
 
@@ -45,7 +44,6 @@ const Layout: React.FC<any> = ({ ...props }) => {
           colorScheme="teal"
           aria-label="Send email"
           visibility={['visible', 'hidden']}
-          icon={<Tune />}
           onClick={() => setOpenFilter(true)}
         />
 
