@@ -49,7 +49,7 @@ const Layout: React.FC<any> = ({ ...props }) => {
 
         <BottomSheet
           image={{
-            src: '/next.svg',
+            src: '/icons/next.svg',
             width: 50,
             height: 50,
             alt: '',
