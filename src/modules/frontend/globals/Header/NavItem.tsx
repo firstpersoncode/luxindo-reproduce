@@ -9,7 +9,7 @@ interface NavItemProps {
 const NavItem: React.FC<NavItemProps> = ({ title, value }) => {
   return (
     <Link href={value}>
-      <Button as="nav" variant="link" color="inherit">
+      <Button minWidth={0} as="nav" variant="link" color="inherit">
         <Text textTransform="uppercase" fontSize="12px">{title}</Text>
       </Button>
     </Link>

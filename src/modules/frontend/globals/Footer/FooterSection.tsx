@@ -1,6 +1,7 @@
 import React from 'react'
 import { VStack, Text, Button } from '@chakra-ui/react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 interface FooterSectionProps {
   title: string
@@ -18,7 +19,15 @@ const FooterSection: React.FC<FooterSectionProps> = ({ title, items }) => {
           {items.map((item: any, index: number) =>
             item.value !== '#' ? (
               <Link key={index} href={item.value}>
-                <Button variant="link" color="white" minW={0}>
+                <Button variant="link" color="white" minW={0} gap="8px">
+                  {item.icon?.url && (
+                    <Image
+                      src={item.icon.url}
+                      alt={item.icon.alt ?? item.title}
+                      width={20}
+                      height={20}
+                    />
+                  )}
                   <Text fontSize="14px">{item.title}</Text>
                 </Button>
               </Link>

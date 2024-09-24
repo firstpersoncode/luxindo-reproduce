@@ -22,22 +22,23 @@ const LanguageSelector: React.FC = () => {
   return (
     <Popover>
       <PopoverTrigger>
-        <Button variant="link" color="inherit" minW={0}>
+        <Button variant="link" color="inherit" minW={0} gap="8px">
           <Box
             position="relative"
-            width={'24px'}
-            height={'24px'}
+            width={'16px'}
+            height={'16px'}
             borderRadius="50%"
             overflow="hidden"
+            boxShadow={'0 0 2px rgba(0,0,0,0.5)'}
           >
             <Image
-              src={`https://flagsapi.com/${locale === 'en' ? 'GB' : locale.toUpperCase()}/flat/24.png`}
+              src={`/icons/flag_${locale}.png`}
               alt="Language Icon"
               fill
               style={{ objectFit: 'cover' }}
             />
           </Box>
-          <Text ml="12px" textTransform="uppercase" fontSize="12px">
+          <Text textTransform="uppercase" fontSize="12px">
             {locale}
           </Text>
         </Button>
