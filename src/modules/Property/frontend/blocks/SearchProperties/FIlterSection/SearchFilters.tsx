@@ -44,12 +44,11 @@ const SearchFilters: React.FC<any> = () => {
         </Select>
 
         <Select
-          value={filter.area_2}
-          onChange={(e) => setFilter({ area_2: e.target.value })}
+          value={filter.area_1}
+          onChange={(e) => setFilter({ area_1: e.target.value })}
           flex={1}
           minW="200px"
         >
-          {/* Add area options */}
           <option value="">{getLocale('SELECT AREA')}</option>
           {LOCATIONS.map((area) => (
             <option key={area.value} value={area.value}>

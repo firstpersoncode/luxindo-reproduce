@@ -17,8 +17,8 @@ const context: IContext = {
   filter: {
     type: '',
     ownership: '',
-    area_2: '',
     area_1: '',
+    area_2: '',
     sku: '',
   },
   handleSearch: () => {},
