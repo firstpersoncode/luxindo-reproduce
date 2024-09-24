@@ -1,9 +1,8 @@
-import { Box, Button, Flex, Select, Input, VStack } from '@chakra-ui/react'
+import { Box, Button, Select, Input, VStack } from '@chakra-ui/react'
 import {
-  AREAS,
+  LOCATIONS,
   PROPERTY_OWNERSHIP,
   PROPERTY_TYPES,
-  SUB_AREAS,
 } from '@/modules/Property/libs/options'
 import { useContextProvider } from '../providers'
 import { SearchParams } from '../providers/search-properties.service'
@@ -52,7 +51,7 @@ const SearchFilters: React.FC<any> = () => {
         >
           {/* Add area options */}
           <option value="">{getLocale('SELECT AREA')}</option>
-          {AREAS.map((area) => (
+          {LOCATIONS.map((area) => (
             <option key={area.value} value={area.value}>
               {area.label}
             </option>

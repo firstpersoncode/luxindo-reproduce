@@ -387,104 +387,12 @@ export interface Property {
         id?: string | null;
       }[]
     | null;
-  descriptions?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  descriptions_html?: string | null;
-  area_1?:
-    | (
-        | 'TABANAN AREA'
-        | 'CANGGU AREA'
-        | 'NORTH BALI AREA'
-        | 'UMALAS AND KEROBOKAN AREA'
-        | 'BUKIT AREA'
-        | 'SANUR AND EAST COAST AREA'
-        | 'ROTE ISLAND'
-        | 'SEMINYAK AREA'
-        | 'DENPASAR'
-        | 'UBUD AREA'
-        | 'MENGWI'
-        | 'SUMBAWA'
-        | 'NUSA LEMBONGAN / CENINGAN / PENIDA'
-        | 'LOMBOK'
-        | 'BADUNG AREA'
-        | 'SUMBA'
-        | 'WEST SUMATERA'
-        | 'FLORES'
-        | 'EAST JAVA'
-        | 'Kintamani'
-        | 'GIANYAR'
-        | 'NUSA DUA'
-        | 'JEMBRANA AREA'
-        | 'WEST JAVA'
-        | 'OTHERS'
-      )
-    | null;
-  area_2?:
-    | (
-        | 'Kedungu'
-        | 'Berawa'
-        | 'Buleleng'
-        | 'Umalas'
-        | 'Tegal Cupek'
-        | 'Sanur'
-        | 'Seminyak'
-        | 'Jimbaran'
-        | 'Cemagi'
-        | 'Pecatu'
-        | 'Pererenan'
-        | 'Mas'
-        | 'Keramas'
-        | 'Nyanyi'
-        | 'Tibubeneng'
-        | 'Tumbak Bayuh'
-        | 'Batu Bolong / Echo Beach'
-        | 'Payangan'
-        | 'Gili Islands'
-        | 'Buduk'
-        | 'Petitenget'
-        | 'Mentawai'
-        | 'GILI TRAWANGAN'
-        | 'Kerobokan'
-        | 'Ketewel'
-        | 'South Bukit'
-        | 'Padonan'
-        | 'Tegallalang'
-        | 'Others'
-        | 'Amed / Tulamben'
-        | 'Seseh'
-        | 'Ungasan'
-        | 'Kuta'
-        | 'Kayu Tulang'
-        | 'Legian'
-        | 'Mandalika'
-        | 'Kaba - Kaba'
-        | 'Batu Belig'
-        | 'Pantai Lima'
-        | 'Babakan'
-        | 'Balian'
-        | 'Tying Tutul'
-        | 'Kuta Area'
-        | 'Medewi'
-        | 'Singaraja'
-        | 'Senggigi Area'
-      )
-    | null;
+  descriptions?: string | null;
+  area_1?: string | null;
+  area_2?: string | null;
   address?: string | null;
-  lat_str?: string | null;
-  lng_str?: string | null;
+  lat?: string | null;
+  lng?: string | null;
   country?: 'Indonesia' | null;
   state?:
     | (
@@ -519,22 +427,7 @@ export interface Property {
  * via the `definition` "RichTextBlock".
  */
 export interface RichTextBlock {
-  content?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  content_html?: string | null;
+  content?: string | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'RichText';

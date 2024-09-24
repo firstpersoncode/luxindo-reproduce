@@ -1,5 +1,3 @@
-import { HTMLConverterFeature, lexicalEditor, lexicalHTML } from '@payloadcms/richtext-lexical'
-import { SlateToLexicalFeature } from '@payloadcms/richtext-lexical/migrate'
 import { Block } from 'payload'
 
 export const RichText = ({ ...field }: any): Block => ({
@@ -11,15 +9,17 @@ export const RichText = ({ ...field }: any): Block => ({
     {
       name: field.name,
       label: field.label,
-      type: 'richText',
-      editor: lexicalEditor({
-        features: ({ defaultFeatures }) => [
-          ...defaultFeatures,
-          SlateToLexicalFeature({}),
-          HTMLConverterFeature({}),
-        ],
-      }),
+      type: 'text',
+      localized: field.localized ?? false,
+      required: false,
+      admin: {
+        components: {
+          Field: {
+            path: '@/modules/Property/cms/_fields/RichTextField',
+            clientProps: { path: field.name, label: field.label },
+          },
+        },
+      },
     },
-    lexicalHTML(field.name, { name: `${field.name}_html` }),
   ],
 })

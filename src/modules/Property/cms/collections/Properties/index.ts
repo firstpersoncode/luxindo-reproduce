@@ -1,9 +1,7 @@
 import { CollectionConfig } from 'payload'
-import { SlateToLexicalFeature } from '@payloadcms/richtext-lexical/migrate'
-import { HTMLConverterFeature, lexicalEditor, lexicalHTML } from '@payloadcms/richtext-lexical'
+
 import {
   AMENITIES,
-  AREAS,
   COUNTRIES,
   CURRENCIES,
   PLANS,
@@ -11,11 +9,10 @@ import {
   PROPERTY_TYPES,
   SPACES,
   STATES,
-  SUB_AREAS,
 } from '@/modules/Property/libs/options'
 import { formatSlug } from '@/modules/Property/libs/utils'
 import { BLOCKS } from '@/modules/Property/cms/blocks'
-import { PROPERTY_TEMPLATES } from "./templates"
+import { PROPERTY_TEMPLATES } from './templates'
 
 const PropertyInfo: CollectionConfig['fields'] = [
   {
@@ -214,35 +211,81 @@ const PropertyDetails: CollectionConfig['fields'] = [
   {
     name: 'descriptions',
     label: 'Descriptions',
-    type: 'richText',
+    type: 'text',
     required: false,
     localized: true,
-    editor: lexicalEditor({
-      features: ({ defaultFeatures }) => [
-        ...defaultFeatures,
-        SlateToLexicalFeature({}),
-        HTMLConverterFeature({}),
-      ],
-    }),
+    admin: {
+      components: {
+        Field: {
+          path: '@/modules/Property/cms/_fields/RichTextField',
+          clientProps: { path: 'descriptions', label: 'Descriptions' },
+        },
+      },
+    },
   },
-  lexicalHTML('descriptions', { name: 'descriptions_html' }),
+
+  // {
+  //   name: 'descriptions',
+  //   label: 'Descriptions',
+  //   type: 'richText',
+  //   required: false,
+  //   localized: true,
+  //   editor: lexicalEditor({
+  //     features: ({ defaultFeatures }) => [
+  //       ...defaultFeatures,
+  //       SlateToLexicalFeature({}),
+  //       HTMLConverterFeature({}),
+  //     ],
+  //   }),
+  // },
+  // {
+  //   name: 'descriptions_html',
+  //   label: 'Descriptions HTML',
+  //   type: 'text',
+  //   required: false,
+  //   localized: true,
+  //   admin: {
+  //     components: {
+  //       Field: {
+  //         path: '@/modules/Property/cms/_fields/LexicalToHTMLField',
+  //         clientProps: { path: 'descriptions_html' },
+  //       },
+  //     },
+  //   },
+  // },
+  // lexicalHTML('descriptions', { name: 'descriptions_html' }),
 ]
 
 const PropertyLocation: CollectionConfig['fields'] = [
   {
     name: 'area_1',
     label: 'Area',
-    type: 'select',
+    type: 'text',
     required: false,
-    options: AREAS,
+    admin: {
+      components: {
+        Field: {
+          path: '@/modules/Property/cms/_fields/AreaSelectField',
+          clientProps: { path: 'area_1', childPath: 'area_2' },
+        },
+      },
+    },
   },
   {
     name: 'area_2',
     label: 'Sub Area',
-    type: 'select',
+    type: 'text',
     required: false,
-    options: SUB_AREAS,
+    admin: {
+      components: {
+        Field: {
+          path: '@/modules/Property/cms/_fields/SubAreaSelectField',
+          clientProps: { path: 'area_2', parentPath: 'area_1' },
+        },
+      },
+    },
   },
+
   {
     name: 'address',
     label: 'Address',
@@ -258,13 +301,13 @@ const PropertyLocation: CollectionConfig['fields'] = [
     },
     fields: [
       {
-        name: 'lat_str',
+        name: 'lat',
         label: 'Latitude',
         type: 'text',
         required: false,
       },
       {
-        name: 'lng_str',
+        name: 'lng',
         label: 'Longitude',
         type: 'text',
         required: false,
@@ -443,24 +486,4 @@ export const Properties: CollectionConfig = {
       ],
     },
   ],
-  // endpoints: [
-  //   {
-  //     path: '/search',
-  //     method: 'get',
-  //     handler: async (req: any, res: any, next) => {
-  //       const payload = await getPayload({
-  //         config: configPromise,
-  //       })
-
-  //       const properties = await payload.find({
-  //         collection: 'properties',
-  //         // page: 1,
-  //         // limit: 10
-  //         // where: req.query,
-  //       })
-
-  //       res.status(200).send({ docs: properties.docs })
-  //     },
-  //   },
-  // ],
 }

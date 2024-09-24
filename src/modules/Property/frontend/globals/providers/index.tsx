@@ -3,6 +3,7 @@ import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 import { LOCALES } from '@/modules/Property/libs/locales'
 import { useRouter } from 'next/router'
+import { useSearchParams } from 'next/navigation'
 
 export interface IContext {
   isLoading?: boolean
@@ -10,6 +11,7 @@ export interface IContext {
   locale: string
   locales: { [x: string]: { [y: string]: string } }
   data: any
+  currency: string
   getLocale: (key: string) => string
 }
 
@@ -18,6 +20,7 @@ const context: IContext = {
   isRouteChanging: false,
   locale: 'en',
   locales: {},
+  currency: "IDR",
   data: {
     appUrl: '',
   },
@@ -34,6 +37,8 @@ const useController = (_context: IContext) => {
   const [data, setData] = useState<any>(_context.data)
 
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const currency = searchParams?.get('currency') ?? _context.currency
 
   const getLocale = useMemo(() => {
     return (key: string) => locales[key]?.[locale as string] || locales[key]?.['en'] || key
@@ -66,6 +71,7 @@ const useController = (_context: IContext) => {
     isRouteChanging,
     locale,
     locales,
+    currency,
     data,
     getLocale,
   }
