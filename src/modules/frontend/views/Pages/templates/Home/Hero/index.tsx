@@ -11,7 +11,12 @@ const Hero: React.FC = () => {
     <Box position="relative" minH="80vh" width="100%" background="#000">
       {heroImage?.url && (
         <Box width="100%" height="100%" position="absolute" top={0} left={0}>
-          <Image src={heroImage.url} alt={heroImage.alt ?? 'Home Hero'} fill />
+          <Image
+            src={heroImage.url}
+            alt={heroImage.alt ?? 'Home Hero'}
+            fill
+            style={{ objectFit: 'cover' }}
+          />
           <Box position="absolute" width="100%" height="100%" bg="black" opacity={0.5} />
         </Box>
       )}
