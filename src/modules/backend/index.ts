@@ -33,8 +33,8 @@ export const Backend_generateSiteMap = generateSiteMap
 
 export const Backend_getStaticPaths = async () => {
   const modules: { [x: string]: any } = {
-    pages: getPagesPaths,
-    properties: getPropertiesPaths,
+    Pages: getPagesPaths,
+    Properties: getPropertiesPaths,
   }
 
   const paths = []
@@ -53,15 +53,17 @@ export const Backend_getStaticPaths = async () => {
 const getCollectionName = (ctx: GetStaticPropsContext) => {
   const slugs = ctx.params?.slugs ?? ([] as string[])
   // const availableCollections = COLLECTIONS.map((c) => c.slug)
-  const availableCollections = ["pages", "properties"]
-  let collectionName = slugs[0] ?? availableCollections[0]
+  const availableCollections = ['Pages', 'Properties']
+  let collectionName = slugs[0]
+    ? slugs[0].charAt(0).toUpperCase() + slugs[0].slice(1)
+    : availableCollections[0]
   return collectionName
 }
 
 export const Backend_getStaticProps = async (ctx: GetStaticPropsContext) => {
   const modules: { [x: string]: any } = {
-    pages: getPagesProps,
-    properties: getPropertiesProps,
+    Pages: getPagesProps,
+    Properties: getPropertiesProps,
   }
   const res = await appProps(ctx)
   return modules[getCollectionName(ctx)](res, ctx)
