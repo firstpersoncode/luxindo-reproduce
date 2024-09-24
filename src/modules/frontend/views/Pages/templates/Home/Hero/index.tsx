@@ -17,7 +17,7 @@ const Hero: React.FC = () => {
             fill
             style={{ objectFit: 'cover' }}
           />
-          <Box position="absolute" width="100%" height="100%" bg="black" opacity={0.5} />
+          <Box position="absolute" width="100%" height="100%" bg="black" opacity={0.75} />
         </Box>
       )}
       <Container
