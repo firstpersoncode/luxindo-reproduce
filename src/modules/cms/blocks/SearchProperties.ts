@@ -1,12 +1,12 @@
 import { Block } from 'payload'
 
-export const SearchProperties = ({ ...field }: any): Block => ({
+export const SearchProperties = (): Block => ({
   slug: 'SearchProperties', // required
   interfaceName: 'SearchPropertiesBlock', // optional
   fields: [
     {
-      name: field.name,
-      label: field.label,
+      name: "search_properties",
+      label: 'Search Properties',
       type: 'text',
       required: false,
     },

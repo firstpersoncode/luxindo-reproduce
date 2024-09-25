@@ -2,16 +2,19 @@ import { ChakraProvider } from '@chakra-ui/react'
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import { useRouter } from 'next/router'
 import { useSearchParams } from 'next/navigation'
+import { LOCALES } from './locales'
 
 export interface IContext {
   isLoading?: boolean
   isRouteChanging?: boolean
   isScrolledToTop?: boolean
+  locales: { [key: string]: { [key: string]: string } }
   locale: string
   data: any
   currency: string
   setLocale: (locale: string) => void
   setCurrency: (currency: string) => void
+  getLocale: (key: string) => string
 }
 
 const context: IContext = {
@@ -19,6 +22,7 @@ const context: IContext = {
   isRouteChanging: false,
   isScrolledToTop: true,
   locale: 'en',
+  locales: {},
   currency: 'IDR',
   data: {
     appUrl: '',
@@ -27,6 +31,7 @@ const context: IContext = {
   },
   setLocale: () => {},
   setCurrency: () => {},
+  getLocale: () => '',
 }
 
 const Context = createContext(context)
@@ -74,15 +79,22 @@ const useController = (_context: IContext) => {
     }
   }, [])
 
+  const getLocale = useMemo(() => {
+    return (key: string) =>
+      _context.locales[key]?.[locale as string] || _context.locales[key]?.['en'] || key
+  }, [_context.locales, locale])
+
   return {
     isLoading,
     isRouteChanging,
     isScrolledToTop,
     locale,
+    locales: _context.locales,
     currency,
     data,
     setLocale,
     setCurrency,
+    getLocale
   }
 }
 
@@ -90,7 +102,7 @@ export default function Providers({
   children,
   context: _context,
 }: Readonly<{ children: React.ReactNode; context?: IContext }>) {
-  const value = useController({ ...context, ..._context })
+  const value = useController({ ...context, ..._context, locales: LOCALES })
   return (
     <ChakraProvider>
       <Context.Provider value={value}>{children}</Context.Provider>

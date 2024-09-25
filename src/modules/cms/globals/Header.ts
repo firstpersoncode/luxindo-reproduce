@@ -31,6 +31,7 @@ export const Header: GlobalConfig = {
           label: 'Title',
           type: 'text',
           required: true,
+          localized: true
         },
         {
           name: 'value',

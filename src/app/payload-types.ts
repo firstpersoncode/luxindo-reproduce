@@ -416,7 +416,7 @@ export interface Property {
         id?: string | null;
       }[]
     | null;
-  sections?: (RichTextBlock | SearchPropertiesBlock)[] | null;
+  sections?: (RichTextBlock | HeroSearchBlock | SearchPropertiesBlock)[] | null;
   agent?: (number | null) | Agent;
   related_properties?: (number | Property)[] | null;
   updatedAt: string;
@@ -431,6 +431,21 @@ export interface RichTextBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'RichText';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HeroSearchBlock".
+ */
+export interface HeroSearchBlock {
+  images?:
+    | {
+        file: number | Media;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'HeroSearch';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -454,7 +469,7 @@ export interface Page {
   keywords?: string | null;
   template?: ('Default' | 'Home' | 'About' | 'Contact') | null;
   image?: (number | null) | Media;
-  sections?: (RichTextBlock | SearchPropertiesBlock)[] | null;
+  sections?: (RichTextBlock | HeroSearchBlock | SearchPropertiesBlock)[] | null;
   updatedAt: string;
   createdAt: string;
 }

@@ -3,6 +3,9 @@ import configPromise from '@/app/payload.config'
 import { GetStaticPropsContext } from 'next'
 import { getPayload } from 'payload'
 
+import { getProps as getHeroSearchBlockProps } from './block.hero-search.props'
+
+
 export const getPaths = async () => {
   const payload = await getPayload({
     config: configPromise,
@@ -27,7 +30,7 @@ export const getPaths = async () => {
     .flat()
 }
 
-const BLOCKS_HANDLERS: any[] = []
+const BLOCKS_HANDLERS: any[] = [getHeroSearchBlockProps]
 
 export const getProps = async (resp: any, ctx: GetStaticPropsContext) => {
   const payload = await getPayload({

@@ -23,6 +23,7 @@ const config: Config = {
     pool: {
       connectionString: process.env.DATABASE_URI || '',
     },
+    push: false
   }),
   sharp,
   localization: {

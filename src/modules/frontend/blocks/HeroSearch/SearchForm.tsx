@@ -1,6 +1,7 @@
 import React from 'react'
 import { Flex, Text, Input, Select, Button } from '@chakra-ui/react'
 import Image from 'next/image'
+import { useContextProvider } from './providers'
 
 interface SearchFieldProps {
   icon?: string
@@ -18,13 +19,15 @@ const SearchField: React.FC<SearchFieldProps> = ({
   options,
 }) => (
   <Flex flexDirection="column" width="177px">
-    <Flex alignItems="start" gap="8px" fontSize="12px" fontWeight={500} textTransform="uppercase">
+    <Flex alignItems="start" gap="8px">
       {icon && <Image src={icon} alt={label} width={16} height={16} />}
-      <Text>{label}</Text>
+      <Text fontSize="12px" fontWeight={500} textTransform="uppercase">
+        {label}
+      </Text>
     </Flex>
     <Flex marginTop="16px" flexDirection="column" fontSize="12px" fontWeight={400}>
       {isSelect ? (
-        <Select variant="flushed" placeholder="Any">
+        <Select variant="flushed" placeholder={placeholder}>
           {/* {options?.map((option) => (
             <option key={option} value={option}>
               {option}
@@ -39,6 +42,7 @@ const SearchField: React.FC<SearchFieldProps> = ({
 )
 
 const SearchForm: React.FC = () => {
+  const { getLocale } = useContextProvider()
   return (
     <Flex as="form" flexDirection="column" marginTop={{ base: '18px', md: '64px' }} width="100%">
       <Flex
@@ -50,25 +54,21 @@ const SearchForm: React.FC = () => {
       >
         <SearchField
           icon="/icons/quick_reference_all.png"
-          label="REF. NO"
-          placeholder="e.g. RV392"
+          label={getLocale('REF. NO')}
+          placeholder={getLocale("e.g. RV392")}
         />
-        <SearchField icon="/icons/location_on.png" label="LOCATION" isSelect />
-        <SearchField icon="/icons/home_work.png" label="TYPE" isSelect />
-        <SearchField icon="/icons/key.png" label="OWNERSHIP" isSelect />
+        <SearchField icon="/icons/location_on.png" label={getLocale('Location')} placeholder={getLocale("Any")} isSelect />
+        <SearchField icon="/icons/home_work.png" label={getLocale('Type')} placeholder={getLocale("Any")} isSelect />
+        <SearchField icon="/icons/key.png" label={getLocale('Ownership')} placeholder={getLocale("Any")} isSelect />
         <Flex flexDirection="column" flex={1} minWidth="240px">
-          <Flex
-            alignItems="start"
-            gap="8px"
-            fontSize="12px"
-            fontWeight={500}
-            textTransform="uppercase"
-          >
+          <Flex alignItems="start" gap="8px">
             <Image src="/icons/sell.png" alt="PRICE RANGE" width={16} height={16} />
-            <Text>PRICE RANGE</Text>
+            <Text fontSize="12px" fontWeight={500} textTransform="uppercase">
+              {getLocale('Price Range')}
+            </Text>
           </Flex>
           <Flex marginTop="16px" flexDirection="column" fontSize="12px" fontWeight={400}>
-            <Select variant="flushed" placeholder="Any">
+            <Select variant="flushed" placeholder={getLocale("Any")}>
               {/* <option value="0-500000000">0 - 500,000,000 IDR</option>
               <option value="500000000-1000000000">500,000,000 - 1,000,000,000 IDR</option>
               <option value="1000000000+">1,000,000,000+ IDR</option> */}
@@ -87,8 +87,12 @@ const SearchForm: React.FC = () => {
         gap="12px"
       >
         <Image src="/icons/search.png" alt="Search" width={24} height={24} />
-        <Text display={{ base: 'none', md: 'block' }}>SEARCH</Text>
-        <Text display={{ base: 'block', md: 'none' }}>SEARCH PROPERTY</Text>
+        <Text display={{ base: 'none', md: 'block' }} textTransform="uppercase">
+          {getLocale('Search')}
+        </Text>
+        <Text display={{ base: 'block', md: 'none' }} textTransform="uppercase">
+          {getLocale('Search Property')}
+        </Text>
       </Button>
     </Flex>
   )

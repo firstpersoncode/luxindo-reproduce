@@ -30,6 +30,7 @@ export const Footer: GlobalConfig = {
           label: 'Label',
           type: 'text',
           required: false,
+          localized: true
         },
         {
           name: 'navigations',
@@ -48,6 +49,7 @@ export const Footer: GlobalConfig = {
               label: 'Title',
               type: 'text',
               required: true,
+              localized: true
             },
             {
               name: 'value',
