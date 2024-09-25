@@ -7,7 +7,7 @@ import { useRouter } from 'next/router'
 export default function App({ Component, pageProps }: AppProps) {
   const { asPath } = useRouter()
   return (
-    <Frontend_Layout context={{ ...pageProps.appContext }}>
+    <Frontend_Layout key={asPath} context={{ ...pageProps.appContext }}>
       <Component key={asPath} {...pageProps} />
     </Frontend_Layout>
   )
