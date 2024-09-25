@@ -5,9 +5,9 @@ import type { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
 
 export default function App({ Component, pageProps }: AppProps) {
-  const { asPath } = useRouter()
+  const { asPath, locale } = useRouter()
   return (
-    <Frontend_Layout key={asPath} context={{ ...pageProps.appContext }}>
+    <Frontend_Layout key={locale} context={{ ...pageProps.appContext }}>
       <Component key={asPath} {...pageProps} />
     </Frontend_Layout>
   )
