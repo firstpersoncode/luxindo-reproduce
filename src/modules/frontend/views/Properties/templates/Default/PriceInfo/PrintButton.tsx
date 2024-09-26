@@ -25,14 +25,7 @@ const PrintButton: React.FC = () => {
         }
       }}
     >
-      <Image
-        src="https://cdn.builder.io/api/v1/image/assets/TEMP/43db769919eb7ea6d43e48f080e97d4b2718675a613d6a1156f99ea464aec982?placeholderIfAbsent=true&apiKey=a9b95505e95b4a99931826297eec4185"
-        alt=""
-        objectFit="contain"
-        objectPosition="center"
-        width="14px"
-        height="15px"
-      />
+     
       <Text margin="auto 0">{getLocale('Print')}</Text>
     </Flex>
   )

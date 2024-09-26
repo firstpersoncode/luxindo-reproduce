@@ -13,9 +13,11 @@ import {
   TagLabel,
   TagCloseButton,
   Box,
+  Divider,
+  Button,
 } from '@chakra-ui/react'
 
-import { ChevronDownIcon } from '@chakra-ui/icons'
+import { ChevronDownIcon, CloseIcon } from '@chakra-ui/icons'
 import Image from 'next/image'
 
 const CheckBoxSelect: React.FC<{
@@ -69,9 +71,6 @@ const CheckBoxSelect: React.FC<{
                   'scrollbar-width': 'none',
                 }}
               >
-                {/* <HStack>
-                  
-                </HStack> */}
                 {values.map((item, i) => (
                   <Box as="span" key={i}>
                     <Tag borderRadius="full" variant="solid">
@@ -98,10 +97,10 @@ const CheckBoxSelect: React.FC<{
           </Flex>
         </Flex>
       </PopoverTrigger>
-      <PopoverContent border="none" minW="250px" maxH="250px" overflowY="auto">
+      <PopoverContent border="none" minW="250px">
         <PopoverArrow />
-        <PopoverBody background="#000" p="18px">
-          <Stack pl={6} mt={1} spacing={1}>
+        <PopoverBody background="#000" p={0}>
+          <Stack p="18px" mt={1} spacing={1} maxH="250px" overflowY="auto" gap="12px">
             {options.map((option, i) => (
               <Checkbox
                 key={i}
@@ -115,10 +114,28 @@ const CheckBoxSelect: React.FC<{
                   }
                 }}
               >
-                {option}
+                <Text fontSize="xs">{option}</Text>
               </Checkbox>
             ))}
           </Stack>
+          <Divider />
+          <Button
+            // disabled={values.length === 0}
+            variant="link"
+            color="white"
+            w="full"
+            p="18px"
+            textTransform="uppercase"
+            leftIcon={
+              <Box borderRadius="50%" border="1px solid white" p="5px">
+                <CloseIcon display="block" w="10px" h="10px" />
+              </Box>
+            }
+            onClick={() => onChange([])}
+            fontSize="xs"
+          >
+            Clear
+          </Button>
         </PopoverBody>
       </PopoverContent>
     </Popover>

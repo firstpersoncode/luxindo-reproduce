@@ -13,7 +13,20 @@ const nextConfig = {
     defaultLocale,
   },
   images: {
-    domains: [getHostName(process.env.NEXT_PUBLIC_APP_URL ?? ''), 'cdn.builder.io', 'flagsapi.com'],
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '3000',
+        pathname: '/api/media/file/**'
+      },
+      {
+        protocol: 'https',
+        hostname: getHostName(process.env.NEXT_PUBLIC_APP_URL),
+        port: '',
+        pathname: '/api/media/file/**'
+      }
+    ]
   },
   reactStrictMode: false,
 }

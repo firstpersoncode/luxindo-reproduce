@@ -56,39 +56,19 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
           justifyContent="space-between"
         >
           <Flex align="center" gap={2}>
-            <Image
-              src="https://cdn.builder.io/api/v1/image/assets/TEMP/392ffe49e93263c596f14775191e0162c5200c7d63967aedfb6b4e355567cb91?placeholderIfAbsent=true&apiKey=a9b95505e95b4a99931826297eec4185"
-              alt="Bedrooms"
-              w="15px"
-              h="15px"
-            />
+            
             <Text fontSize="12px">{bedrooms}</Text>
           </Flex>
           <Flex align="center" gap={2}>
-            <Image
-              src="https://cdn.builder.io/api/v1/image/assets/TEMP/c5e91c46227abdf2b2c56c9538425585c7e55912ea8229e0bbc3d901e3fa174e?placeholderIfAbsent=true&apiKey=a9b95505e95b4a99931826297eec4185"
-              alt="Bathrooms"
-              w="15px"
-              h="15px"
-            />
+            
             <Text fontSize="12px">{bathrooms}</Text>
           </Flex>
           <Flex align="center" gap={2}>
-            <Image
-              src="https://cdn.builder.io/api/v1/image/assets/TEMP/579a0e2a6faba39ef255603ea910f010a5ec0ba1e9d32ec88958c7b1b5b60680?placeholderIfAbsent=true&apiKey=a9b95505e95b4a99931826297eec4185"
-              alt="Area"
-              w="15px"
-              h="15px"
-            />
+           
             <Text fontSize="12px">{area}</Text>
           </Flex>
           <Flex align="center" gap={2}>
-            <Image
-              src="https://cdn.builder.io/api/v1/image/assets/TEMP/efa039afcdba28ca016a495b3a5debabfedf8d97a188517489f4d75c3233f063?placeholderIfAbsent=true&apiKey=a9b95505e95b4a99931826297eec4185"
-              alt="Lease Years"
-              w="15px"
-              h="15px"
-            />
+            
             <Text fontSize="12px">
               {leaseYears} {getLocale('years')}
             </Text>

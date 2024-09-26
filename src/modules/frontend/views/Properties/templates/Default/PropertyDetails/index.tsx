@@ -22,11 +22,7 @@ const PropertyDetails: React.FC = ({}) => {
               <PropertyFeature
                 key={plan.id}
                 icon={
-                  plan.icon?.url ??
-                  (plan.icon_placeholder
-                    ? undefined
-                    : 'https://cdn.builder.io/api/v1/image/assets/TEMP/e22eb4ee629417234d3b89a10d8ab13fca6f565834c0f4bdff254032783dec58?placeholderIfAbsent=true&apiKey=a9b95505e95b4a99931826297eec4185')
-                }
+                  plan.icon?.url ?? undefined}
                 icon_placeholder={plan.icon_placeholder}
                 label={plan.title}
                 value={plan.value}

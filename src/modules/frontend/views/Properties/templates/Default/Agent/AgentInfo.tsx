@@ -24,18 +24,6 @@ const AgentInfo: React.FC<AgentInfoProps> = ({ isLoading }) => {
         }
       `}
     >
-      <Skeleton isLoaded={!isLoading}>
-        <Box
-          as="img"
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/748f3db14ef647d0bb2787eac1ce4cb152e551b09951ee429055e056f12002dd?placeholderIfAbsent=true&apiKey=a9b95505e95b4a99931826297eec4185"
-          alt=""
-          position="absolute"
-          inset="0"
-          height="100%"
-          width="100%"
-          objectFit="cover"
-        />
-      </Skeleton>
       <Text
         position="relative"
         color="rgba(52, 47, 44, 1)"
