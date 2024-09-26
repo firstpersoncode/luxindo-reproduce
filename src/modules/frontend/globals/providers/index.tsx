@@ -46,13 +46,9 @@ const hydrateProps = async (params: any): Promise<any> => {
       .map((key) => key + '=' + params[key])
       .join('&')
 
-  const { data: header } = await axios.get(
-    process.env.NEXT_PUBLIC_APP_URL + `/api/globals/header/` + qs,
-  )
+  const { data: header } = await axios.get(`/api/globals/header/${qs}`)
 
-  const { data: footer } = await axios.get(
-    process.env.NEXT_PUBLIC_APP_URL + `/api/globals/footer/` + qs,
-  )
+  const { data: footer } = await axios.get(`/api/globals/footer/${qs}`)
 
   return { header, footer }
 }
@@ -143,21 +139,21 @@ export default function Providers({
   const theme = extendTheme({
     colors: {
       primary: {
-        50: "#f8f7f4",
-        100: "#f2d8bd",
+        50: '#f8f7f4',
+        100: '#f2d8bd',
         500: '#C1A283',
       },
       brand: {
         primary: '#C1A283',
         secondary: '#333333',
-        surface: "#f8f7f4",
-        background: '#191919'
+        surface: '#f8f7f4',
+        background: '#191919',
       },
     },
   })
 
   return (
-    <ChakraProvider theme={theme} cssVarsRoot='body'>
+    <ChakraProvider theme={theme} cssVarsRoot="body">
       <Context.Provider value={value}>{children}</Context.Provider>
     </ChakraProvider>
   )

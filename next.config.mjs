@@ -1,10 +1,10 @@
 import { withPayload } from '@payloadcms/next/withPayload'
 import { locales, defaultLocale } from './src/modules/locales.js'
 
-const getHostName = (url) => {
-  const hostName = new URL(url).hostname
-  return hostName.startsWith('www.') ? hostName.slice(4) : hostName
-}
+// const getHostName = (url) => {
+//   const hostName = new URL(url).hostname
+//   return hostName.startsWith('www.') ? hostName.slice(4) : hostName
+// }
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -18,13 +18,13 @@ const nextConfig = {
         protocol: 'http',
         hostname: 'localhost',
         port: '3000',
-        pathname: '/api/media/file/**'
+        pathname: '/**'
       },
       {
         protocol: 'https',
-        hostname: getHostName(process.env.NEXT_PUBLIC_APP_URL),
+        hostname: "**",
         port: '',
-        pathname: '/api/media/file/**'
+        pathname: '/**'
       }
     ]
   },

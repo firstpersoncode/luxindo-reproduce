@@ -12,10 +12,7 @@ const BannerSlider: React.FC = () => {
     const banner = images.filter((i) => !!i.file?.url)
 
     return banner.map((image: any) => {
-      const isAbsolutePath = image.file.url.startsWith('http')
-      const url = isAbsolutePath
-        ? image.file.url
-        : `${process.env.NEXT_PUBLIC_APP_URL}${image.file.url}`
+      const url = image.file.url
       return {
         file: { url, alt: image.file.alt },
       }

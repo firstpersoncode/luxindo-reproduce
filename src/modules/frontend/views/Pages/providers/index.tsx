@@ -36,7 +36,7 @@ const hydrateProps = async (id: number, collection: string, params: any): Promis
     Object.keys(params)
       .map((key) => key + '=' + params[key])
       .join('&')
-  const res = await axios.get(process.env.NEXT_PUBLIC_APP_URL + `/api/${collection}/` + id + qs)
+  const res = await axios.get(`/api/${collection}/${id}${qs}`)
   return res.data
 }
 
