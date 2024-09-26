@@ -153,7 +153,9 @@ const Actions: React.FC = () => {
         display={{ base: 'none', md: 'flex' }}
       >
         <Image src="/icons/search.png" alt="Search" width={24} height={24} />
-        <Text textTransform="uppercase">{cta ?? getLocale('Search')}</Text>
+        <Text className="cormorant" textTransform="uppercase">
+          {cta ?? getLocale('Search')}
+        </Text>
       </Button>
 
       <Button
@@ -169,7 +171,9 @@ const Actions: React.FC = () => {
         display={{ base: 'flex', md: 'none' }}
       >
         <Image src="/icons/search.png" alt="Search" width={24} height={24} />
-        <Text textTransform="uppercase">{cta ?? getLocale('Search Property')}</Text>
+        <Text className="cormorant" textTransform="uppercase">
+          {cta ?? getLocale('Search Property')}
+        </Text>
       </Button>
 
       <BottomSheet
@@ -191,7 +195,9 @@ const Actions: React.FC = () => {
             }}
           >
             <Image src="/icons/search.png" alt="Search" width={24} height={24} />
-            <Text textTransform="uppercase">{cta ?? getLocale('Search Property')}</Text>
+            <Text className="cormorant" textTransform="uppercase">
+              {cta ?? getLocale('Search Property')}
+            </Text>
           </Button>
         }
       >

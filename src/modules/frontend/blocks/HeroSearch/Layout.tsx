@@ -1,4 +1,4 @@
-import { Box, Container, Heading } from '@chakra-ui/react'
+import { Box, Container, Text } from '@chakra-ui/react'
 import SearchForm from './SearchForm'
 import { useContextProvider } from './providers'
 import BannerSlider from './BannerSlider'
@@ -26,15 +26,16 @@ const Layout: React.FC = () => {
         bottom={'200px'}
         mx="auto"
       >
-        <Heading
+        <Text
           as="h1"
           color="white"
           fontSize={{ base: '48px', md: '72px' }}
           width={{ base: '100%', md: '80%' }}
           textTransform="uppercase"
+          className='cormorant'
         >
           {title ?? getLocale('Your Gateway to Prestige Living')}
-        </Heading>
+        </Text>
         <SearchForm />
       </Container>
     </Box>

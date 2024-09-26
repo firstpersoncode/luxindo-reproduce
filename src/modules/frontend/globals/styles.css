@@ -1,0 +1,11 @@
+* {
+  font-family: var(--font-inter);
+}
+
+.cormorant {
+  font-family: var(--font-cormorant);
+}
+
+.aerotis {
+  font-family: var(--font-aerotis);
+}
