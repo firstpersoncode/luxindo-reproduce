@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next'
 import configPromise from '@/app/payload.config'
 import { getPayload } from 'payload'
-import { locales } from '@/locales'
+import { locales } from '@/modules/locales'
 
 const generateSite = (path: string) => {
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL

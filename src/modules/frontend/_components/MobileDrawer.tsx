@@ -15,7 +15,7 @@ import {
 } from '@chakra-ui/react'
 import { HamburgerIcon } from '@chakra-ui/icons'
 import { useMemo, useRef } from 'react'
-import { useContextProvider } from '../providers'
+import { useContextProvider } from '@/modules/frontend/globals/providers'
 import NavItem from './NavItem'
 import LanguageSelector from './LanguageSelector'
 import CurrencySelector from './CurrencySelector'

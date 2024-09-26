@@ -9,8 +9,8 @@ import {
   Text,
   Button,
 } from '@chakra-ui/react'
-import { useContextProvider } from '../providers'
-import { locales } from '@/locales'
+import { useContextProvider } from '@/modules/frontend/globals/providers'
+import { locales } from '@/modules/locales'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Image from 'next/image'

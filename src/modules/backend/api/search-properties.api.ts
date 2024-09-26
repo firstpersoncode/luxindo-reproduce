@@ -1,7 +1,7 @@
 import { NextRequest } from 'next/server'
 import { getPayload } from 'payload'
 import configPromise from '@/app/payload.config'
-import { LOCATIONS } from '@/options'
+import { LOCATIONS } from '@/modules/options'
 
 export const searchPropertiesApi = async (req: NextRequest) => {
   const payload = await getPayload({

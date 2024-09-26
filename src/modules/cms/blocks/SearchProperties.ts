@@ -1,4 +1,4 @@
-import { PROPERTY_OWNERSHIP, PROPERTY_TYPES } from '@/options'
+import { PROPERTY_OWNERSHIP, PROPERTY_TYPES } from '@/modules/options'
 import { Block } from 'payload'
 
 export const SearchProperties = (): Block => ({

@@ -1,4 +1,4 @@
-import { generateSiteMap } from './generateSiteMap'
+import { generateSiteMap } from './utils/generateSiteMap'
 import { NextRequest, NextResponse } from 'next/server'
 import { ROUTES } from './api'
 import { GetStaticPropsContext } from 'next'
@@ -8,6 +8,10 @@ import {
   getPaths as getPropertiesPaths,
 } from './props/properties.props'
 import { appProps } from './props/app.props'
+import { generateRobots } from './utils/generateRobots'
+
+export const Backend_generateSiteMap = generateSiteMap
+export const Backend_generateRobots = generateRobots
 
 export const Backend_apiHandler =
   (method: string) =>
@@ -29,7 +33,7 @@ export const Backend_apiHandler =
     return route.handler(req, { params, ...rest })
   }
 
-export const Backend_generateSiteMap = generateSiteMap
+
 
 export const Backend_getStaticPaths = async () => {
   const modules: { [x: string]: any } = {

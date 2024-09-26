@@ -1,6 +1,6 @@
 'use client'
 
-import { LOCATIONS } from '@/options'
+import { LOCATIONS } from '@/modules/options'
 import { SelectInput, useField } from '@payloadcms/ui'
 import { useMemo } from 'react'
 

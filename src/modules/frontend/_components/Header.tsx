@@ -1,10 +1,10 @@
 import React, { useMemo } from 'react'
 import { Box, Flex, Container } from '@chakra-ui/react'
-import { useContextProvider } from '../providers'
+import { useContextProvider } from '@/modules/frontend/globals/providers'
 import Image from 'next/image'
 import MobileDrawer from './MobileDrawer'
-import DesktopNavigation from './DesktopNavigation'
 import Link from 'next/link'
+import DesktopNavigation from './DesktopNavigation'
 
 const Header: React.FC = () => {
   const { data, locale, isScrolledToTop } = useContextProvider()

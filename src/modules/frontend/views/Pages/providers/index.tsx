@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import { useContextProvider as useGlobalContextProvider } from '@/modules/frontend/globals/providers'
 import axios from 'axios'
-import { LOCALES } from './locales'
+import { LOCALES } from '@/modules/locales'
 
 export interface IContext {
   isLoading?: boolean

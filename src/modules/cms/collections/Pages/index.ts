@@ -1,4 +1,4 @@
-import { formatSlug } from '../../utils'
+import { formatSlug } from '../../utils/formatSlug'
 import { BLOCKS } from '@/modules/cms/blocks'
 import { CollectionConfig } from 'payload'
 import { PAGE_TEMPLATES } from './templates'

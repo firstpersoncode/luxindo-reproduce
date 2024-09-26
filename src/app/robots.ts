@@ -1,14 +1,3 @@
-import type { MetadataRoute } from 'next'
- 
-export default function robots(): MetadataRoute.Robots {
-  return {
-    rules: [
-      {
-        userAgent: '*',
-        allow: ['/'],
-        disallow: '/admin/',
-      },
-    ],
-    sitemap: `${process.env.NEXT_PUBLIC_APP_URL}/sitemap.xml`,
-  }
-}
+import { Backend_generateRobots } from '@/modules/backend'
+
+export default Backend_generateRobots

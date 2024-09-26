@@ -2,7 +2,7 @@ import React, { useMemo } from 'react'
 import { Box, Flex, Divider } from '@chakra-ui/react'
 import NavItem from './NavItem'
 import LanguageSelector from './LanguageSelector'
-import { useContextProvider } from '../providers'
+import { useContextProvider } from '@/modules/frontend/globals/providers'
 import CurrencySelector from './CurrencySelector'
 
 const DesktopNavigation: React.FC = () => {

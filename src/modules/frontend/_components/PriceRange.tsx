@@ -16,7 +16,7 @@ import {
 } from '@chakra-ui/react'
 import Image from 'next/image'
 import { ChevronDownIcon } from '@chakra-ui/icons'
-import { MAX_PRICE, MIN_PRICE } from '@/options'
+import { MAX_PRICE, MIN_PRICE } from '@/modules/options'
 
 const PriceRange: React.FC<{
   label: string

@@ -9,8 +9,8 @@ import {
   PROPERTY_TYPES,
   SPACES,
   STATES,
-} from '@/options'
-import { formatSlug } from '../../utils'
+} from '@/modules/options'
+import { formatSlug } from '../../utils/formatSlug'
 import { BLOCKS } from '@/modules/cms/blocks'
 import { PROPERTY_TEMPLATES } from './templates'
 

@@ -8,10 +8,10 @@ import {
   Text,
   Button,
 } from '@chakra-ui/react'
-import { useContextProvider } from '../providers'
+import { useContextProvider } from '@/modules/frontend/globals/providers'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import { CURRENCIES } from '@/options'
+import { CURRENCIES } from '@/modules/options'
 
 const CurrencySelector: React.FC = () => {
   const { setCurrency, currency } = useContextProvider()

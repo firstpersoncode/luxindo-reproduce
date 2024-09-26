@@ -1,9 +1,8 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
-import { LOCALES } from './locales'
+import { LOCALES } from '@/modules/locales'
 import { useContextProvider as useGlobalContextProvider } from '@/modules/frontend/globals/providers'
 import { useRouter } from 'next/router'
-import { search } from '../../SearchProperties/providers/search-properties.service'
-import { MAX_PRICE, MIN_PRICE } from '@/options'
+import { MAX_PRICE, MIN_PRICE } from '@/modules/options'
 
 export interface IContext {
   isReady?: boolean

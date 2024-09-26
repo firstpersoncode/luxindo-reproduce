@@ -2,7 +2,7 @@ import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import { useRouter } from 'next/router'
 import { useSearchParams } from 'next/navigation'
-import { LOCALES } from './locales'
+import { LOCALES } from '@/modules/locales'
 import axios from 'axios'
 
 export interface IContext {

@@ -1,4 +1,4 @@
-import { locales } from '@/locales'
+import { locales } from '@/modules/locales'
 import configPromise from '@/app/payload.config'
 import { GetStaticPropsContext } from 'next'
 import { getPayload } from 'payload'
