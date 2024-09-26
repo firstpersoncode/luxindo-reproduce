@@ -437,6 +437,9 @@ export interface RichTextBlock {
  * via the `definition` "HeroSearchBlock".
  */
 export interface HeroSearchBlock {
+  title?: string | null;
+  cta?: string | null;
+  search_page_slug?: string | null;
   images?:
     | {
         file: number | Media;
@@ -453,6 +456,12 @@ export interface HeroSearchBlock {
  */
 export interface SearchPropertiesBlock {
   search_properties?: string | null;
+  filter_area_1?: string | null;
+  filter_area_2?: string | null;
+  filter_type?:
+    | ('Land' | 'Villa Rental' | 'Villa / House / Apartment' | 'Hotel, Resort, Villa Complex' | 'Commercial Space')
+    | null;
+  filter_ownership?: ('Rental' | 'Freehold' | 'Leasehold') | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'SearchProperties';

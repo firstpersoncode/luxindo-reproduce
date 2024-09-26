@@ -3,8 +3,10 @@ import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import { useRouter } from 'next/router'
 import { useSearchParams } from 'next/navigation'
 import { LOCALES } from './locales'
+import axios from 'axios'
 
 export interface IContext {
+  isReady?: boolean
   isLoading?: boolean
   isRouteChanging?: boolean
   isScrolledToTop?: boolean
@@ -18,6 +20,7 @@ export interface IContext {
 }
 
 const context: IContext = {
+  isReady: false,
   isLoading: true,
   isRouteChanging: false,
   isScrolledToTop: true,
@@ -36,7 +39,26 @@ const context: IContext = {
 
 const Context = createContext(context)
 
+const hydrateProps = async (params: any): Promise<any> => {
+  const qs =
+    '?' +
+    Object.keys(params)
+      .map((key) => key + '=' + params[key])
+      .join('&')
+
+  const { data: header } = await axios.get(
+    process.env.NEXT_PUBLIC_APP_URL + `/api/globals/header/` + qs,
+  )
+
+  const { data: footer } = await axios.get(
+    process.env.NEXT_PUBLIC_APP_URL + `/api/globals/footer/` + qs,
+  )
+
+  return { header, footer }
+}
+
 const useController = (_context: IContext) => {
+  const [isReady, setIsReady] = useState(_context.isReady)
   const [isLoading, setIsLoading] = useState(_context.isLoading)
   const [isRouteChanging, setIsRouteChanging] = useState(_context.isRouteChanging)
   const [isScrolledToTop, setIsScrolledToTop] = useState(_context.isScrolledToTop)
@@ -48,10 +70,24 @@ const useController = (_context: IContext) => {
   const [currency, setCurrency] = useState(searchParams?.get('currency') ?? _context.currency)
 
   useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false)
-    }, 1000)
+    // setTimeout(() => {
+    //   setIsLoading(false)
+    // }, 1000)
+    setIsReady(true)
   }, [])
+
+  useEffect(() => {
+    if (!!isReady) {
+      hydrateProps({ locale: _context.locale })
+        .then((res) => {
+          setTimeout(() => {
+            setIsLoading(false)
+          }, 1000)
+          setData(res)
+        })
+        .catch(console.error)
+    }
+  }, [isReady, _context.locale])
 
   useEffect(() => {
     const handleRouteChange = () => {
@@ -94,7 +130,7 @@ const useController = (_context: IContext) => {
     data,
     setLocale,
     setCurrency,
-    getLocale
+    getLocale,
   }
 }
 

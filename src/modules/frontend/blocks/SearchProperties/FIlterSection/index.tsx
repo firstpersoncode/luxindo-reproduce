@@ -2,6 +2,7 @@ import React from 'react';
 import { Box } from '@chakra-ui/react';
 import PriceFilter from './PriceFilter';
 import SearchFilters from './SearchFilters';
+import PriceRange from './PriceRange';
 
 const FilterSection: React.FC = () => {
   return (
@@ -9,11 +10,11 @@ const FilterSection: React.FC = () => {
       width="100%"
       flexDirection="column"
       alignItems="start"
-      mt={{ base: '40px', lg: '0' }}
-      position="sticky"
-      top="0"
+      mt={{ base: '40px', lg: '100px' }}
+      // position="sticky"
+      // top="0"
     > 
-      <PriceFilter />
+      <PriceRange />
       <SearchFilters />
       {/* <PropertyStatusFilter />
       <PropertyLabelFilter />

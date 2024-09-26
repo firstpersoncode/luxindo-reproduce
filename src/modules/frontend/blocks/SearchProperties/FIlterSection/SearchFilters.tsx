@@ -1,14 +1,9 @@
 import { Box, Button, Select, Input, VStack } from '@chakra-ui/react'
-import {
-  LOCATIONS,
-  PROPERTY_OWNERSHIP,
-  PROPERTY_TYPES,
-} from '@/options'
+import { LOCATIONS, PROPERTY_OWNERSHIP, PROPERTY_TYPES } from '@/options'
 import { useContextProvider } from '../providers'
-import { SearchParams } from '../providers/search-properties.service'
 
 const SearchFilters: React.FC<any> = () => {
-  const { filter = {} as SearchParams, setFilter, handleSearch, getLocale } = useContextProvider()
+  const { filter = {} as any, setFilter, handleSearch, getLocale } = useContextProvider()
 
   return (
     <Box mt={8}>

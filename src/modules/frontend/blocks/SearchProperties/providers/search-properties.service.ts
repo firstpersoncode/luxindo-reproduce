@@ -1,19 +1,11 @@
 import axios from 'axios'
 
-export interface SearchParams {
-  type: string
-  ownership: string
-  area_2: string
-  area_1: string
-  sku: string
-}
-
-export const search = async (params: SearchParams): Promise<any> => {
+export const search = async (params: any): Promise<any> => {
   try {
     const qs =
       '?' +
       Object.keys(params)
-        .map((key) => key + '=' + encodeURIComponent(params[key as keyof SearchParams]))
+        .map((key) => key + '=' + encodeURIComponent(params[key]))
         .join('&')
 
     const res = await axios.get(
@@ -22,6 +14,6 @@ export const search = async (params: SearchParams): Promise<any> => {
     return res.data
   } catch (err) {
     console.error(err)
-    return null
+    return []
   }
 }

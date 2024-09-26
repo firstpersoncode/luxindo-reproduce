@@ -2,12 +2,16 @@ import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import { LOCALES } from './locales'
 import { useContextProvider as useGlobalContextProvider } from '@/modules/frontend/globals/providers'
 import { useRouter } from 'next/router'
+import { search } from '../../SearchProperties/providers/search-properties.service'
 
 export interface IContext {
   isReady?: boolean
   isLoading?: boolean
   filter?: any
+  title: string
+  cta: string
   images: any[]
+  search_page_slug: string
   locale: string
   locales: { [x: string]: { [y: string]: string } }
   handleSearch: () => void
@@ -25,9 +29,12 @@ const context: IContext = {
     area_2: '',
     sku: '',
     price_start: 0,
-    price_end: 0,
+    price_end: 10000000000,
   },
+  title: '',
+  cta: '',
   images: [],
+  search_page_slug: '/search',
   locale: 'en',
   locales: {},
   handleSearch: () => {},
@@ -41,7 +48,6 @@ const useController = (_context: IContext) => {
   const [isReady, setIsReady] = useState(_context.isReady)
   const [isLoading, setIsLoading] = useState(_context.isLoading)
   const [filter, _setFilter] = useState(_context.filter)
-  const [images, setImages] = useState(_context.images)
 
   useEffect(() => {
     setTimeout(() => {
@@ -53,9 +59,10 @@ const useController = (_context: IContext) => {
   const { asPath, push } = useRouter()
 
   const handleSearch = async () => {
+    console.log(filter)
     push(
       {
-        pathname: '/properties',
+        pathname: _context.search_page_slug,
         query: {
           ...Object.fromEntries(new URLSearchParams(asPath.split('?')[1])),
           ...filter,
@@ -79,9 +86,12 @@ const useController = (_context: IContext) => {
     isReady,
     isLoading,
     filter,
-    images,
+    images: _context.images,
     locale: _context.locale,
     locales: _context.locales,
+    search_page_slug: _context.search_page_slug,
+    title: _context.title,
+    cta: _context.cta,
     handleSearch,
     setFilter,
     getLocale,

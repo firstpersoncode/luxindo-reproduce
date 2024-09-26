@@ -2,6 +2,8 @@ import React from 'react'
 import { Flex, Text, Input, Select, Button } from '@chakra-ui/react'
 import Image from 'next/image'
 import { useContextProvider } from './providers'
+import { LOCATIONS, PROPERTY_OWNERSHIP, PROPERTY_TYPES } from '@/options'
+import PriceRange from './PriceRange'
 
 interface SearchFieldProps {
   icon?: string
@@ -9,6 +11,7 @@ interface SearchFieldProps {
   placeholder?: string
   isSelect?: boolean
   options?: string[]
+  onChange?: (e: React.ChangeEvent<any>) => void
 }
 
 const SearchField: React.FC<SearchFieldProps> = ({
@@ -17,6 +20,7 @@ const SearchField: React.FC<SearchFieldProps> = ({
   placeholder,
   isSelect,
   options,
+  onChange
 }) => (
   <Flex flexDirection="column" width="177px">
     <Flex alignItems="start" gap="8px">
@@ -27,22 +31,22 @@ const SearchField: React.FC<SearchFieldProps> = ({
     </Flex>
     <Flex marginTop="16px" flexDirection="column" fontSize="12px" fontWeight={400}>
       {isSelect ? (
-        <Select variant="flushed" placeholder={placeholder}>
-          {/* {options?.map((option) => (
+        <Select variant="flushed" placeholder={placeholder} onChange={onChange}>
+          {options?.map((option) => (
             <option key={option} value={option}>
               {option}
             </option>
-          ))} */}
+          ))}
         </Select>
       ) : (
-        <Input variant="flushed" placeholder={placeholder} />
+        <Input variant="flushed" placeholder={placeholder} onChange={onChange} />
       )}
     </Flex>
   </Flex>
 )
 
 const SearchForm: React.FC = () => {
-  const { getLocale } = useContextProvider()
+  const { cta, getLocale, handleSearch, setFilter } = useContextProvider()
   return (
     <Flex as="form" flexDirection="column" marginTop={{ base: '18px', md: '64px' }} width="100%">
       <Flex
@@ -55,12 +59,34 @@ const SearchForm: React.FC = () => {
         <SearchField
           icon="/icons/quick_reference_all.png"
           label={getLocale('REF. NO')}
-          placeholder={getLocale("e.g. RV392")}
+          placeholder={getLocale('e.g. RV392')}
+          onChange={e => setFilter({ sku: e.target.value })}
         />
-        <SearchField icon="/icons/location_on.png" label={getLocale('Location')} placeholder={getLocale("Any")} isSelect />
-        <SearchField icon="/icons/home_work.png" label={getLocale('Type')} placeholder={getLocale("Any")} isSelect />
-        <SearchField icon="/icons/key.png" label={getLocale('Ownership')} placeholder={getLocale("Any")} isSelect />
-        <Flex flexDirection="column" flex={1} minWidth="240px">
+        <SearchField
+          icon="/icons/location_on.png"
+          label={getLocale('Location')}
+          placeholder={getLocale('Any')}
+          isSelect
+          options={LOCATIONS.map((l) => l.value)}
+          onChange={e => setFilter({ area_1: e.target.value })}
+        />
+        <SearchField
+          icon="/icons/home_work.png"
+          label={getLocale('Type')}
+          placeholder={getLocale('Any')}
+          isSelect
+          options={PROPERTY_TYPES.map((t) => t.value)}
+          onChange={e => setFilter({ type: e.target.value })}
+        />
+        <SearchField
+          icon="/icons/key.png"
+          label={getLocale('Ownership')}
+          placeholder={getLocale('Any')}
+          isSelect
+          options={PROPERTY_OWNERSHIP.map((o) => o.value)}
+          onChange={e => setFilter({ ownership: e.target.value })}
+        />
+        {/* <Flex flexDirection="column" flex={1} minWidth="240px">
           <Flex alignItems="start" gap="8px">
             <Image src="/icons/sell.png" alt="PRICE RANGE" width={16} height={16} />
             <Text fontSize="12px" fontWeight={500} textTransform="uppercase">
@@ -68,13 +94,11 @@ const SearchForm: React.FC = () => {
             </Text>
           </Flex>
           <Flex marginTop="16px" flexDirection="column" fontSize="12px" fontWeight={400}>
-            <Select variant="flushed" placeholder={getLocale("Any")}>
-              {/* <option value="0-500000000">0 - 500,000,000 IDR</option>
-              <option value="500000000-1000000000">500,000,000 - 1,000,000,000 IDR</option>
-              <option value="1000000000+">1,000,000,000+ IDR</option> */}
+            <Select variant="flushed" placeholder={getLocale('Any')}>
             </Select>
           </Flex>
-        </Flex>
+        </Flex> */}
+        <PriceRange />
       </Flex>
       <Button
         alignSelf={{ base: 'flex-start', md: 'flex-end' }}
@@ -85,13 +109,14 @@ const SearchForm: React.FC = () => {
         fontWeight={600}
         padding="8px 16px"
         gap="12px"
+        onClick={handleSearch}
       >
         <Image src="/icons/search.png" alt="Search" width={24} height={24} />
         <Text display={{ base: 'none', md: 'block' }} textTransform="uppercase">
-          {getLocale('Search')}
+          {cta ?? getLocale('Search')}
         </Text>
         <Text display={{ base: 'block', md: 'none' }} textTransform="uppercase">
-          {getLocale('Search Property')}
+          {cta ?? getLocale('Search Property')}
         </Text>
       </Button>
     </Flex>

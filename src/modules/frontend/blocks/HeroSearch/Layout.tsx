@@ -4,7 +4,7 @@ import { useContextProvider } from './providers'
 import BannerSlider from './BannerSlider'
 
 const Layout: React.FC = () => {
-  const { getLocale } = useContextProvider()
+  const { title, getLocale } = useContextProvider()
   return (
     <Box position="relative" minH="100vh" width="100%" overflow="hidden" background="#000">
       <BannerSlider />
@@ -24,7 +24,7 @@ const Layout: React.FC = () => {
           width={{ base: '100%', md: '80%' }}
           textTransform="uppercase"
         >
-          {getLocale('Your Gateway to Prestige Living')}
+          {title ?? getLocale('Your Gateway to Prestige Living')}
         </Heading>
         <SearchForm />
       </Container>

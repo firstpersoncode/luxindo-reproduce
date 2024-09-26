@@ -1,13 +1,15 @@
-import { createContext, useContext, useEffect, useMemo, useState } from 'react'
-import { search, SearchParams } from './search-properties.service'
+import { createContext, use, useContext, useEffect, useMemo, useState } from 'react'
+import { search } from './search-properties.service'
 import { LOCALES } from './locales'
 import { useContextProvider as useGlobalContextProvider } from '@/modules/frontend/globals/providers'
+import { useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/router'
 
 export interface IContext {
   isReady?: boolean
   isLoading?: boolean
   docs: any[]
-  filter?: SearchParams
+  filter?: any
   locale: string
   locales: { [x: string]: { [y: string]: string } }
   handleSearch: () => void
@@ -25,6 +27,8 @@ const context: IContext = {
     area_1: '',
     area_2: '',
     sku: '',
+    price_start: 0,
+    price_end: 10000000000,
   },
   locale: 'en',
   locales: {},
@@ -36,10 +40,52 @@ const context: IContext = {
 const Context = createContext(context)
 
 const useController = (_context: IContext) => {
+  const { replace, asPath } = useRouter()
   const [isReady, setIsReady] = useState(_context.isReady)
   const [isLoading, setIsLoading] = useState(_context.isLoading)
   const [docs, setDocs] = useState(_context.docs)
   const [filter, _setFilter] = useState(_context.filter)
+
+  const searchParams = useSearchParams()
+
+  const initialFilter = useMemo(() => {
+    const _filter: any = {
+      type: searchParams?.get('type') || '',
+      ownership: searchParams?.get('ownership') || '',
+      area_1: searchParams?.get('area_1') || '',
+      area_2: searchParams?.get('area_2') || '',
+      sku: searchParams?.get('sku') || '',
+      price_start: searchParams?.get('price_start') || 0,
+      price_end: searchParams?.get('price_end') || 10000000000,
+    }
+
+    Object.keys(_filter).forEach((key) => {
+      if (
+        _filter[key] === undefined ||
+        _filter[key] === null ||
+        _filter[key] === '' ||
+        _filter[key] === '0' ||
+        _filter[key] === 'any' ||
+        _filter[key] === 'all'
+      ) {
+        delete _filter[key]
+      }
+    })
+
+    return _filter
+  }, [searchParams])
+
+  useEffect(() => {
+    _setFilter(initialFilter)
+    ;(async () => {
+      setIsLoading(true)
+      const res = await search(initialFilter)
+      if (res?.docs) setDocs(res.docs)
+      setTimeout(() => {
+        setIsLoading(false)
+      }, 1000)
+    })()
+  }, [initialFilter])
 
   useEffect(() => {
     setTimeout(() => {
@@ -49,16 +95,23 @@ const useController = (_context: IContext) => {
   }, [])
 
   const handleSearch = async () => {
-    setIsLoading(true)
     if (filter) {
-      const res = await search(filter)
-      if (res?.docs) setDocs(res.docs)
+      replace(
+        {
+          pathname: asPath.split('?')[0],
+          query: {
+            ...Object.fromEntries(new URLSearchParams(asPath.split('?')[1])),
+            ...filter,
+          },
+        },
+        undefined,
+        { locale: _context.locale },
+      )
     }
-    setIsLoading(false)
   }
 
-  const setFilter = (newFilter: SearchParams) => {
-    _setFilter((v) => ({ ...v, ...newFilter }))
+  const setFilter = (newFilter: any) => {
+    _setFilter((v: any) => ({ ...v, ...newFilter }))
   }
 
   const getLocale = useMemo(() => {

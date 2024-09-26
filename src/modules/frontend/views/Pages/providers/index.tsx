@@ -47,9 +47,9 @@ const useController = (_context: IContext) => {
   const [metadata, setMetaData] = useState<IContext['metadata']>(_context.metadata)
 
   useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false)
-    }, 1000)
+    // setTimeout(() => {
+    //   setIsLoading(false)
+    // }, 1000)
     setIsReady(true)
   }, [])
 
@@ -57,6 +57,9 @@ const useController = (_context: IContext) => {
     if (!!isReady && !!data.id) {
       hydrateProps(data.id, 'pages', { locale: _context.locale })
         .then((res) => {
+          setTimeout(() => {
+            setIsLoading(false)
+          }, 1000)
           setData(res)
         })
         .catch(console.error)
