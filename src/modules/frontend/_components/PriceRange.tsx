@@ -26,14 +26,16 @@ const PriceRange: React.FC<{
   step: number
   onChange: (_: number[]) => void
 }> = ({ label, placeholder, start, end, step, onChange }) => {
-
   const min = MIN_PRICE
   const max = MAX_PRICE
-  
+
   return (
     <Popover>
       <PopoverTrigger>
-        <Flex flexDirection="column" flex={1} width={{ base: '300px', md: 'auto' }}>
+        <Flex
+          flexDirection="column"
+          flexGrow={1}
+        >
           <Flex alignItems="start" gap="8px">
             <Image src="/icons/sell.png" alt="PRICE RANGE" width={16} height={16} />
             <Text fontSize="12px" fontWeight={500} textTransform="uppercase">
@@ -75,13 +77,15 @@ const PriceRange: React.FC<{
           <VStack spacing={4} align="stretch" width="100%">
             <HStack gap="8px">
               <Text color="white" fontSize="16px" fontWeight="400">
-                from {Number(start ?? min)
+                from{' '}
+                {Number(start ?? min)
                   .toLocaleString()
                   .replace(/,/g, '.')}
               </Text>
 
               <Text color="white" fontSize="16px" fontWeight="400">
-                to {Number(end ?? max)
+                to{' '}
+                {Number(end ?? max)
                   .toLocaleString()
                   .replace(/,/g, '.')}
               </Text>
@@ -93,7 +97,7 @@ const PriceRange: React.FC<{
                 max={max}
                 step={step}
                 onChange={onChange}
-                colorScheme='primary'
+                colorScheme="primary"
               >
                 <RangeSliderTrack>
                   <RangeSliderFilledTrack />

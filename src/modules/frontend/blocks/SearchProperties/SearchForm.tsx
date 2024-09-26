@@ -185,10 +185,13 @@ const Actions: React.FC = () => {
             fontWeight={600}
             padding="8px 16px"
             gap="12px"
-            onClick={handleSearch}
+            onClick={() => {
+              setOpen(false)
+              handleSearch()
+            }}
           >
             <Image src="/icons/search.png" alt="Search" width={24} height={24} />
-            <Text textTransform="uppercase">{getLocale('Search')}</Text>
+            <Text textTransform="uppercase">{getLocale('Search Property')}</Text>
           </Button>
         }
       >
