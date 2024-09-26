@@ -1,9 +1,10 @@
-import { createContext, use, useContext, useEffect, useMemo, useState } from 'react'
+import { createContext, use, useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { search } from './search-properties.service'
 import { LOCALES } from './locales'
 import { useContextProvider as useGlobalContextProvider } from '@/modules/frontend/globals/providers'
 import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/router'
+import { MAX_PRICE, MIN_PRICE } from '@/options'
 
 export interface IContext {
   isReady?: boolean
@@ -13,6 +14,7 @@ export interface IContext {
   locale: string
   locales: { [x: string]: { [y: string]: string } }
   handleSearch: () => void
+  handleNextPage: () => void
   setFilter: (params: any) => void
   getLocale: (key: string) => string
 }
@@ -22,17 +24,18 @@ const context: IContext = {
   isLoading: true,
   docs: [],
   filter: {
-    type: '',
-    ownership: '',
-    area_1: '',
-    area_2: '',
+    type: [],
+    ownership: [],
+    area_1: [],
+    area_2: [],
     sku: '',
-    price_start: 0,
-    price_end: 10000000000,
+    price_start: MIN_PRICE,
+    price_end: MAX_PRICE,
   },
   locale: 'en',
   locales: {},
   handleSearch: () => {},
+  handleNextPage: () => {},
   setFilter: () => {},
   getLocale: () => '',
 }
@@ -46,45 +49,50 @@ const useController = (_context: IContext) => {
   const [docs, setDocs] = useState(_context.docs)
   const [filter, _setFilter] = useState(_context.filter)
 
-  const searchParams = useSearchParams()
+  const [page, setPage] = useState(1)
+  const [isLastPage, setIsLastPage] = useState(false)
+
+  const searchParams = useMemo(() => new URLSearchParams(asPath.split('?')[1]), [asPath])
 
   const initialFilter = useMemo(() => {
-    const _filter: any = {
-      type: searchParams?.get('type') || '',
-      ownership: searchParams?.get('ownership') || '',
-      area_1: searchParams?.get('area_1') || '',
-      area_2: searchParams?.get('area_2') || '',
-      sku: searchParams?.get('sku') || '',
-      price_start: searchParams?.get('price_start') || 0,
-      price_end: searchParams?.get('price_end') || 10000000000,
+    if (!searchParams) return {}
+
+    let _filter: any = {
+      type: searchParams.get('type') || '',
+      ownership: searchParams.get('ownership') || '',
+      area_1: searchParams.get('area_1') || '',
+      area_2: searchParams.get('area_2') || '',
+      sku: searchParams.get('sku') || '',
+      price_start: searchParams.get('price_start') || MIN_PRICE,
+      price_end: searchParams.get('price_end') || MAX_PRICE,
     }
 
     Object.keys(_filter).forEach((key) => {
-      if (
-        _filter[key] === undefined ||
-        _filter[key] === null ||
-        _filter[key] === '' ||
-        _filter[key] === '0' ||
-        _filter[key] === 'any' ||
-        _filter[key] === 'all'
-      ) {
-        delete _filter[key]
-      }
+      if (!_filter[key] || _filter[key] === '0' || _filter[key] === 'any' || _filter[key] === 'all')
+        _filter[key] = _context.filter[key]
+      else if (key !== 'sku' && isNaN(_filter[key]))
+        _filter[key] = _filter[key].includes('|') ? _filter[key].split('|') : [_filter[key]]
     })
 
     return _filter
   }, [searchParams])
 
+  console.log(filter)
+
+  const fetchList = async (f: any, p: number) => {
+    setIsLoading(true)
+    const res = await search({ ...f, page: p })
+    if (res?.docs) setDocs((arr) => (p > 1 ? [...arr, ...res.docs] : res.docs))
+    if (!res?.docs?.length) setIsLastPage(true)
+    setTimeout(() => {
+      setIsLoading(false)
+    }, 1000)
+  }
+
   useEffect(() => {
-    _setFilter(initialFilter)
-    ;(async () => {
-      setIsLoading(true)
-      const res = await search(initialFilter)
-      if (res?.docs) setDocs(res.docs)
-      setTimeout(() => {
-        setIsLoading(false)
-      }, 1000)
-    })()
+    const _filter = { ...initialFilter }
+    _setFilter(_filter)
+    fetchList(_filter, 1)
   }, [initialFilter])
 
   useEffect(() => {
@@ -95,20 +103,28 @@ const useController = (_context: IContext) => {
   }, [])
 
   const handleSearch = async () => {
-    if (filter) {
-      replace(
-        {
-          pathname: asPath.split('?')[0],
-          query: {
-            ...Object.fromEntries(new URLSearchParams(asPath.split('?')[1])),
-            ...filter,
-          },
+    setIsLastPage(false)
+    setPage(1)
+    replace(
+      {
+        pathname: asPath.split('?')[0],
+        query: {
+          ...Object.fromEntries(new URLSearchParams(asPath.split('?')[1])),
+          ...filter,
+          page: 1,
         },
-        undefined,
-        { locale: _context.locale },
-      )
-    }
+      },
+      undefined,
+      { locale: _context.locale },
+    )
   }
+
+  const handleNextPage = useCallback(async () => {
+    if (isLastPage) return
+    const currPage = page + 1
+    setPage(currPage)
+    await fetchList(filter, currPage)
+  }, [filter, page, isLastPage])
 
   const setFilter = (newFilter: any) => {
     _setFilter((v: any) => ({ ...v, ...newFilter }))
@@ -127,6 +143,7 @@ const useController = (_context: IContext) => {
     locale: _context.locale,
     locales: _context.locales,
     handleSearch,
+    handleNextPage,
     setFilter,
     getLocale,
   }

@@ -3,6 +3,7 @@ import { LOCALES } from './locales'
 import { useContextProvider as useGlobalContextProvider } from '@/modules/frontend/globals/providers'
 import { useRouter } from 'next/router'
 import { search } from '../../SearchProperties/providers/search-properties.service'
+import { MAX_PRICE, MIN_PRICE } from '@/options'
 
 export interface IContext {
   isReady?: boolean
@@ -23,13 +24,13 @@ const context: IContext = {
   isReady: false,
   isLoading: true,
   filter: {
-    type: '',
-    ownership: '',
-    area_1: '',
-    area_2: '',
+    type: [],
+    ownership: [],
+    area_1: [],
+    area_2: [],
     sku: '',
-    price_start: 0,
-    price_end: 10000000000,
+    price_start: MIN_PRICE,
+    price_end: MAX_PRICE,
   },
   title: '',
   cta: '',
@@ -59,13 +60,25 @@ const useController = (_context: IContext) => {
   const { asPath, push } = useRouter()
 
   const handleSearch = async () => {
-    console.log(filter)
+    let _filter = { ...filter }
+    Object.keys(_filter).forEach((key) => {
+      if (
+        !_filter[key] ||
+        (Array.isArray(_filter[key]) && !_filter[key].length) ||
+        _filter[key] === '0' ||
+        _filter[key] === 'any' ||
+        _filter[key] === 'all'
+      )
+        delete _filter[key]
+      else if (Array.isArray(_filter[key])) _filter[key] = _filter[key].join('|')
+    })
+
     push(
       {
         pathname: _context.search_page_slug,
         query: {
           ...Object.fromEntries(new URLSearchParams(asPath.split('?')[1])),
-          ...filter,
+          ..._filter,
         },
       },
       undefined,

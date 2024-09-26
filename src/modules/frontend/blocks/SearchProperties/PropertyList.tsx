@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { Box, Text, Image, Flex, Badge, Progress } from '@chakra-ui/react'
 import { useContextProvider } from './providers'
 import Link from 'next/link'
@@ -100,7 +100,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
 }
 
 const PropertyList: React.FC = () => {
-  const { docs, locale, isLoading } = useContextProvider()
+  const { docs, locale, isLoading, handleNextPage } = useContextProvider()
 
   const properties = useMemo(() => {
     return docs.map((doc) => ({
@@ -118,9 +118,29 @@ const PropertyList: React.FC = () => {
     }))
   }, [docs])
 
+  useEffect(() => {
+    const nextPage = document.getElementById('NextPage')
+    if (!nextPage) return
+    // detect if scrolled to element id NextPage
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !isLoading) {
+          handleNextPage()
+        }
+      },
+      { threshold: 1 },
+    )
+
+    observer.observe(nextPage)
+
+    return () => {
+      observer.disconnect()
+    }
+  }, [isLoading, handleNextPage])
+
   return (
     <>
-      {isLoading && <Progress size='xs' isIndeterminate />}
+      {isLoading && <Progress size="xs" isIndeterminate />}
       <Box opacity={isLoading ? 0.3 : 1}>
         {properties.map((property, index) => (
           <Link key={index} href={`/${property.slug}`} locale={locale}>
@@ -128,6 +148,7 @@ const PropertyList: React.FC = () => {
           </Link>
         ))}
       </Box>
+      <Box id="NextPage" />
     </>
   )
 }

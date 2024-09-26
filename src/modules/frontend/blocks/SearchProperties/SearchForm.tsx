@@ -27,42 +27,46 @@ const SearchField: React.FC<SearchFieldProps> = ({
 }) => (
   <Flex flexDirection="column" width="177px">
     {isSelect ? (
-        <CheckBoxSelect
-          icon={icon}
-          label={label}
-          placeholder={placeholder}
-          options={options ?? []}
-          values={value as string[]}
-          onChange={onChange}
-        />
-      ) : (
-        <Flex flexDirection="column" flex={1}>
-          {icon && (
-            <Flex alignItems="start" gap="8px">
-              <Image src={icon} alt="" width={16} height={16} />
-              <Text fontSize="12px" fontWeight={500} textTransform="uppercase">
-                {label}
-              </Text>
-            </Flex>
-          )}
-          <Flex
-            marginTop="16px"
-            flexDirection="column"
-            fontSize="12px"
-            fontWeight={400}
-            position="relative"
-            overflow="hidden"
-          >
-            <Input variant="flushed" value={value as string} placeholder={placeholder} onChange={onChange} />
+      <CheckBoxSelect
+        icon={icon}
+        label={label}
+        placeholder={placeholder}
+        options={options ?? []}
+        values={value as string[]}
+        onChange={onChange}
+      />
+    ) : (
+      <Flex flexDirection="column" flex={1}>
+        {icon && (
+          <Flex alignItems="start" gap="8px">
+            <Image src={icon} alt="" width={16} height={16} />
+            <Text fontSize="12px" fontWeight={500} textTransform="uppercase">
+              {label}
+            </Text>
           </Flex>
+        )}
+        <Flex
+          marginTop="16px"
+          flexDirection="column"
+          fontSize="12px"
+          fontWeight={400}
+          position="relative"
+          overflow="hidden"
+        >
+          <Input
+            variant="flushed"
+            value={value as string}
+            placeholder={placeholder}
+            onChange={onChange}
+          />
         </Flex>
-        
-      )}
+      </Flex>
+    )}
   </Flex>
 )
 
 const SearchForm: React.FC = () => {
-  const { cta, getLocale, handleSearch, filter, setFilter } = useContextProvider()
+  const { getLocale, handleSearch, filter, setFilter } = useContextProvider()
   return (
     <Flex as="form" flexDirection="column" marginTop={{ base: '18px', md: '64px' }} width="100%">
       <Flex
@@ -130,10 +134,10 @@ const SearchForm: React.FC = () => {
       >
         <Image src="/icons/search.png" alt="Search" width={24} height={24} />
         <Text display={{ base: 'none', md: 'block' }} textTransform="uppercase">
-          {cta ?? getLocale('Search')}
+          {getLocale('Search')}
         </Text>
         <Text display={{ base: 'block', md: 'none' }} textTransform="uppercase">
-          {cta ?? getLocale('Search Property')}
+          {getLocale('Search Property')}
         </Text>
       </Button>
     </Flex>

@@ -1,3 +1,6 @@
+export const MIN_PRICE = 0
+export const MAX_PRICE = 10000000000
+
 export const PROPERTY_TYPES = [
   {
     label: 'Land',

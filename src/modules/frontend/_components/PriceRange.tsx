@@ -16,12 +16,20 @@ import {
 } from '@chakra-ui/react'
 import Image from 'next/image'
 import { ChevronDownIcon } from '@chakra-ui/icons'
-import { useContextProvider } from '../providers'
+import { MAX_PRICE, MIN_PRICE } from '@/options'
 
-const PriceRange: React.FC = () => {
-  const { getLocale, filter, setFilter } = useContextProvider()
-  const min = 0
-  const max = 10000000000
+const PriceRange: React.FC<{
+  label: string
+  placeholder: string
+  start: number
+  end: number
+  step: number
+  onChange: (_: number[]) => void
+}> = ({ label, placeholder, start, end, step, onChange }) => {
+
+  const min = MIN_PRICE
+  const max = MAX_PRICE
+  
   return (
     <Popover>
       <PopoverTrigger>
@@ -29,7 +37,7 @@ const PriceRange: React.FC = () => {
           <Flex alignItems="start" gap="8px">
             <Image src="/icons/sell.png" alt="PRICE RANGE" width={16} height={16} />
             <Text fontSize="12px" fontWeight={500} textTransform="uppercase">
-              {getLocale('Price Range')}
+              {label}
             </Text>
           </Flex>
           <Flex
@@ -43,11 +51,11 @@ const PriceRange: React.FC = () => {
               variant="flushed"
               readOnly
               value={
-                filter.price_start > min || filter.price_end < max
-                  ? [filter.price_start, filter.price_end]
+                start > min || end < max
+                  ? [start, end]
                       .map((p) => Number(p).toLocaleString().replace(/,/g, '.'))
                       .join(' - ')
-                  : getLocale('Any')
+                  : placeholder
               }
             />
 
@@ -61,29 +69,30 @@ const PriceRange: React.FC = () => {
           </Flex>
         </Flex>
       </PopoverTrigger>
-      <PopoverContent>
+      <PopoverContent border="none" w="500px">
         <PopoverArrow />
-        <PopoverBody>
+        <PopoverBody background="#000" p="18px">
           <VStack spacing={4} align="stretch" width="100%">
-            <HStack justifyContent="space-between">
-              <Text fontSize="16px" fontWeight="400">
-                {Number(filter.price_start ?? min).toLocaleString().replace(/,/g, '.')}
+            <HStack gap="8px">
+              <Text color="white" fontSize="16px" fontWeight="400">
+                from {Number(start ?? min)
+                  .toLocaleString()
+                  .replace(/,/g, '.')}
               </Text>
 
-              <Text fontSize="16px" fontWeight="400">
-                {Number(filter.price_end ?? max).toLocaleString().replace(/,/g, '.')}
+              <Text color="white" fontSize="16px" fontWeight="400">
+                to {Number(end ?? max)
+                  .toLocaleString()
+                  .replace(/,/g, '.')}
               </Text>
             </HStack>
             <Flex>
               <RangeSlider
-                value={[filter.price_start ?? min, filter.price_end ?? max]}
+                value={[start ?? min, end ?? max]}
                 min={min}
                 max={max}
-                step={1000000}
-                onChange={(vals) => {
-                  const [price_start, price_end] = vals
-                  setFilter({ price_start, price_end })
-                }}
+                step={step}
+                onChange={onChange}
               >
                 <RangeSliderTrack>
                   <RangeSliderFilledTrack />

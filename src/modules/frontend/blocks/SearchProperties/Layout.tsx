@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { Box, Button, Container, IconButton, VStack } from '@chakra-ui/react'
-import FilterSection from './FIlterSection'
 import PropertyList from './PropertyList'
 import BottomSheet from './BottomSheet'
 import { useContextProvider } from './providers'
+import SearchForm from './SearchForm'
 
 const Layout: React.FC<any> = ({ ...props }) => {
   const [openFilter, setOpenFilter] = useState(false)
@@ -16,24 +16,12 @@ const Layout: React.FC<any> = ({ ...props }) => {
   }
 
   return (
-    <Box bg="white">
+    <Box bg="white" mt="100px">
       <Container maxW="container.xl">
-        <VStack spacing={8} align="stretch">
-          <Box
-            display="flex"
-            gap={2}
-            alignItems={'flex-start'}
-            position="relative"
-            flexDirection={['column', 'row']}
-          >
-            <Box minW="350px" visibility={['hidden', 'visible']} h={[0, 'auto']}>
-              <FilterSection />
-            </Box>
-            <Box flex={1}>
-              <PropertyList />
-            </Box>
-          </Box>
-        </VStack>
+        <Box background="#000" padding="18px">
+        <SearchForm />
+        </Box>
+        <PropertyList />
 
         <IconButton
           variant="outline"
@@ -59,7 +47,7 @@ const Layout: React.FC<any> = ({ ...props }) => {
           action={<Button onClick={submitSearch}>Update</Button>}
           actionSecondary="Cancel"
         >
-          <FilterSection />
+          <SearchForm />
         </BottomSheet>
       </Container>
     </Box>
