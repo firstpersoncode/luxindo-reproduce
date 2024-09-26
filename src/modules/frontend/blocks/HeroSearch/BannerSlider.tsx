@@ -41,7 +41,7 @@ const BannerSlider: React.FC = () => {
             }}
           >
             {hydratedImages.map((image, index) => (
-              <Box position="relative" key={index} maxW="100%" pb={{ base: '220%', md: '56%' }}>
+              <Box position="relative" key={index} maxW="100%" h="100vh">
                 <Image
                   src={image.file.url}
                   alt={image.file.alt ?? 'Home Hero'}
@@ -51,15 +51,6 @@ const BannerSlider: React.FC = () => {
               </Box>
             ))}
           </Slider>
-          <Box
-            position="absolute"
-            top={0}
-            left={0}
-            width="100%"
-            height="100%"
-            bg="black"
-            opacity={0.75}
-          />
         </Box>
       )}
     </>

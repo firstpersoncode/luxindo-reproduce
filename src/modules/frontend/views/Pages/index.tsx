@@ -52,7 +52,7 @@ function LoadingLayout() {
       alignItems="center"
       zIndex={9999}
     >
-      <CircularProgress isIndeterminate color="green.300" />
+      <CircularProgress isIndeterminate color="brand.primary" />
     </Box>
   )
 }

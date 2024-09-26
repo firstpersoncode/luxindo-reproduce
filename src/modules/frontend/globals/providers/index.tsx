@@ -1,4 +1,4 @@
-import { ChakraProvider } from '@chakra-ui/react'
+import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import { useRouter } from 'next/router'
 import { useSearchParams } from 'next/navigation'
@@ -139,8 +139,25 @@ export default function Providers({
   context: _context,
 }: Readonly<{ children: React.ReactNode; context?: IContext }>) {
   const value = useController({ ...context, ..._context, locales: LOCALES })
+
+  const theme = extendTheme({
+    colors: {
+      primary: {
+        50: "#f8f7f4",
+        100: "#f2d8bd",
+        500: '#C1A283',
+      },
+      brand: {
+        primary: '#C1A283',
+        secondary: '#333333',
+        surface: "#f8f7f4",
+        background: '#191919'
+      },
+    },
+  })
+
   return (
-    <ChakraProvider>
+    <ChakraProvider theme={theme} cssVarsRoot='body'>
       <Context.Provider value={value}>{children}</Context.Provider>
     </ChakraProvider>
   )

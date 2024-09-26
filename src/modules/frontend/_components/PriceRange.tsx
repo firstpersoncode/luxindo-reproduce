@@ -71,7 +71,7 @@ const PriceRange: React.FC<{
       </PopoverTrigger>
       <PopoverContent border="none" w="500px">
         <PopoverArrow />
-        <PopoverBody background="#000" p="18px">
+        <PopoverBody background="brand.background" p="18px">
           <VStack spacing={4} align="stretch" width="100%">
             <HStack gap="8px">
               <Text color="white" fontSize="16px" fontWeight="400">

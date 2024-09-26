@@ -5,14 +5,17 @@ import { useContextProvider } from './providers'
 import { LOCATIONS, PROPERTY_OWNERSHIP, PROPERTY_TYPES } from '@/options'
 import PriceRange from '@/modules/frontend/_components/PriceRange'
 import CheckBoxSelect from '@/modules/frontend/_components/CheckBoxSelect'
+import CheckBoxTreeSelect from '@/modules/frontend/_components/CheckBoxTreeSelect'
 
 interface SearchFieldProps {
   icon?: string
   label: string
   placeholder?: string
   isSelect?: boolean
-  options?: string[]
+  isTreeSelect?: boolean
+  options?: any[]
   value: string | string[]
+  subValues?: string[]
   onChange?: (e: React.ChangeEvent<any>) => void
 }
 
@@ -21,8 +24,10 @@ const SearchField: React.FC<SearchFieldProps> = ({
   label,
   placeholder,
   isSelect,
+  isTreeSelect,
   options,
   value,
+  subValues,
   onChange,
 }) => (
   <Flex flexDirection="column" width="177px">
@@ -33,6 +38,16 @@ const SearchField: React.FC<SearchFieldProps> = ({
         placeholder={placeholder}
         options={options ?? []}
         values={value as string[]}
+        onChange={onChange}
+      />
+    ) : isTreeSelect ? (
+      <CheckBoxTreeSelect
+        icon={icon}
+        label={label}
+        placeholder={placeholder}
+        options={options ?? []}
+        values={value as string[]}
+        subValues={subValues as string[]}
         onChange={onChange}
       />
     ) : (
@@ -87,10 +102,13 @@ const SearchForm: React.FC = () => {
           icon="/icons/location_on.png"
           label={getLocale('Location')}
           placeholder={getLocale('Any')}
-          isSelect
+          isTreeSelect
           value={filter.area_1}
-          options={LOCATIONS.map((l) => l.value)}
-          onChange={(items) => setFilter({ area_1: items })}
+          subValues={filter.area_2}
+          options={LOCATIONS}
+          onChange={({ values, subValues }: any) =>
+            setFilter({ area_1: values, area_2: subValues })
+          }
         />
         <SearchField
           icon="/icons/home_work.png"
@@ -124,7 +142,7 @@ const SearchForm: React.FC = () => {
       <Button
         alignSelf={{ base: 'flex-start', md: 'flex-end' }}
         marginTop={{ base: '18px', md: '32px' }}
-        backgroundColor="rgba(193, 162, 131, 1)"
+        backgroundColor="brand.primary"
         color="white"
         fontSize="24px"
         fontWeight={600}

@@ -39,13 +39,13 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
         </Flex>
       </Box>
       <Box p={4}>
-        <Text fontSize="12px" color="gray.600">
+        <Text fontSize="12px" color="brand.secondary">
           {location}
         </Text>
         <Text fontSize="16px" fontWeight="bold" textTransform="uppercase" my={2}>
           {title}
         </Text>
-        <Text fontSize="18px" fontWeight="bold" color="rgba(71, 60, 56, 1)">
+        <Text fontSize="18px" fontWeight="bold" color="brand.secondary">
           {price}
         </Text>
         <Flex
@@ -56,19 +56,15 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
           justifyContent="space-between"
         >
           <Flex align="center" gap={2}>
-            
             <Text fontSize="12px">{bedrooms}</Text>
           </Flex>
           <Flex align="center" gap={2}>
-            
             <Text fontSize="12px">{bathrooms}</Text>
           </Flex>
           <Flex align="center" gap={2}>
-           
             <Text fontSize="12px">{area}</Text>
           </Flex>
           <Flex align="center" gap={2}>
-            
             <Text fontSize="12px">
               {leaseYears} {getLocale('years')}
             </Text>
@@ -120,7 +116,7 @@ const PropertyList: React.FC = () => {
 
   return (
     <>
-      {isLoading && <Progress size="xs" isIndeterminate />}
+      {isLoading && <Progress colorScheme="primary" size="xs" isIndeterminate />}
       <Box opacity={isLoading ? 0.3 : 1}>
         {properties.map((property, index) => (
           <Link key={index} href={`/${property.slug}`} locale={locale}>
@@ -129,6 +125,7 @@ const PropertyList: React.FC = () => {
         ))}
       </Box>
       <Box id="NextPage" />
+      {isLoading && <Progress colorScheme="primary" size="xs" isIndeterminate />}
     </>
   )
 }

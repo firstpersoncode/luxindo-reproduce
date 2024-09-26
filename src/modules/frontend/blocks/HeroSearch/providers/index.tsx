@@ -76,10 +76,7 @@ const useController = (_context: IContext) => {
     push(
       {
         pathname: _context.search_page_slug,
-        query: {
-          ...Object.fromEntries(new URLSearchParams(asPath.split('?')[1])),
-          ..._filter,
-        },
+        query: _filter,
       },
       undefined,
       { locale: _context.locale },

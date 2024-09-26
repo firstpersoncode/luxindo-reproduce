@@ -1167,10 +1167,7 @@ export const LOCATIONS = [
         label: 'Watukarung',
         value: 'Watukarung',
       },
-      {
-        label: 'Others',
-        value: 'Others',
-      },
+      
     ],
     value: 'EAST JAVA',
   },
@@ -1197,10 +1194,7 @@ export const LOCATIONS = [
         label: 'Negara',
         value: 'Negara',
       },
-      {
-        label: 'Others',
-        value: 'Others',
-      },
+     
     ],
     value: 'JEMBRANA AREA',
   },
@@ -1226,10 +1220,6 @@ export const LOCATIONS = [
       {
         label: 'Mandalika',
         value: 'Mandalika',
-      },
-      {
-        label: 'Others',
-        value: 'Others',
       },
       {
         label: 'Senggigi Area',
@@ -1258,10 +1248,6 @@ export const LOCATIONS = [
       {
         label: 'Lovina',
         value: 'Lovina',
-      },
-      {
-        label: 'Others',
-        value: 'Others',
       },
       {
         label: 'Singaraja',
@@ -1373,10 +1359,6 @@ export const LOCATIONS = [
         label: 'Nyanyi',
         value: 'Nyanyi',
       },
-      {
-        label: 'Others',
-        value: 'Others',
-      },
     ],
     value: 'TABANAN AREA',
   },
@@ -1386,10 +1368,6 @@ export const LOCATIONS = [
       {
         label: 'Mas',
         value: 'Mas',
-      },
-      {
-        label: 'Others',
-        value: 'Others',
       },
       {
         label: 'Payangan',
@@ -1412,10 +1390,6 @@ export const LOCATIONS = [
       {
         label: 'Kerobokan',
         value: 'Kerobokan',
-      },
-      {
-        label: 'Others',
-        value: 'Others',
       },
       {
         label: 'Tegal Cupek',

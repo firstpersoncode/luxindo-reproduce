@@ -77,8 +77,6 @@ const useController = (_context: IContext) => {
     return _filter
   }, [searchParams])
 
-  console.log(filter)
-
   const fetchList = async (f: any, p: number) => {
     setIsLoading(true)
     const res = await search({ ...f, page: p })
@@ -104,15 +102,23 @@ const useController = (_context: IContext) => {
 
   const handleSearch = async () => {
     setIsLastPage(false)
+    let _filter = { ...filter }
+    Object.keys(_filter).forEach((key) => {
+      if (
+        !_filter[key] ||
+        (Array.isArray(_filter[key]) && !_filter[key].length) ||
+        _filter[key] === '0' ||
+        _filter[key] === 'any' ||
+        _filter[key] === 'all'
+      )
+        delete _filter[key]
+      else if (Array.isArray(_filter[key])) _filter[key] = _filter[key].join('|')
+    })
     setPage(1)
     replace(
       {
         pathname: asPath.split('?')[0],
-        query: {
-          ...Object.fromEntries(new URLSearchParams(asPath.split('?')[1])),
-          ...filter,
-          page: 1,
-        },
+        query: _filter,
       },
       undefined,
       { locale: _context.locale },

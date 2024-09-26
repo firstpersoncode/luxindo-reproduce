@@ -6,8 +6,17 @@ import BannerSlider from './BannerSlider'
 const Layout: React.FC = () => {
   const { title, getLocale } = useContextProvider()
   return (
-    <Box position="relative" minH="100vh" width="100%" overflow="hidden" background="#000">
+    <Box position="relative" h="100vh" width="100%" overflow="visible" background="brand.background">
       <BannerSlider />
+      <Box
+        position="absolute"
+        top={0}
+        left={0}
+        width="100%"
+        height="100%"
+        bg="black"
+        opacity={0.75}
+      />
 
       <Container
         position="absolute"

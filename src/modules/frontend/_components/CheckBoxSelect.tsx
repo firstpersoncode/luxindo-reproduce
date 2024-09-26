@@ -17,7 +17,7 @@ import {
   Button,
 } from '@chakra-ui/react'
 
-import { ChevronDownIcon, CloseIcon } from '@chakra-ui/icons'
+import { ChevronDownIcon } from '@chakra-ui/icons'
 import Image from 'next/image'
 
 const CheckBoxSelect: React.FC<{
@@ -39,7 +39,7 @@ const CheckBoxSelect: React.FC<{
                 {label}
               </Text>
               {values.length > 0 && (
-                <Tag size="sm" borderRadius="full" variant="solid">
+                <Tag size="sm" borderRadius="full" variant="solid" bgColor="red">
                   <TagLabel fontSize="xs">{values.length}</TagLabel>
                 </Tag>
               )}
@@ -73,7 +73,7 @@ const CheckBoxSelect: React.FC<{
               >
                 {values.map((item, i) => (
                   <Box as="span" key={i}>
-                    <Tag borderRadius="full" variant="solid">
+                    <Tag bgColor="brand.primary" borderRadius="full" variant="solid">
                       <TagLabel fontSize="xs">{item}</TagLabel>
                       <TagCloseButton
                         onClick={(e) => {
@@ -99,12 +99,13 @@ const CheckBoxSelect: React.FC<{
       </PopoverTrigger>
       <PopoverContent border="none" minW="250px">
         <PopoverArrow />
-        <PopoverBody background="#000" p={0}>
+        <PopoverBody background="brand.background" p={0}>
           <Stack p="18px" mt={1} spacing={1} maxH="250px" overflowY="auto" gap="12px">
             {options.map((option, i) => (
               <Checkbox
                 key={i}
                 isChecked={values.includes(option)}
+                colorScheme='primary'
                 onChange={() => {
                   const currValues = [...values]
                   if (currValues.includes(option)) {
@@ -120,21 +121,19 @@ const CheckBoxSelect: React.FC<{
           </Stack>
           <Divider />
           <Button
-            // disabled={values.length === 0}
             variant="link"
-            color="white"
             w="full"
             p="18px"
-            textTransform="uppercase"
-            leftIcon={
-              <Box borderRadius="50%" border="1px solid white" p="5px">
-                <CloseIcon display="block" w="10px" h="10px" />
-              </Box>
-            }
             onClick={() => onChange([])}
             fontSize="xs"
+            gap="4px"
           >
-            Clear
+            <Box w="20px" h="20px" position="relative">
+              <Image src="/icons/cancel.png" alt="Clear" fill />
+            </Box>
+            <Text color="white" textTransform="uppercase">
+              Clear
+            </Text>
           </Button>
         </PopoverBody>
       </PopoverContent>

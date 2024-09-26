@@ -1,6 +1,7 @@
 import { NextRequest } from 'next/server'
 import { getPayload } from 'payload'
 import configPromise from '@/app/payload.config'
+import { LOCATIONS } from '@/options'
 
 export const searchPropertiesApi = async (req: NextRequest) => {
   const payload = await getPayload({
@@ -14,18 +15,49 @@ export const searchPropertiesApi = async (req: NextRequest) => {
     const types = query.type.split('|')
     where.and.push({ type: { in: types } })
   }
+
   if (query.ownership) {
     const ownerships = query.ownership.split('|')
     where.and.push({ ownership: { in: ownerships } })
   }
+
+  let or: any[] = []
+
   if (query.area_1) {
     const areas = query.area_1.split('|')
-    where.and.push({ area_1: { in: areas } })
+    areas.forEach((area) => {
+      or.push({ area_1: { equals: area } })
+    })
   }
+
   if (query.area_2) {
     const areas = query.area_2.split('|')
-    where.and.push({ area_2: { in: areas } })
+    const options = LOCATIONS
+    const parent = options.find((o) => o.children?.find((c) => areas.includes(c.value)))
+    const selectedParent = parent ? or.find((a: any) => a.area_1.equals === parent.value) : null
+    if (selectedParent) {
+      or = or.filter((a: any) => a.area_1.equals !== selectedParent.area_1.equals)
+      areas.forEach((area) => {
+        or.push({ area_2: { equals: area } })
+      })
+    }
   }
+
+  if (or.length > 0) where.and.push({ or })
+
+  // if (query.area_1 || query.area_2) {
+  //   const or = []
+  //   if (query.area_1) {
+  //     const areas = query.area_1.split('|')
+  //     or.push({ area_1: { in: areas } })
+  //   }
+  //   if (query.area_2) {
+  //     const areas = query.area_2.split('|')
+  //     or.push({ area_2: { in: areas } })
+  //   }
+  //   where.and.push({ or })
+  // }
+
   if (query.sku) where.and.push({ sku: { equals: query.sku } })
   if (query.price_start) where.and.push({ price: { greater_than_equal: query.price_start } })
   if (query.price_end) where.and.push({ price: { less_than_equal: query.price_end } })

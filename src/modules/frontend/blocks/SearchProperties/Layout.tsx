@@ -18,8 +18,8 @@ const Layout: React.FC<any> = ({ ...props }) => {
   return (
     <Box bg="white" mt="100px">
       <Container maxW="container.xl">
-        <Box background="#000" padding="18px">
-        <SearchForm />
+        <Box background="brand.secondary" padding="18px">
+          <SearchForm />
         </Box>
         <PropertyList />
 
@@ -47,7 +47,9 @@ const Layout: React.FC<any> = ({ ...props }) => {
           action={<Button onClick={submitSearch}>Update</Button>}
           actionSecondary="Cancel"
         >
-          <SearchForm />
+          <Box background="brand.secondary" padding="18px">
+            <SearchForm />
+          </Box>
         </BottomSheet>
       </Container>
     </Box>

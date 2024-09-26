@@ -11,7 +11,7 @@ interface FooterSectionProps {
 const FooterSection: React.FC<FooterSectionProps> = ({ title, items }) => {
   return (
     <VStack align="flex-start" spacing={8}>
-      <Text color="rgba(193, 162, 131, 1)" textTransform="uppercase" fontSize="24px">
+      <Text color="brand.primary" textTransform="uppercase" fontSize="24px">
         {title}
       </Text>
       {items.length > 0 && (

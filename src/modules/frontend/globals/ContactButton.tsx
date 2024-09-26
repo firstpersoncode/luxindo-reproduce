@@ -7,7 +7,7 @@ const ContactButton: React.FC = () => {
   return (
     <Button
       gap="12px"
-      backgroundColor="rgba(24, 28, 37, 1)"
+      backgroundColor="brand.background"
       color="white"
       padding="12px 16px"
       fontSize="12px"

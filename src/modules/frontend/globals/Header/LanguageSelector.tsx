@@ -54,7 +54,7 @@ const LanguageSelector: React.FC = () => {
                   variant={locale === l ? 'solid' : 'outline'}
                   onClick={() => setLocale(l)}
                 >
-                  <Text textTransform="uppercase" color="black">
+                  <Text textTransform="uppercase" color="brand.secondary">
                     {l}
                   </Text>
                 </Button>

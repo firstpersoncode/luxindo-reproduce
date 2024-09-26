@@ -29,6 +29,9 @@ const nextConfig = {
     ]
   },
   reactStrictMode: false,
+  experimental: {
+    esmExternals: false
+  }
 }
 
 export default withPayload(nextConfig)

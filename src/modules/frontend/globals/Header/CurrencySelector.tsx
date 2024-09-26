@@ -35,7 +35,6 @@ const CurrencySelector: React.FC = () => {
                 href={{
                   pathname: asPath.split('?')[0],
                   query: {
-                    ...Object.fromEntries(new URLSearchParams(asPath.split('?')[1])),
                     currency: l.value,
                   },
                 }}
@@ -46,7 +45,7 @@ const CurrencySelector: React.FC = () => {
                   variant={currency === l.value ? 'solid' : 'outline'}
                   onClick={() => setCurrency(l.value)}
                 >
-                  <Text textTransform="uppercase" color="black">
+                  <Text textTransform="uppercase" color="brand.secondary">
                     {l.label}
                   </Text>
                 </Button>

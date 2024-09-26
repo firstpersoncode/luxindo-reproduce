@@ -5,7 +5,7 @@ import 'slick-carousel/slick/slick-theme.css'
 import Header from './Header'
 import Footer from './Footer'
 import Providers, { IContext } from './providers'
-import { Box, CircularProgress } from '@chakra-ui/react'
+import { Box } from '@chakra-ui/react'
 import ContactButton from './ContactButton'
 
 export default function AppLayout({
@@ -24,23 +24,5 @@ export default function AppLayout({
       <Footer />
       <ContactButton />
     </Providers>
-  )
-}
-
-function LoadingLayout() {
-  return (
-    <Box
-      position="fixed"
-      top={0}
-      left={0}
-      width="100vw"
-      height="100vh"
-      backgroundColor="rgba(255,255,255,0.5)"
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-    >
-      <CircularProgress isIndeterminate color="green.300" />
-    </Box>
   )
 }
