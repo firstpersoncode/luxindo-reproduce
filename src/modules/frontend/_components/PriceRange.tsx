@@ -33,7 +33,7 @@ const PriceRange: React.FC<{
   return (
     <Popover>
       <PopoverTrigger>
-        <Flex flexDirection="column" flex={1} minWidth="240px">
+        <Flex flexDirection="column" flex={1} width={{ base: '300px', md: 'auto' }}>
           <Flex alignItems="start" gap="8px">
             <Image src="/icons/sell.png" alt="PRICE RANGE" width={16} height={16} />
             <Text fontSize="12px" fontWeight={500} textTransform="uppercase">
@@ -69,7 +69,7 @@ const PriceRange: React.FC<{
           </Flex>
         </Flex>
       </PopoverTrigger>
-      <PopoverContent border="none" w="500px">
+      <PopoverContent border="none" minW={{ base: '100vw', md: '500px' }}>
         <PopoverArrow />
         <PopoverBody background="brand.background" p="18px">
           <VStack spacing={4} align="stretch" width="100%">
@@ -93,6 +93,7 @@ const PriceRange: React.FC<{
                 max={max}
                 step={step}
                 onChange={onChange}
+                colorScheme='primary'
               >
                 <RangeSliderTrack>
                   <RangeSliderFilledTrack />

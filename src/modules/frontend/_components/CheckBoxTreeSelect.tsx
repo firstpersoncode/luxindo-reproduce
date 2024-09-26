@@ -40,7 +40,7 @@ const CheckBoxTreeSelect: React.FC<{
   return (
     <Popover>
       <PopoverTrigger>
-        <Flex flexDirection="column" flex={1}>
+        <Flex flexDirection="column" flex={1} width={{ base: '300px', md: 'auto' }}>
           {icon && (
             <Flex alignItems="start" gap="8px">
               <Image src={icon} alt="" width={16} height={16} />
@@ -111,7 +111,7 @@ const CheckBoxTreeSelect: React.FC<{
           </Flex>
         </Flex>
       </PopoverTrigger>
-      <PopoverContent border="none" minW={{ base: '100%', md: '50vw' }}>
+      <PopoverContent border="none" minW={{ base: '100vw', md: '50vw' }}>
         <PopoverArrow />
         <PopoverBody background="brand.background" p={0}>
           <HStack
@@ -171,7 +171,8 @@ function Option({
   const [isOpen, setIsOpen] = useState(false)
   const isSelected = !!values.length && values.includes(option.value)
   const hasChildren = option.children && option.children.length > 0
-  const childrenSelectedAll = !hasChildren || option.children?.every((child) => subValues.includes(child.value))
+  const childrenSelectedAll =
+    !hasChildren || option.children?.every((child) => subValues.includes(child.value))
   useEffect(() => {
     if (values.length && values.includes(option.value)) {
       setIsOpen(true)

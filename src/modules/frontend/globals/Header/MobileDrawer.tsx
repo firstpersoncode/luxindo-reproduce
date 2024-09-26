@@ -45,7 +45,7 @@ export default function MobileDrawer() {
 
       <Drawer isOpen={isOpen} placement="right" onClose={onClose} finalFocusRef={btnRef as any}>
         <DrawerOverlay />
-        <DrawerContent>
+        <DrawerContent background="brand.secondary" color="white">
           <DrawerCloseButton />
           <DrawerHeader>MENU</DrawerHeader>
 

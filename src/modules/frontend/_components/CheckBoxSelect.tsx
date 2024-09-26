@@ -31,7 +31,7 @@ const CheckBoxSelect: React.FC<{
   return (
     <Popover>
       <PopoverTrigger>
-        <Flex flexDirection="column" flex={1}>
+        <Flex flexDirection="column" flex={1} width={{ base: '300px', md: 'auto' }}>
           {icon && (
             <Flex alignItems="start" gap="8px">
               <Image src={icon} alt="" width={16} height={16} />
@@ -97,7 +97,7 @@ const CheckBoxSelect: React.FC<{
           </Flex>
         </Flex>
       </PopoverTrigger>
-      <PopoverContent border="none" minW="250px">
+      <PopoverContent border="none" minW={{base: "100vw",md: "250px"}}>
         <PopoverArrow />
         <PopoverBody background="brand.background" p={0}>
           <Stack p="18px" mt={1} spacing={1} maxH="250px" overflowY="auto" gap="12px">
