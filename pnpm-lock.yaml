@@ -72,6 +72,9 @@ importers:
       react-dropdown-tree-select:
         specifier: ^2.8.0
         version: 2.8.0(prop-types@15.8.1)(react@19.0.0-rc-778e1ed2-20240926)
+      react-icons:
+        specifier: ^5.3.0
+        version: 5.3.0(react@19.0.0-rc-778e1ed2-20240926)
       react-quill-new:
         specifier: ^3.3.2
         version: 3.3.2(quill-delta@5.1.0)(react-dom@19.0.0-rc-778e1ed2-20240926(react@19.0.0-rc-778e1ed2-20240926))(react@19.0.0-rc-778e1ed2-20240926)
@@ -3613,6 +3616,11 @@ packages:
     peerDependenciesMeta:
       '@types/react':
         optional: true
+
+  react-icons@5.3.0:
+    resolution: {integrity: sha512-DnUk8aFbTyQPSkCfF8dbX6kQjXA9DktMeJqfjrg6cK9vwQVMxmcA3BfP4QoiztVmEHtwlTgLFsPuH2NskKT6eg==}
+    peerDependencies:
+      react: '*'
 
   react-image-crop@10.1.8:
     resolution: {integrity: sha512-4rb8XtXNx7ZaOZarKKnckgz4xLMvds/YrU6mpJfGhGAsy2Mg4mIw1x+DCCGngVGq2soTBVVOxx2s/C6mTX9+pA==}
@@ -8214,6 +8222,10 @@ snapshots:
       use-sidecar: 1.1.2(react@19.0.0-rc-778e1ed2-20240926)(types-react@19.0.0-rc.0)
     optionalDependencies:
       '@types/react': types-react@19.0.0-rc.0
+
+  react-icons@5.3.0(react@19.0.0-rc-778e1ed2-20240926):
+    dependencies:
+      react: 19.0.0-rc-778e1ed2-20240926
 
   react-image-crop@10.1.8(react@19.0.0-rc-778e1ed2-20240926):
     dependencies:

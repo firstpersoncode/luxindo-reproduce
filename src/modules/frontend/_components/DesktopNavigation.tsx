@@ -17,7 +17,7 @@ const DesktopNavigation: React.FC = () => {
       justifyContent="flex-start"
       flexWrap="wrap"
       minWidth="240px"
-      display={{ base: 'none', md: 'flex' }}
+      display={{ base: 'none', md: 'none', lg: "flex" }}
     >
       <Flex
         alignSelf="stretch"

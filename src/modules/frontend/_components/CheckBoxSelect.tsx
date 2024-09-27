@@ -31,7 +31,12 @@ const CheckBoxSelect: React.FC<{
   return (
     <Popover>
       <PopoverTrigger>
-        <Flex flexDirection="column" flex={1} width={{ base: '300px', md: 'auto' }}>
+        <Flex
+          mb="18px"
+          flexDirection="column"
+          flexGrow={1}
+          width={{ base: 'full', md: 'full', lg: 'auto' }}
+        >
           {icon && (
             <Flex alignItems="start" gap="8px">
               <Image src={icon} alt="" width={16} height={16} />
@@ -97,15 +102,15 @@ const CheckBoxSelect: React.FC<{
           </Flex>
         </Flex>
       </PopoverTrigger>
-      <PopoverContent border="none" minW={{base: "100vw",md: "250px"}}>
+      <PopoverContent border="none" minW={{ base: '90vw', md: '80vw', lg: '200px' }}>
         <PopoverArrow />
         <PopoverBody background="brand.background" p={0}>
-          <Stack p="18px" mt={1} spacing={1} maxH="250px" overflowY="auto" gap="12px">
+          <Stack p="18px" mt={1} maxH="250px" overflowY="auto" gap="18px">
             {options.map((option, i) => (
               <Checkbox
                 key={i}
                 isChecked={values.includes(option)}
-                colorScheme='primary'
+                colorScheme="primary"
                 onChange={() => {
                   const currValues = [...values]
                   if (currValues.includes(option)) {

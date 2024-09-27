@@ -13,10 +13,12 @@ import {
   RangeSliderFilledTrack,
   RangeSliderThumb,
   HStack,
+  Box,
 } from '@chakra-ui/react'
 import Image from 'next/image'
 import { ChevronDownIcon } from '@chakra-ui/icons'
 import { MAX_PRICE, MIN_PRICE } from '@/modules/options'
+import { MdGraphicEq } from 'react-icons/md'
 
 const PriceRange: React.FC<{
   label: string
@@ -32,10 +34,7 @@ const PriceRange: React.FC<{
   return (
     <Popover>
       <PopoverTrigger>
-        <Flex
-          flexDirection="column"
-          flexGrow={1}
-        >
+        <Flex flexDirection="column" mb="18px" flexGrow={1} width={{ base: 'full', md: 'full', lg: '400px' }}>
           <Flex alignItems="start" gap="8px">
             <Image src="/icons/sell.png" alt="PRICE RANGE" width={16} height={16} />
             <Text fontSize="12px" fontWeight={500} textTransform="uppercase">
@@ -97,13 +96,17 @@ const PriceRange: React.FC<{
                 max={max}
                 step={step}
                 onChange={onChange}
-                colorScheme="primary"
               >
-                <RangeSliderTrack>
-                  <RangeSliderFilledTrack />
+                <RangeSliderTrack bg="brand.secondary">
+                  <RangeSliderFilledTrack bg="brand.primary" />
                 </RangeSliderTrack>
-                <RangeSliderThumb index={0} />
-                <RangeSliderThumb index={1} />
+                <Steps />
+                <RangeSliderThumb position="relative" zIndex={3} boxSize={6} index={0}>
+                  <Box color="brand.primary" as={MdGraphicEq} />
+                </RangeSliderThumb>
+                <RangeSliderThumb position="relative" zIndex={3} boxSize={6} index={1}>
+                  <Box color="brand.primary" as={MdGraphicEq} />
+                </RangeSliderThumb>
               </RangeSlider>
             </Flex>
           </VStack>
@@ -114,3 +117,13 @@ const PriceRange: React.FC<{
 }
 
 export default PriceRange
+
+function Steps() {
+  return (
+    <HStack spacing={0} width="100%" justify="space-between" position="relative" zIndex={2}>
+      {Array.from({ length: 11 }).map((_, index) => (
+        <Box key={index} width="1px" height="10px" background="brand.primary" />
+      ))}
+    </HStack>
+  )
+}

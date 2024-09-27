@@ -126,7 +126,7 @@ const Form: React.FC = () => {
         placeholder={getLocale('Any')}
         start={filter.price_start as number}
         end={filter.price_end as number}
-        step={1000000}
+        step={100000000}
         onChange={([start, end]) =>
           setFilter({ price_start: Number(start), price_end: Number(end) })
         }

@@ -40,7 +40,12 @@ const CheckBoxTreeSelect: React.FC<{
   return (
     <Popover>
       <PopoverTrigger>
-        <Flex flexDirection="column" flex={1} width={{ base: '300px', md: 'auto' }}>
+        <Flex
+          mb="18px"
+          flexDirection="column"
+          flexGrow={1}
+          width={{ base: 'full', md: 'full', lg: 'auto' }}
+        >
           {icon && (
             <Flex alignItems="start" gap="8px">
               <Image src={icon} alt="" width={16} height={16} />
@@ -111,7 +116,7 @@ const CheckBoxTreeSelect: React.FC<{
           </Flex>
         </Flex>
       </PopoverTrigger>
-      <PopoverContent border="none" minW={{ base: '100vw', md: '50vw' }}>
+      <PopoverContent border="none" minW={{ base: '90vw', md: '80vw', lg: '50vw' }}>
         <PopoverArrow />
         <PopoverBody background="brand.background" p={0}>
           <HStack
@@ -122,6 +127,7 @@ const CheckBoxTreeSelect: React.FC<{
             maxH="400px"
             overflowY="auto"
             gap="18px"
+            flexDirection={{ base: 'row', md: 'row', lg: 'row' }}
           >
             {options.map((option, i) => (
               <Option
@@ -179,7 +185,7 @@ function Option({
     }
   }, [values, option.value])
   return (
-    <Box w="200px">
+    <Box w={{ base: '100%', md: '100%', lg: '200px' }}>
       <HStack gap="8px" alignItems="center">
         {hasChildren && (
           <>

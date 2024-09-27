@@ -31,7 +31,7 @@ export default function MobileDrawer() {
     <>
       <Button
         ref={btnRef}
-        display={{ base: 'flex', md: 'none' }}
+        display={{ base: 'flex', md: 'flex', lg: "none" }}
         alignItems="center"
         gap="8px"
         minW={0}
