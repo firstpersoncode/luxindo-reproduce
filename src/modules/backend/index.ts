@@ -71,6 +71,7 @@ export const Backend_getStaticProps = async (ctx: GetStaticPropsContext) => {
   }
   const res = await appProps(ctx)
   const collectionName = getCollectionName(ctx)
+  console.log(collectionName)
   const handler = modules[collectionName]
   return handler(res, ctx)
 }

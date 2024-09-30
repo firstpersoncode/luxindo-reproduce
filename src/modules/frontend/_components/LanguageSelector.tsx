@@ -13,7 +13,7 @@ import { useContextProvider } from '@/modules/frontend/globals/providers'
 import { locales } from '@/modules/locales'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import Image from 'next/image'
+import Image from '@/modules/frontend/_components/Image'
 
 const LanguageSelector: React.FC = () => {
   const { setLocale, locale } = useContextProvider()

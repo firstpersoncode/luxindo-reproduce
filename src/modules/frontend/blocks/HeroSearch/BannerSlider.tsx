@@ -1,6 +1,6 @@
 import { Box } from '@chakra-ui/react'
 import { useContextProvider } from './providers'
-import Image from 'next/image'
+import Image from '@/modules/frontend/_components/Image'
 import Slider from 'react-slick'
 
 const BannerSlider: React.FC = () => {

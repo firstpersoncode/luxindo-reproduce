@@ -2,7 +2,7 @@ import React, { useMemo } from 'react'
 import { Box, Flex, Text, Container, Divider } from '@chakra-ui/react'
 import FooterSection from './FooterSection'
 import { useContextProvider } from '@/modules/frontend/globals/providers'
-import Image from 'next/image'
+import Image from '@/modules/frontend/_components/Image'
 
 const Footer: React.FC = () => {
   const { data } = useContextProvider()

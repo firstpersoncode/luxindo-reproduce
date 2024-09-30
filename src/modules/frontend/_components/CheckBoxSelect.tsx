@@ -18,7 +18,7 @@ import {
 } from '@chakra-ui/react'
 
 import { ChevronDownIcon } from '@chakra-ui/icons'
-import Image from 'next/image'
+import Image from '@/modules/frontend/_components/Image'
 
 const CheckBoxSelect: React.FC<{
   icon?: string
@@ -106,7 +106,7 @@ const CheckBoxSelect: React.FC<{
       </PopoverTrigger>
       <PopoverContent border="none" minW={{ base: '90vw', md: '80vw', lg: '200px' }}>
         <PopoverArrow />
-        <PopoverBody background="brand.background" p={0}>
+        <PopoverBody background="brand.background" p={0} color="white">
           <Stack p="18px" mt={1} maxH="250px" overflowY="auto" gap="18px">
             {options.map((option, i) => (
               <Checkbox

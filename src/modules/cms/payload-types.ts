@@ -16,7 +16,6 @@ export interface Config {
     agents: Agent;
     properties: Property;
     pages: Page;
-    'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
@@ -417,7 +416,7 @@ export interface Property {
         id?: string | null;
       }[]
     | null;
-  sections?: (RichTextBlock | HeroSearchBlock | SearchBlock | SearchPropertiesBlock)[] | null;
+  sections?: (RichTextBlock | HeroSearchBlock | SearchBlock | SearchPropertiesBlock | MarginBlock)[] | null;
   agent?: (number | null) | Agent;
   related_properties?: (number | Property)[] | null;
   updatedAt: string;
@@ -486,6 +485,18 @@ export interface SearchPropertiesBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MarginBlock".
+ */
+export interface MarginBlock {
+  background_color?: string | null;
+  margin_desktop?: number | null;
+  margin_mobile?: number | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'Margin';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "pages".
  */
 export interface Page {
@@ -496,42 +507,7 @@ export interface Page {
   keywords?: string | null;
   template?: ('Default' | 'Home' | 'About' | 'Contact') | null;
   image?: (number | null) | Media;
-  sections?: (RichTextBlock | HeroSearchBlock | SearchBlock | SearchPropertiesBlock)[] | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "payload-locked-documents".
- */
-export interface PayloadLockedDocument {
-  id: number;
-  document?:
-    | ({
-        relationTo: 'users';
-        value: number | User;
-      } | null)
-    | ({
-        relationTo: 'media';
-        value: number | Media;
-      } | null)
-    | ({
-        relationTo: 'agents';
-        value: number | Agent;
-      } | null)
-    | ({
-        relationTo: 'properties';
-        value: number | Property;
-      } | null)
-    | ({
-        relationTo: 'pages';
-        value: number | Page;
-      } | null);
-  globalSlug?: string | null;
-  user: {
-    relationTo: 'users';
-    value: number | User;
-  };
+  sections?: (RichTextBlock | HeroSearchBlock | SearchBlock | SearchPropertiesBlock | MarginBlock)[] | null;
   updatedAt: string;
   createdAt: string;
 }

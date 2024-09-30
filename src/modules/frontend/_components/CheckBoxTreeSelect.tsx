@@ -19,7 +19,7 @@ import {
 } from '@chakra-ui/react'
 
 import { CheckIcon, ChevronDownIcon, ChevronUpIcon, MinusIcon } from '@chakra-ui/icons'
-import Image from 'next/image'
+import Image from '@/modules/frontend/_components/Image'
 import { useEffect, useState } from 'react'
 
 interface Option {
@@ -118,7 +118,7 @@ const CheckBoxTreeSelect: React.FC<{
           </Flex>
         </Box>
       </PopoverTrigger>
-      <PopoverContent border="none" minW={{ base: '90vw', md: '80vw', lg: '50vw' }}>
+      <PopoverContent border="none" minW={{ base: '90vw', md: '80vw', lg: '50vw' }} color="white">
         <PopoverArrow />
         <PopoverBody background="brand.background" p={0}>
           <HStack

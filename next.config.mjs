@@ -1,37 +1,48 @@
 import { withPayload } from '@payloadcms/next/withPayload'
-import { locales, defaultLocale } from './src/modules/locales.js'
-
-// const getHostName = (url) => {
-//   const hostName = new URL(url).hostname
-//   return hostName.startsWith('www.') ? hostName.slice(4) : hostName
-// }
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   i18n: {
-    locales,
-    defaultLocale,
+    locales: ['en', 'id', 'fr'],
+    defaultLocale: 'en',
   },
-  images: {
-    remotePatterns: [
-      {
-        protocol: 'http',
-        hostname: 'localhost',
-        port: '3000',
-        pathname: '/**'
-      },
-      {
-        protocol: 'https',
-        hostname: "**",
-        port: '',
-        pathname: '/**'
-      }
-    ]
-  },
+  // images: {
+  //   remotePatterns: [
+  //     {
+  //       protocol: 'http',
+  //       hostname: 'localhost',
+  //       port: '3001',
+  //       pathname: '/**',
+  //     },
+  //     {
+  //       protocol: 'https',
+  //       hostname: '**',
+  //       port: '',
+  //       pathname: '/**',
+  //     },
+  //   ],
+  // },
   reactStrictMode: false,
+  productionBrowserSourceMaps: false,
   experimental: {
-    esmExternals: false
-  }
+    turbo: {
+      memoryLimit: 4096,
+    },
+    serverSourceMaps: false,
+    webpackMemoryOptimizations: true,
+  },
+  webpack: (
+    config,
+    { buildId, dev, isServer, defaultLoaders, nextRuntime, webpack }
+  ) => {
+    if (config.cache && !dev) {
+      config.cache = Object.freeze({
+        type: 'memory',
+      })
+    }
+    // Important: return the modified config
+    return config
+  },
 }
 
 export default withPayload(nextConfig)

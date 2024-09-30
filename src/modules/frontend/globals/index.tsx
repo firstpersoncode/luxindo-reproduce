@@ -1,4 +1,3 @@
-import 'react-spring-bottom-sheet/dist/style.css'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import './styles.css'
@@ -34,16 +33,12 @@ export default function AppLayout({
 }>) {
   return (
     <Providers context={{ ...context }}>
-      <Header />
-      <Box
-        className={`${inter.variable} ${cormorant.variable} ${aerotis.variable}`}
-        as="main"
-        minH="80vh"
-      >
+      <Box className={`${inter.variable} ${cormorant.variable} ${aerotis.variable}`} as="main">
+        <Header />
         {children}
+        <Footer />
+        <ContactButton />
       </Box>
-      <Footer />
-      <ContactButton />
     </Providers>
   )
 }

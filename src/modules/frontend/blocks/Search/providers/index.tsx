@@ -1,9 +1,9 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
-import { search } from './search-properties.service'
 import { LOCALES } from '@/modules/locales'
 import { useContextProvider as useGlobalContextProvider } from '@/modules/frontend/globals/providers'
 import { useRouter } from 'next/router'
 import { MAX_PRICE, MIN_PRICE } from '@/modules/options'
+import { search } from './search.service'
 
 export interface IContext {
   isReady?: boolean
@@ -74,7 +74,7 @@ const useController = (_context: IContext) => {
     })
 
     return _filter
-  }, [searchParams])
+  }, [_context.filter, searchParams])
 
   const fetchList = async (f: any, p: number) => {
     setIsLoading(true)

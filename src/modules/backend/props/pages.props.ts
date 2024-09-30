@@ -7,6 +7,8 @@ import { getProps as getHeroSearchBlockProps } from './block.hero-search.props'
 import { getProps as getSearchBlockProps } from './block.search.props'
 
 export const getPaths = async () => {
+  if (process.env.PRERENDER === "skip") return []
+
   const payload = await getPayload({
     config: configPromise,
   })

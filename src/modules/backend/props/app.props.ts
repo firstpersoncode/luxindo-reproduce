@@ -34,6 +34,6 @@ export const appProps = async (ctx: GetStaticPropsContext) => {
         }),
       ),
     },
-    revalidate: 60,
+    // revalidate: 60,
   }
 }

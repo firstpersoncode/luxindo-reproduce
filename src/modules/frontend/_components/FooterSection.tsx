@@ -1,7 +1,7 @@
 import React from 'react'
 import { VStack, Text, Button } from '@chakra-ui/react'
 import Link from 'next/link'
-import Image from 'next/image'
+import Image from '@/modules/frontend/_components/Image'
 
 interface FooterSectionProps {
   title: string

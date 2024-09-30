@@ -1,8 +1,8 @@
-import { searchPropertiesApi } from './search-properties.api'
+import { search } from './search.api'
 
 export const ROUTES: { [x: string]: any } = {
-  'search-properties': {
+  'search': {
     method: "GET",
-    handler: searchPropertiesApi
+    handler: search
   },
 }

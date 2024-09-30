@@ -9,10 +9,13 @@ const LocationSelectFieldMany: React.FC<{ path: string; parentPath: string }> = 
   // path,
   parentPath,
 }) => {
-  const { path, indexPath } = useFieldProps()
+  const { path } = useFieldProps()
   const { getDataByPath } = useWatchForm()
 
-  const _parentValue = (getDataByPath(`sections.${indexPath}.${parentPath}`) as string)?.split(',').filter(Boolean) ?? []
+  const _parentValue =
+    (getDataByPath(path.replace('filter_sub_area', parentPath)) as string)
+      ?.split(',')
+      .filter(Boolean) ?? []
 
   const { value, setValue } = useField<string>({
     path,
@@ -41,7 +44,7 @@ const LocationSelectFieldMany: React.FC<{ path: string; parentPath: string }> = 
       setValues(filteredValues)
       setValue(filteredValues.map((i: any) => i.value).join(','))
     }
-  }, [values, options])
+  }, [values, options, setValue])
 
   return (
     <div

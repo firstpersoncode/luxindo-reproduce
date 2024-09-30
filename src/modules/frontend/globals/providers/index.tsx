@@ -116,7 +116,7 @@ export default function Providers({
         primary: '#C1A283',
         secondary: '#333333',
         surface: '#f8f7f4',
-        background: '#191919',
+        background: '#181818',
       },
     },
   })

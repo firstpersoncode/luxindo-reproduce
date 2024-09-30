@@ -1,5 +1,5 @@
 import { Button, Text } from '@chakra-ui/react'
-import Image from 'next/image'
+import Image from '@/modules/frontend/_components/Image'
 import { useContextProvider } from '@/modules/frontend/globals/providers'
 
 const ContactButton: React.FC = () => {

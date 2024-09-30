@@ -15,19 +15,20 @@ import {
   HStack,
   Box,
 } from '@chakra-ui/react'
-import Image from 'next/image'
+import Image from '@/modules/frontend/_components/Image'
 import { ChevronDownIcon } from '@chakra-ui/icons'
 import { MAX_PRICE, MIN_PRICE } from '@/modules/options'
 import { MdGraphicEq } from 'react-icons/md'
 
 const PriceRange: React.FC<{
+  icon?:string
   label: string
   placeholder: string
   start: number
   end: number
   step: number
   onChange: (_: number[]) => void
-}> = ({ label, placeholder, start, end, step, onChange }) => {
+}> = ({ icon, label, placeholder, start, end, step, onChange }) => {
   const min = MIN_PRICE
   const max = MAX_PRICE
 
@@ -36,7 +37,7 @@ const PriceRange: React.FC<{
       <PopoverTrigger>
         <Box>
           <Flex alignItems="start" gap="8px">
-            <Image src="/icons/sell.png" alt="PRICE RANGE" width={16} height={16} />
+            {icon && <Image src={icon} alt="PRICE RANGE" width={16} height={16} />}
             <Text fontSize="12px" fontWeight={500} textTransform="uppercase">
               {label}
             </Text>
