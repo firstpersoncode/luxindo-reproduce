@@ -18,6 +18,7 @@ interface SearchFieldProps {
   value: string | string[]
   subValues?: string[]
   onChange?: (e: React.ChangeEvent<any>) => void
+  disabled?: boolean
 }
 
 const SearchField: React.FC<SearchFieldProps> = ({
@@ -30,6 +31,7 @@ const SearchField: React.FC<SearchFieldProps> = ({
   value,
   subValues,
   onChange,
+  disabled,
 }) =>
   isSelect ? (
     <CheckBoxSelect
@@ -39,6 +41,7 @@ const SearchField: React.FC<SearchFieldProps> = ({
       options={options || []}
       values={value as string[]}
       onChange={onChange}
+      disabled={disabled}
     />
   ) : isTreeSelect ? (
     <CheckBoxTreeSelect
@@ -49,6 +52,7 @@ const SearchField: React.FC<SearchFieldProps> = ({
       values={value as string[]}
       subValues={subValues as string[]}
       onChange={onChange}
+      disabled={disabled}
     />
   ) : (
     <>
@@ -88,19 +92,18 @@ const Form: React.FC = () => {
       gap="24px"
       flexDir={{ base: 'column', lg: 'row' }}
       flexWrap="wrap"
+      color={{ base: 'white', lg: 'brand.secondary' }}
     >
       <Box minW={{ base: '100%', lg: '250px' }} flexGrow={1}>
         <SearchField
           icon="/icons/space_dashboard_black.png"
           label={getLocale('Area')}
           placeholder={getLocale('Any')}
-          isTreeSelect
-          value={filter.area_1}
-          subValues={filter.area_2}
-          options={LOCATIONS}
-          onChange={({ values, subValues }: any) =>
-            setFilter({ area_1: values, area_2: subValues })
-          }
+          isSelect
+          value={[]}
+          options={[]}
+          onChange={({ values, subValues }: any) => null}
+          disabled
         />
       </Box>
 
@@ -109,13 +112,11 @@ const Form: React.FC = () => {
           icon="/icons/bed_black.png"
           label={getLocale('Bedroom')}
           placeholder={getLocale('Any')}
-          isTreeSelect
-          value={filter.area_1}
-          subValues={filter.area_2}
-          options={LOCATIONS}
-          onChange={({ values, subValues }: any) =>
-            setFilter({ area_1: values, area_2: subValues })
-          }
+          isSelect
+          value={[]}
+          options={[]}
+          onChange={({ values, subValues }: any) => null}
+          disabled
         />
       </Box>
 
@@ -164,9 +165,10 @@ const Form: React.FC = () => {
           label={getLocale('Features')}
           placeholder={getLocale('Any')}
           isSelect
-          value={filter.type}
-          options={PROPERTY_TYPES.map((t) => t.value)}
-          onChange={(items) => setFilter({ type: items })}
+          value={[]}
+          options={[]}
+          onChange={({ values, subValues }: any) => null}
+          disabled
         />
       </Box>
 

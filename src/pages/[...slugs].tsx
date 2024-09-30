@@ -2,5 +2,5 @@ import { Backend_getStaticPaths, Backend_getStaticProps } from '@/modules/backen
 import { Frontend_View } from '@/modules/frontend'
 
 export default Frontend_View
-// export const getStaticPaths = Backend_getStaticPaths
-export const getServerSideProps = Backend_getStaticProps
+export const getStaticPaths = Backend_getStaticPaths
+export const getStaticProps = Backend_getStaticProps

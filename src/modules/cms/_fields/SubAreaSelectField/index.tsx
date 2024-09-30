@@ -29,7 +29,7 @@ const LocationSelectField: React.FC<{ path: string; parentPath: string }> = ({
       const notInChildren = children.every((child) => child.value !== value)
       if (notInChildren) setValue(null)
     }
-  }, [_parentValue, value])
+  }, [_parentValue, setValue, value])
 
   const disabled = useMemo(() => !(_parentValue && options.length > 0), [_parentValue, options])
 

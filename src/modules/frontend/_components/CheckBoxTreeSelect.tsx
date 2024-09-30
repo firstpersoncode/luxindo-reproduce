@@ -36,11 +36,12 @@ const CheckBoxTreeSelect: React.FC<{
   values: string[]
   subValues: string[]
   onChange: any
-}> = ({ icon, label, placeholder, options, values = [], subValues = [], onChange }) => {
+  disabled?: boolean
+}> = ({ icon, label, placeholder, options, values = [], subValues = [], onChange, disabled }) => {
   return (
     <Popover>
       <PopoverTrigger>
-        <Box>
+        <Box pointerEvents={disabled ? 'none' : 'auto'} opacity={disabled ? 0.5 : 1}>
           {icon && (
             <Flex alignItems="start" gap="8px">
               <Image src={icon} alt="" width={16} height={16} />

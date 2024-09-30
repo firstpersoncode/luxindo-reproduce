@@ -12,6 +12,7 @@ const LocationSelectFieldMany: React.FC<{ path: string; parentPath: string }> = 
   const { path } = useFieldProps()
   const { getDataByPath } = useWatchForm()
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const _parentValue =
     (getDataByPath(path.replace('filter_sub_area', parentPath)) as string)
       ?.split(',')
