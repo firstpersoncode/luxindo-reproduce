@@ -12,6 +12,7 @@ export interface IContext {
   filter?: any
   locale: string
   locales: { [x: string]: { [y: string]: string } }
+  cta?: string
   handleSearch: () => void
   handleNextPage: () => void
   setFilter: (params: any) => void
@@ -33,6 +34,7 @@ const context: IContext = {
   },
   locale: 'en',
   locales: {},
+  cta: '',
   handleSearch: () => {},
   handleNextPage: () => {},
   setFilter: () => {},
@@ -147,6 +149,7 @@ const useController = (_context: IContext) => {
     filter,
     locale: _context.locale,
     locales: _context.locales,
+    cta: _context.cta,
     handleSearch,
     handleNextPage,
     setFilter,
