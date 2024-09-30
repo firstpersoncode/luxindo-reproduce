@@ -16,6 +16,7 @@ const LocationSelectField: React.FC<{ path: string; childPath?: string }> = ({
     <div style={{ marginBottom: '18px' }}>
       <label className="field-label">Area</label>
       <SelectInput
+        label="Area"
         path={path}
         name={path}
         options={options}
