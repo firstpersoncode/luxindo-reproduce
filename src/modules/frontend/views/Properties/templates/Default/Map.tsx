@@ -12,7 +12,7 @@ const Map: React.FC = () => {
 
   return (
     <Box bg="white">
-      <Container maxW="container.xl">
+      <Container px={{ base: '24px', md: '48px' }} maxW="container.xl">
         <Box textAlign="left" p="20px" maxW={{ base: '100%' }}>
           <iframe
             src={`https://maps.google.com/maps?q=${lat_str}, ${lng_str}&z=15&output=embed`}

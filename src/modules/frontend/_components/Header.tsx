@@ -19,9 +19,10 @@ const Header: React.FC = () => {
       zIndex={500}
       backgroundColor={isScrolledToTop ? 'rgba(0,0,0,0)' : 'rgba(0,0,0,0.75)'}
       transition="background-color 0.3s"
+      backdropFilter={isScrolledToTop ? 'none' : 'blur(8px)'}
       py="18px"
     >
-      <Container maxW="container.xl">
+      <Container px={{ base: '24px', md: '48px' }} maxW="container.xl">
         <Flex
           as="header"
           width="100%"

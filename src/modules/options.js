@@ -1114,10 +1114,6 @@ export const LOCATIONS = [
         value: 'Bumbak',
       },
       {
-        label: 'Cemagi',
-        value: 'Cemagi',
-      },
-      {
         label: 'Kayu Tulang',
         value: 'Kayu Tulang',
       },

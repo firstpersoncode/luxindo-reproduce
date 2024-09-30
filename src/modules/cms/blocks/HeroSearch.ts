@@ -15,12 +15,14 @@ export const HeroSearch = (): Block => ({
               label: 'Title',
               type: 'text',
               required: false,
+              localized: true
             },
             {
               name: 'cta',
               label: 'CTA',
               type: 'text',
               required: false,
+              localized: true
             },
             {
               name: 'search_page_slug',

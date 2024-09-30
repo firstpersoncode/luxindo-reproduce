@@ -18,7 +18,7 @@ const Layout: React.FC = () => {
         opacity={0.75}
       />
 
-      <Container
+      <Container px={{ base: '24px', md: '48px' }}
         position="absolute"
         maxW="container.xl"
         left={0}

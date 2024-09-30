@@ -11,13 +11,13 @@ import ContactButton from '@/modules/frontend/_components/ContactButton'
 import { Inter, Cormorant_Infant } from 'next/font/google'
 import localFont from 'next/font/local'
 
-const inter = Inter({
+export const inter = Inter({
   weight: ['400', '700'],
   subsets: ['latin'],
   variable: '--font-inter', //css variables name
 })
 
-const cormorant = Cormorant_Infant({
+export const cormorant = Cormorant_Infant({
   weight: ['400', '500', '700'],
   subsets: ['latin'],
   variable: '--font-cormorant', //css variables name

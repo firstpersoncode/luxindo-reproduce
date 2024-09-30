@@ -10,7 +10,7 @@ const Footer: React.FC = () => {
 
   return (
     <Box as="footer" bg="rgba(25, 25, 25, 1)" py={{ base: 8, md: 20 }}>
-      <Container maxW="container.xl">
+      <Container px={{ base: '24px', md: '48px' }} maxW="container.xl">
         <Flex
           direction={{ base: 'column', md: 'row' }}
           justify="space-between"

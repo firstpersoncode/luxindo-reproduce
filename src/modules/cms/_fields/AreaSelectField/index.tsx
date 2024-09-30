@@ -1,15 +1,15 @@
 'use client'
 
 import { LOCATIONS } from '@/modules/options'
-import { SelectInput, useField } from '@payloadcms/ui'
+import { SelectInput, useField, useFieldProps } from '@payloadcms/ui'
 import { useMemo } from 'react'
 
-const LocationSelectField: React.FC<{ path: string; childPath: string }> = ({
+const LocationSelectField: React.FC<{ path: string; childPath?: string }> = ({
   path,
-  childPath,
+  // childPath,
 }) => {
   const { value, setValue } = useField<string>({ path })
-  const { setValue: _setChildValue } = useField<string>({ path: childPath })
+  // const { setValue: _setChildValue } = useField<string>({ path: childPath })
   const options = useMemo(() => LOCATIONS.map((l) => ({ label: l.label, value: l.value })), [])
 
   return (
@@ -22,7 +22,7 @@ const LocationSelectField: React.FC<{ path: string; childPath: string }> = ({
         value={value}
         onChange={(e: any) => {
           setValue(e?.value)
-          _setChildValue(null)
+          // if (!!childPath) _setChildValue(null)
         }}
       />
     </div>

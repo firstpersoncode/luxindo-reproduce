@@ -11,7 +11,7 @@ const PropertyDetails: React.FC = ({}) => {
 
   return (
     <Box bg="white">
-      <Container maxW="container.xl">
+      <Container px={{ base: '24px', md: '48px' }} maxW="container.xl">
         <Text fontSize="20px" fontWeight="600" lineHeight="1.1" mt="34px">
           {getLocale('The space')}
         </Text>

@@ -1,5 +1,5 @@
 {
-  "id": "c27c41e7-0472-4f23-8da5-fccd60f3ae5a",
+  "id": "eaf71e25-fbfb-473c-91df-95385408e0e1",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -1233,6 +1233,12 @@
           "primaryKey": true,
           "notNull": true
         },
+        "search_page_slug": {
+          "name": "search_page_slug",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
         "block_name": {
           "name": "block_name",
           "type": "varchar",
@@ -1305,6 +1311,70 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
+    "public.properties_blocks_hero_search_locales": {
+      "name": "properties_blocks_hero_search_locales",
+      "schema": "",
+      "columns": {
+        "title": {
+          "name": "title",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "cta": {
+          "name": "cta",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "_locale": {
+          "name": "_locale",
+          "type": "_locales",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "properties_blocks_hero_search_locales_parent_id_fk": {
+          "name": "properties_blocks_hero_search_locales_parent_id_fk",
+          "tableFrom": "properties_blocks_hero_search_locales",
+          "tableTo": "properties_blocks_hero_search",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "properties_blocks_hero_search_locales_locale_parent_id_unique": {
+          "name": "properties_blocks_hero_search_locales_locale_parent_id_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "_locale",
+            "_parent_id"
+          ]
+        }
+      }
+    },
     "public.properties_blocks_search_properties": {
       "name": "properties_blocks_search_properties",
       "schema": "",
@@ -1333,9 +1403,29 @@
           "primaryKey": true,
           "notNull": true
         },
-        "search_properties": {
-          "name": "search_properties",
+        "filter_area_1": {
+          "name": "filter_area_1",
           "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "filter_area_2": {
+          "name": "filter_area_2",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "filter_type": {
+          "name": "filter_type",
+          "type": "enum_properties_blocks_search_properties_filter_type",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "filter_ownership": {
+          "name": "filter_ownership",
+          "type": "enum_properties_blocks_search_properties_filter_ownership",
+          "typeSchema": "public",
           "primaryKey": false,
           "notNull": false
         },
@@ -2093,6 +2183,12 @@
           "primaryKey": true,
           "notNull": true
         },
+        "search_page_slug": {
+          "name": "search_page_slug",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
         "block_name": {
           "name": "block_name",
           "type": "varchar",
@@ -2165,6 +2261,70 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
+    "public.pages_blocks_hero_search_locales": {
+      "name": "pages_blocks_hero_search_locales",
+      "schema": "",
+      "columns": {
+        "title": {
+          "name": "title",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "cta": {
+          "name": "cta",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "_locale": {
+          "name": "_locale",
+          "type": "_locales",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "pages_blocks_hero_search_locales_parent_id_fk": {
+          "name": "pages_blocks_hero_search_locales_parent_id_fk",
+          "tableFrom": "pages_blocks_hero_search_locales",
+          "tableTo": "pages_blocks_hero_search",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "pages_blocks_hero_search_locales_locale_parent_id_unique": {
+          "name": "pages_blocks_hero_search_locales_locale_parent_id_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "_locale",
+            "_parent_id"
+          ]
+        }
+      }
+    },
     "public.pages_blocks_search_properties": {
       "name": "pages_blocks_search_properties",
       "schema": "",
@@ -2193,9 +2353,29 @@
           "primaryKey": true,
           "notNull": true
         },
-        "search_properties": {
-          "name": "search_properties",
+        "filter_area_1": {
+          "name": "filter_area_1",
           "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "filter_area_2": {
+          "name": "filter_area_2",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "filter_type": {
+          "name": "filter_type",
+          "type": "enum_pages_blocks_search_properties_filter_type",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "filter_ownership": {
+          "name": "filter_ownership",
+          "type": "enum_pages_blocks_search_properties_filter_ownership",
+          "typeSchema": "public",
           "primaryKey": false,
           "notNull": false
         },
@@ -2434,6 +2614,262 @@
           ]
         }
       }
+    },
+    "public.payload_locked_documents": {
+      "name": "payload_locked_documents",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "global_slug": {
+          "name": "global_slug",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "payload_locked_documents_global_slug_idx": {
+          "name": "payload_locked_documents_global_slug_idx",
+          "columns": [
+            {
+              "expression": "global_slug",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "payload_locked_documents_created_at_idx": {
+          "name": "payload_locked_documents_created_at_idx",
+          "columns": [
+            {
+              "expression": "created_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.payload_locked_documents_rels": {
+      "name": "payload_locked_documents_rels",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "order": {
+          "name": "order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "parent_id": {
+          "name": "parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "path": {
+          "name": "path",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "users_id": {
+          "name": "users_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "media_id": {
+          "name": "media_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "agents_id": {
+          "name": "agents_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "properties_id": {
+          "name": "properties_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "pages_id": {
+          "name": "pages_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "payload_locked_documents_rels_order_idx": {
+          "name": "payload_locked_documents_rels_order_idx",
+          "columns": [
+            {
+              "expression": "order",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "payload_locked_documents_rels_parent_idx": {
+          "name": "payload_locked_documents_rels_parent_idx",
+          "columns": [
+            {
+              "expression": "parent_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "payload_locked_documents_rels_path_idx": {
+          "name": "payload_locked_documents_rels_path_idx",
+          "columns": [
+            {
+              "expression": "path",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "payload_locked_documents_rels_parent_fk": {
+          "name": "payload_locked_documents_rels_parent_fk",
+          "tableFrom": "payload_locked_documents_rels",
+          "tableTo": "payload_locked_documents",
+          "columnsFrom": [
+            "parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "payload_locked_documents_rels_users_fk": {
+          "name": "payload_locked_documents_rels_users_fk",
+          "tableFrom": "payload_locked_documents_rels",
+          "tableTo": "users",
+          "columnsFrom": [
+            "users_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "payload_locked_documents_rels_media_fk": {
+          "name": "payload_locked_documents_rels_media_fk",
+          "tableFrom": "payload_locked_documents_rels",
+          "tableTo": "media",
+          "columnsFrom": [
+            "media_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "payload_locked_documents_rels_agents_fk": {
+          "name": "payload_locked_documents_rels_agents_fk",
+          "tableFrom": "payload_locked_documents_rels",
+          "tableTo": "agents",
+          "columnsFrom": [
+            "agents_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "payload_locked_documents_rels_properties_fk": {
+          "name": "payload_locked_documents_rels_properties_fk",
+          "tableFrom": "payload_locked_documents_rels",
+          "tableTo": "properties",
+          "columnsFrom": [
+            "properties_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "payload_locked_documents_rels_pages_fk": {
+          "name": "payload_locked_documents_rels_pages_fk",
+          "tableFrom": "payload_locked_documents_rels",
+          "tableTo": "pages",
+          "columnsFrom": [
+            "pages_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
     },
     "public.payload_preferences": {
       "name": "payload_preferences",
@@ -3549,6 +3985,26 @@
         "West Java"
       ]
     },
+    "public.enum_properties_blocks_search_properties_filter_type": {
+      "name": "enum_properties_blocks_search_properties_filter_type",
+      "schema": "public",
+      "values": [
+        "Land",
+        "Villa Rental",
+        "Villa / House / Apartment",
+        "Hotel, Resort, Villa Complex",
+        "Commercial Space"
+      ]
+    },
+    "public.enum_properties_blocks_search_properties_filter_ownership": {
+      "name": "enum_properties_blocks_search_properties_filter_ownership",
+      "schema": "public",
+      "values": [
+        "Rental",
+        "Freehold",
+        "Leasehold"
+      ]
+    },
     "public.enum_pages_template": {
       "name": "enum_pages_template",
       "schema": "public",
@@ -3557,6 +4013,26 @@
         "Home",
         "About",
         "Contact"
+      ]
+    },
+    "public.enum_pages_blocks_search_properties_filter_type": {
+      "name": "enum_pages_blocks_search_properties_filter_type",
+      "schema": "public",
+      "values": [
+        "Land",
+        "Villa Rental",
+        "Villa / House / Apartment",
+        "Hotel, Resort, Villa Complex",
+        "Commercial Space"
+      ]
+    },
+    "public.enum_pages_blocks_search_properties_filter_ownership": {
+      "name": "enum_pages_blocks_search_properties_filter_ownership",
+      "schema": "public",
+      "values": [
+        "Rental",
+        "Freehold",
+        "Leasehold"
       ]
     }
   },

@@ -6,12 +6,6 @@ export const SearchProperties = (): Block => ({
   interfaceName: 'SearchPropertiesBlock', // optional
   fields: [
     {
-      name: "search_properties",
-      label: 'Search Properties',
-      type: 'text',
-      required: false,
-    },
-    {
       name: 'filter_area_1',
       label: 'Filter Area',
       type: 'text',

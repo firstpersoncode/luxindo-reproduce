@@ -63,7 +63,31 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
   END $$;
   
   DO $$ BEGIN
+   CREATE TYPE "public"."enum_properties_blocks_search_properties_filter_type" AS ENUM('Land', 'Villa Rental', 'Villa / House / Apartment', 'Hotel, Resort, Villa Complex', 'Commercial Space');
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
+   CREATE TYPE "public"."enum_properties_blocks_search_properties_filter_ownership" AS ENUM('Rental', 'Freehold', 'Leasehold');
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
    CREATE TYPE "public"."enum_pages_template" AS ENUM('Default', 'Home', 'About', 'Contact');
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
+   CREATE TYPE "public"."enum_pages_blocks_search_properties_filter_type" AS ENUM('Land', 'Villa Rental', 'Villa / House / Apartment', 'Hotel, Resort, Villa Complex', 'Commercial Space');
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
+   CREATE TYPE "public"."enum_pages_blocks_search_properties_filter_ownership" AS ENUM('Rental', 'Freehold', 'Leasehold');
   EXCEPTION
    WHEN duplicate_object THEN null;
   END $$;
@@ -197,7 +221,17 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
   	"_parent_id" integer NOT NULL,
   	"_path" text NOT NULL,
   	"id" varchar PRIMARY KEY NOT NULL,
+  	"search_page_slug" varchar,
   	"block_name" varchar
+  );
+  
+  CREATE TABLE IF NOT EXISTS "properties_blocks_hero_search_locales" (
+  	"title" varchar,
+  	"cta" varchar,
+  	"id" serial PRIMARY KEY NOT NULL,
+  	"_locale" "_locales" NOT NULL,
+  	"_parent_id" varchar NOT NULL,
+  	CONSTRAINT "properties_blocks_hero_search_locales_locale_parent_id_unique" UNIQUE("_locale","_parent_id")
   );
   
   CREATE TABLE IF NOT EXISTS "properties_blocks_search_properties" (
@@ -205,7 +239,10 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
   	"_parent_id" integer NOT NULL,
   	"_path" text NOT NULL,
   	"id" varchar PRIMARY KEY NOT NULL,
-  	"search_properties" varchar,
+  	"filter_area_1" varchar,
+  	"filter_area_2" varchar,
+  	"filter_type" "enum_properties_blocks_search_properties_filter_type",
+  	"filter_ownership" "enum_properties_blocks_search_properties_filter_ownership",
   	"block_name" varchar
   );
   
@@ -282,7 +319,17 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
   	"_parent_id" integer NOT NULL,
   	"_path" text NOT NULL,
   	"id" varchar PRIMARY KEY NOT NULL,
+  	"search_page_slug" varchar,
   	"block_name" varchar
+  );
+  
+  CREATE TABLE IF NOT EXISTS "pages_blocks_hero_search_locales" (
+  	"title" varchar,
+  	"cta" varchar,
+  	"id" serial PRIMARY KEY NOT NULL,
+  	"_locale" "_locales" NOT NULL,
+  	"_parent_id" varchar NOT NULL,
+  	CONSTRAINT "pages_blocks_hero_search_locales_locale_parent_id_unique" UNIQUE("_locale","_parent_id")
   );
   
   CREATE TABLE IF NOT EXISTS "pages_blocks_search_properties" (
@@ -290,7 +337,10 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
   	"_parent_id" integer NOT NULL,
   	"_path" text NOT NULL,
   	"id" varchar PRIMARY KEY NOT NULL,
-  	"search_properties" varchar,
+  	"filter_area_1" varchar,
+  	"filter_area_2" varchar,
+  	"filter_type" "enum_pages_blocks_search_properties_filter_type",
+  	"filter_ownership" "enum_pages_blocks_search_properties_filter_ownership",
   	"block_name" varchar
   );
   
@@ -311,6 +361,25 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
   	"_locale" "_locales" NOT NULL,
   	"_parent_id" integer NOT NULL,
   	CONSTRAINT "pages_locales_locale_parent_id_unique" UNIQUE("_locale","_parent_id")
+  );
+  
+  CREATE TABLE IF NOT EXISTS "payload_locked_documents" (
+  	"id" serial PRIMARY KEY NOT NULL,
+  	"global_slug" varchar,
+  	"updated_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
+  	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL
+  );
+  
+  CREATE TABLE IF NOT EXISTS "payload_locked_documents_rels" (
+  	"id" serial PRIMARY KEY NOT NULL,
+  	"order" integer,
+  	"parent_id" integer NOT NULL,
+  	"path" varchar NOT NULL,
+  	"users_id" integer,
+  	"media_id" integer,
+  	"agents_id" integer,
+  	"properties_id" integer,
+  	"pages_id" integer
   );
   
   CREATE TABLE IF NOT EXISTS "payload_preferences" (
@@ -507,6 +576,12 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
   END $$;
   
   DO $$ BEGIN
+   ALTER TABLE "properties_blocks_hero_search_locales" ADD CONSTRAINT "properties_blocks_hero_search_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."properties_blocks_hero_search"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
    ALTER TABLE "properties_blocks_search_properties" ADD CONSTRAINT "properties_blocks_search_properties_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."properties"("id") ON DELETE cascade ON UPDATE no action;
   EXCEPTION
    WHEN duplicate_object THEN null;
@@ -573,6 +648,12 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
   END $$;
   
   DO $$ BEGIN
+   ALTER TABLE "pages_blocks_hero_search_locales" ADD CONSTRAINT "pages_blocks_hero_search_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages_blocks_hero_search"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
    ALTER TABLE "pages_blocks_search_properties" ADD CONSTRAINT "pages_blocks_search_properties_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages"("id") ON DELETE cascade ON UPDATE no action;
   EXCEPTION
    WHEN duplicate_object THEN null;
@@ -586,6 +667,42 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
   
   DO $$ BEGIN
    ALTER TABLE "pages_locales" ADD CONSTRAINT "pages_locales_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pages"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
+   ALTER TABLE "payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_parent_fk" FOREIGN KEY ("parent_id") REFERENCES "public"."payload_locked_documents"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
+   ALTER TABLE "payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_users_fk" FOREIGN KEY ("users_id") REFERENCES "public"."users"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
+   ALTER TABLE "payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_media_fk" FOREIGN KEY ("media_id") REFERENCES "public"."media"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
+   ALTER TABLE "payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_agents_fk" FOREIGN KEY ("agents_id") REFERENCES "public"."agents"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
+   ALTER TABLE "payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_properties_fk" FOREIGN KEY ("properties_id") REFERENCES "public"."properties"("id") ON DELETE cascade ON UPDATE no action;
+  EXCEPTION
+   WHEN duplicate_object THEN null;
+  END $$;
+  
+  DO $$ BEGIN
+   ALTER TABLE "payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_pages_fk" FOREIGN KEY ("pages_id") REFERENCES "public"."pages"("id") ON DELETE cascade ON UPDATE no action;
   EXCEPTION
    WHEN duplicate_object THEN null;
   END $$;
@@ -706,6 +823,11 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX IF NOT EXISTS "pages_blocks_search_properties_path_idx" ON "pages_blocks_search_properties" USING btree ("_path");
   CREATE INDEX IF NOT EXISTS "pages_slug_idx" ON "pages" USING btree ("slug");
   CREATE INDEX IF NOT EXISTS "pages_created_at_idx" ON "pages" USING btree ("created_at");
+  CREATE INDEX IF NOT EXISTS "payload_locked_documents_global_slug_idx" ON "payload_locked_documents" USING btree ("global_slug");
+  CREATE INDEX IF NOT EXISTS "payload_locked_documents_created_at_idx" ON "payload_locked_documents" USING btree ("created_at");
+  CREATE INDEX IF NOT EXISTS "payload_locked_documents_rels_order_idx" ON "payload_locked_documents_rels" USING btree ("order");
+  CREATE INDEX IF NOT EXISTS "payload_locked_documents_rels_parent_idx" ON "payload_locked_documents_rels" USING btree ("parent_id");
+  CREATE INDEX IF NOT EXISTS "payload_locked_documents_rels_path_idx" ON "payload_locked_documents_rels" USING btree ("path");
   CREATE INDEX IF NOT EXISTS "payload_preferences_key_idx" ON "payload_preferences" USING btree ("key");
   CREATE INDEX IF NOT EXISTS "payload_preferences_created_at_idx" ON "payload_preferences" USING btree ("created_at");
   CREATE INDEX IF NOT EXISTS "payload_preferences_rels_order_idx" ON "payload_preferences_rels" USING btree ("order");
@@ -737,6 +859,7 @@ export async function down({ payload, req }: MigrateDownArgs): Promise<void> {
   DROP TABLE "properties_blocks_rich_text_locales";
   DROP TABLE "properties_blocks_hero_search_images";
   DROP TABLE "properties_blocks_hero_search";
+  DROP TABLE "properties_blocks_hero_search_locales";
   DROP TABLE "properties_blocks_search_properties";
   DROP TABLE "properties";
   DROP TABLE "properties_locales";
@@ -745,9 +868,12 @@ export async function down({ payload, req }: MigrateDownArgs): Promise<void> {
   DROP TABLE "pages_blocks_rich_text_locales";
   DROP TABLE "pages_blocks_hero_search_images";
   DROP TABLE "pages_blocks_hero_search";
+  DROP TABLE "pages_blocks_hero_search_locales";
   DROP TABLE "pages_blocks_search_properties";
   DROP TABLE "pages";
   DROP TABLE "pages_locales";
+  DROP TABLE "payload_locked_documents";
+  DROP TABLE "payload_locked_documents_rels";
   DROP TABLE "payload_preferences";
   DROP TABLE "payload_preferences_rels";
   DROP TABLE "payload_migrations";

@@ -417,7 +417,7 @@ export interface Property {
         id?: string | null;
       }[]
     | null;
-  sections?: (RichTextBlock | HeroSearchBlock | SearchPropertiesBlock)[] | null;
+  sections?: (RichTextBlock | HeroSearchBlock | SearchBlock | SearchPropertiesBlock)[] | null;
   agent?: (number | null) | Agent;
   related_properties?: (number | Property)[] | null;
   updatedAt: string;
@@ -453,10 +453,27 @@ export interface HeroSearchBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "SearchBlock".
+ */
+export interface SearchBlock {
+  title?: string | null;
+  filter_area?: string | null;
+  filter_sub_area?: string | null;
+  filter_types?:
+    | ('Land' | 'Villa Rental' | 'Villa / House / Apartment' | 'Hotel, Resort, Villa Complex' | 'Commercial Space')[]
+    | null;
+  filter_ownerships?: ('Rental' | 'Freehold' | 'Leasehold')[] | null;
+  filter_price_start?: number | null;
+  filter_price_end?: number | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'Search';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "SearchPropertiesBlock".
  */
 export interface SearchPropertiesBlock {
-  search_properties?: string | null;
   filter_area_1?: string | null;
   filter_area_2?: string | null;
   filter_type?:
@@ -479,7 +496,7 @@ export interface Page {
   keywords?: string | null;
   template?: ('Default' | 'Home' | 'About' | 'Contact') | null;
   image?: (number | null) | Media;
-  sections?: (RichTextBlock | HeroSearchBlock | SearchPropertiesBlock)[] | null;
+  sections?: (RichTextBlock | HeroSearchBlock | SearchBlock | SearchPropertiesBlock)[] | null;
   updatedAt: string;
   createdAt: string;
 }

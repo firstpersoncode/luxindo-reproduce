@@ -14,7 +14,7 @@ const ContactAgent: React.FC = () => {
 
   return (
     <Box bg="white">
-      <Container maxW="container.xl">
+      <Container px={{ base: '24px', md: '48px' }} maxW="container.xl">
         <Text
           color="rgba(44, 62, 80, 1)"
           fontSize="20px"

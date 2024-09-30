@@ -157,7 +157,7 @@ const Actions: React.FC = () => {
       </Button>
 
       <Button
-        alignSelf={{ base: 'flex-start', md: 'flex-end' }}
+        alignSelf={{ base: 'flex-start' }}
         marginTop={{ base: '18px', md: '32px' }}
         backgroundColor="brand.primary"
         color="white"

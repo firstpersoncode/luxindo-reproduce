@@ -6,7 +6,7 @@ import Title from './Title'
 const ArchitectureSection: React.FC = () => {
   return (
     <Box bg="white">
-      <Container maxW="container.xl">
+      <Container px={{ base: '24px', md: '48px' }} maxW="container.xl">
         <Title />
         <ArchitectureList />
       </Container>

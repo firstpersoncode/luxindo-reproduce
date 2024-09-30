@@ -11,7 +11,7 @@ const DescriptionSection: React.FC = ({}) => {
 
   return (
     <Box bg="white" as="section">
-      <Container maxW="container.xl">
+      <Container px={{ base: '24px', md: '48px' }} maxW="container.xl">
         <Box
           flexGrow={1}
           color="rgba(96, 110, 124, 1)"

@@ -21,7 +21,7 @@ const PropertyListing: React.FC = () => {
 
   return (
     <Box bg="white">
-      <Container maxW="container.xl">
+      <Container px={{ base: '24px', md: '48px' }} maxW="container.xl">
         <Box maxWidth="1200px" margin="0 auto" padding={4}>
           {/* <ImageGallery images={galleryImages} /> */}
           <PropertyGrid properties={properties} />

@@ -11,7 +11,7 @@ const PropertyDetail: React.FC = () => {
 
   return (
     <Box bg="white">
-      <Container maxW="container.xl">
+      <Container px={{ base: '24px', md: '48px' }} maxW="container.xl">
         <Box
           display="flex"
           width="775px"

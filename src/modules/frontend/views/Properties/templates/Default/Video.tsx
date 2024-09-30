@@ -10,7 +10,7 @@ const Video: React.FC = () => {
 
   return (
     <Box bg="white" as="header">
-      <Container maxW="container.xl">
+      <Container px={{ base: '24px', md: '48px' }} maxW="container.xl">
         <Box textAlign="left" p="20px" maxW={{ base: '100%' }}>
           <iframe
             width="560"

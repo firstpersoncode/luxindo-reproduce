@@ -9,7 +9,7 @@ const PropertyTitle: React.FC = () => {
   } = useContextProvider()
   return (
     <Box bg="white" as="header">
-      <Container maxW="container.xl">
+      <Container px={{ base: '24px', md: '48px' }} maxW="container.xl">
         <Box borderBottom="1px solid" borderColor="gray.300" py={3}>
           <Skeleton isLoaded={!isLoading}>
             <Heading

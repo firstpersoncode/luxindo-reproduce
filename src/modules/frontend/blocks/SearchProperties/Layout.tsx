@@ -5,7 +5,7 @@ import SearchForm from './SearchForm'
 const Layout: React.FC<any> = () => {
   return (
     <Box bg="white" mt="100px">
-      <Container maxW="container.xl">
+      <Container px={{ base: '24px', md: '48px' }} maxW="container.xl">
         <Box background="brand.secondary" padding="18px">
           <SearchForm />
         </Box>

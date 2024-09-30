@@ -40,14 +40,21 @@ const CheckBoxSelect: React.FC<{
           {icon && (
             <Flex alignItems="start" gap="8px">
               <Image src={icon} alt="" width={16} height={16} />
-              <Text fontSize="12px" fontWeight={500} textTransform="uppercase">
-                {label}
-              </Text>
-              {values.length > 0 && (
-                <Tag size="sm" borderRadius="full" variant="solid" bgColor="red">
-                  <TagLabel fontSize="xs">{values.length}</TagLabel>
-                </Tag>
-              )}
+              <Flex
+                flexGrow={1}
+                alignItems="center"
+                gap="8px"
+                justifyContent={{ base: 'space-between', lg: 'flex-start' }}
+              >
+                <Text fontSize="12px" fontWeight={500} textTransform="uppercase">
+                  {label}
+                </Text>
+                {values.length > 0 && (
+                  <Tag size="sm" borderRadius="full" variant="solid" bgColor="red">
+                    <TagLabel fontSize="xs">{values.length}</TagLabel>
+                  </Tag>
+                )}
+              </Flex>
             </Flex>
           )}
           <Flex

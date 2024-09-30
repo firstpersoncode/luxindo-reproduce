@@ -20,7 +20,7 @@ export default function Modal({ isOpen, onClose, size, children }: SizeExamplePr
     <CKModal onClose={onClose} size={size} isOpen={isOpen}>
       <ModalOverlay />
 
-      <ModalContent backgroundColor="rgba(0,0,0,0.5)" backdropFilter="blur(5px)">
+      <ModalContent backgroundColor="rgba(0,0,0,0.25)" backdropFilter="blur(10px)">
         <ModalBody>{children}</ModalBody>
       </ModalContent>
       <Flex zIndex={2000} position="fixed" right="18px" top="18px" alignItems="center">

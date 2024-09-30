@@ -2,7 +2,7 @@
 
 import { LOCATIONS } from '@/modules/options'
 import { useField, useWatchForm } from '@payloadcms/ui'
-import { useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 
 const LocationSelectField: React.FC<{ path: string; parentPath: string }> = ({
   path,
@@ -10,6 +10,7 @@ const LocationSelectField: React.FC<{ path: string; parentPath: string }> = ({
 }) => {
   const { getDataByPath } = useWatchForm()
   const _parentValue = getDataByPath(parentPath)
+
   const { value, setValue } = useField<string>({
     path,
   })
@@ -18,6 +19,17 @@ const LocationSelectField: React.FC<{ path: string; parentPath: string }> = ({
     if (!_parentValue) return []
     return LOCATIONS.find((item) => item.value === _parentValue)?.children ?? []
   }, [_parentValue])
+
+  useEffect(() => {
+    if (!_parentValue) setValue(null)
+    const selectedOption = LOCATIONS.find((option) => option.value === _parentValue)
+    const children = selectedOption?.children
+    if (!children?.length) setValue(null)
+    else {
+      const notInChildren = children.every((child) => child.value !== value)
+      if (notInChildren) setValue(null)
+    }
+  }, [_parentValue, value])
 
   const disabled = useMemo(() => !(_parentValue && options.length > 0), [_parentValue, options])
 

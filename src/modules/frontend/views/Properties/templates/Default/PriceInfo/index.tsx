@@ -11,7 +11,7 @@ const FinancialDisplay: React.FC = ({}) => {
   } = useContextProvider()
   return (
     <Box bg="white">
-      <Container maxW="container.xl">
+      <Container px={{ base: '24px', md: '48px' }} maxW="container.xl">
         <Flex
           gap="20px"
           flexWrap="wrap"

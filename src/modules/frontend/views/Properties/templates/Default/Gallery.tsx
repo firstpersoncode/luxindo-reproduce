@@ -31,7 +31,7 @@ const Gallery: React.FC = () => {
   return (
     hydratedImages.length > 0 && (
       <Box bg="white">
-        <Container maxW="container.xl">
+        <Container px={{ base: '24px', md: '48px' }} maxW="container.xl">
           <Slider {...settings}>
             {hydratedImages.map((image: any, index: number) => (
               <Box
