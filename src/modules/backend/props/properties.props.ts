@@ -4,6 +4,7 @@ import { GetStaticPropsContext } from 'next'
 import { getPayload } from 'payload'
 
 import { getProps as getSearchPropertiesBlockProps } from './block.search-properties.props'
+import { getProps as getSearchBlockProps } from './block.search.props'
 
 export const getPaths = async () => {
   const payload = await getPayload({
@@ -29,7 +30,7 @@ export const getPaths = async () => {
     .flat()
 }
 
-const BLOCKS_HANDLERS = [getSearchPropertiesBlockProps]
+const BLOCKS_HANDLERS = [getSearchPropertiesBlockProps, getSearchBlockProps]
 
 export const getProps = async (resp: any, ctx: GetStaticPropsContext) => {
   const payload = await getPayload({

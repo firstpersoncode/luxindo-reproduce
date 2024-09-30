@@ -3,7 +3,6 @@ import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import { useRouter } from 'next/router'
 import { useSearchParams } from 'next/navigation'
 import { LOCALES } from '@/modules/locales'
-import axios from 'axios'
 
 export interface IContext {
   isReady?: boolean
@@ -39,51 +38,21 @@ const context: IContext = {
 
 const Context = createContext(context)
 
-const hydrateProps = async (params: any): Promise<any> => {
-  const qs =
-    '?' +
-    Object.keys(params)
-      .map((key) => key + '=' + params[key])
-      .join('&')
-
-  const { data: header } = await axios.get(`/api/globals/header/${qs}`)
-
-  const { data: footer } = await axios.get(`/api/globals/footer/${qs}`)
-
-  return { header, footer }
-}
-
 const useController = (_context: IContext) => {
-  const [isReady, setIsReady] = useState(_context.isReady)
   const [isLoading, setIsLoading] = useState(_context.isLoading)
   const [isRouteChanging, setIsRouteChanging] = useState(_context.isRouteChanging)
   const [isScrolledToTop, setIsScrolledToTop] = useState(_context.isScrolledToTop)
   const [locale, setLocale] = useState(_context.locale)
-  const [data, setData] = useState<any>(_context.data)
 
   const router = useRouter()
   const searchParams = useSearchParams()
   const [currency, setCurrency] = useState(searchParams?.get('currency') ?? _context.currency)
 
   useEffect(() => {
-    // setTimeout(() => {
-    //   setIsLoading(false)
-    // }, 1000)
-    setIsReady(true)
+    setTimeout(() => {
+      setIsLoading(false)
+    }, 1000)
   }, [])
-
-  useEffect(() => {
-    if (!!isReady) {
-      hydrateProps({ locale: _context.locale })
-        .then((res) => {
-          setTimeout(() => {
-            setIsLoading(false)
-          }, 1000)
-          setData(res)
-        })
-        .catch(console.error)
-    }
-  }, [isReady, _context.locale])
 
   useEffect(() => {
     const handleRouteChange = () => {
@@ -123,7 +92,7 @@ const useController = (_context: IContext) => {
     locale,
     locales: _context.locales,
     currency,
-    data,
+    data: _context.data,
     setLocale,
     setCurrency,
     getLocale,

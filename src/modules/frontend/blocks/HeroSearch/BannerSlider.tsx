@@ -2,26 +2,13 @@ import { Box } from '@chakra-ui/react'
 import { useContextProvider } from './providers'
 import Image from 'next/image'
 import Slider from 'react-slick'
-import { useMemo } from 'react'
 
 const BannerSlider: React.FC = () => {
   const { images = [] } = useContextProvider()
 
-  const hydratedImages = useMemo(() => {
-    if (!images?.length) return []
-    const banner = images.filter((i) => !!i.file?.url)
-
-    return banner.map((image: any) => {
-      const url = image.file.url
-      return {
-        file: { url, alt: image.file.alt },
-      }
-    })
-  }, [images])
-
   return (
     <>
-      {hydratedImages?.length > 0 && (
+      {images?.length > 0 && (
         <Box width="100%" height="100%" position="absolute" top={0} left={0}>
           <Slider
             {...{
@@ -37,7 +24,7 @@ const BannerSlider: React.FC = () => {
               autoplay: true,
             }}
           >
-            {hydratedImages.map((image, index) => (
+            {images.map((image, index) => (
               <Box position="relative" key={index} maxW="100%" h="100vh">
                 <Image
                   src={image.file.url}
