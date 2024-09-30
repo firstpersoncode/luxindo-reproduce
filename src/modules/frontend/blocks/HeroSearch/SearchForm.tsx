@@ -37,7 +37,7 @@ const SearchField: React.FC<SearchFieldProps> = ({
       icon={icon}
       label={label}
       placeholder={placeholder}
-      options={options ?? []}
+      options={options || []}
       values={value as string[]}
       onChange={onChange}
     />
@@ -46,13 +46,13 @@ const SearchField: React.FC<SearchFieldProps> = ({
       icon={icon}
       label={label}
       placeholder={placeholder}
-      options={options ?? []}
+      options={options || []}
       values={value as string[]}
       subValues={subValues as string[]}
       onChange={onChange}
     />
   ) : (
-    <Flex mb="18px" flexDirection="column" flexGrow={1} width={{ base: 'full', md: 'full', lg: 'auto' }}>
+    <>
       {icon && (
         <Flex alignItems="start" gap="8px">
           <Image src={icon} alt="" width={16} height={16} />
@@ -76,59 +76,81 @@ const SearchField: React.FC<SearchFieldProps> = ({
           onChange={onChange}
         />
       </Flex>
-    </Flex>
+    </>
   )
 
 const Form: React.FC = () => {
   const { getLocale, filter, setFilter } = useContextProvider()
 
   return (
-    <Flex alignItems="center" gap="24px" color="white" flexWrap="wrap">
-      <SearchField
-        icon="/icons/quick_reference_all.png"
-        label={getLocale('REF. NO')}
-        placeholder={getLocale('e.g. RV392')}
-        value={filter.sku}
-        onChange={(e) => setFilter({ sku: e.target.value })}
-      />
-      <SearchField
-        icon="/icons/location_on.png"
-        label={getLocale('Location')}
-        placeholder={getLocale('Any')}
-        isTreeSelect
-        value={filter.area_1}
-        subValues={filter.area_2}
-        options={LOCATIONS}
-        onChange={({ values, subValues }: any) => setFilter({ area_1: values, area_2: subValues })}
-      />
-      <SearchField
-        icon="/icons/home_work.png"
-        label={getLocale('Type')}
-        placeholder={getLocale('Any')}
-        isSelect
-        value={filter.type}
-        options={PROPERTY_TYPES.map((t) => t.value)}
-        onChange={(items) => setFilter({ type: items })}
-      />
-      <SearchField
-        icon="/icons/key.png"
-        label={getLocale('Ownership')}
-        placeholder={getLocale('Any')}
-        isSelect
-        value={filter.ownership}
-        options={PROPERTY_OWNERSHIP.map((o) => o.value)}
-        onChange={(items) => setFilter({ ownership: items })}
-      />
-      <PriceRange
-        label={getLocale('Price Range')}
-        placeholder={getLocale('Any')}
-        start={filter.price_start as number}
-        end={filter.price_end as number}
-        step={100000000}
-        onChange={([start, end]) =>
-          setFilter({ price_start: Number(start), price_end: Number(end) })
-        }
-      />
+    <Flex
+      w="100%"
+      alignItems={{ base: 'flex-start', lg: 'center' }}
+      gap="24px"
+      color="white"
+      flexDir={{ base: 'column', lg: 'row' }}
+    >
+      <Box minW={{ base: '100%', lg: 'auto' }}>
+        <SearchField
+          icon="/icons/quick_reference_all.png"
+          label={getLocale('REF. NO')}
+          placeholder={getLocale('e.g. RV392')}
+          value={filter.sku}
+          onChange={(e) => setFilter({ sku: e.target.value })}
+        />
+      </Box>
+
+      <Box minW={{ base: '100%', lg: 'auto' }}>
+        <SearchField
+          icon="/icons/location_on.png"
+          label={getLocale('Location')}
+          placeholder={getLocale('Any')}
+          isTreeSelect
+          value={filter.area_1}
+          subValues={filter.area_2}
+          options={LOCATIONS}
+          onChange={({ values, subValues }: any) =>
+            setFilter({ area_1: values, area_2: subValues })
+          }
+        />
+      </Box>
+
+      <Box minW={{ base: '100%', lg: 'auto' }}>
+        <SearchField
+          icon="/icons/home_work.png"
+          label={getLocale('Type')}
+          placeholder={getLocale('Any')}
+          isSelect
+          value={filter.type}
+          options={PROPERTY_TYPES.map((t) => t.value)}
+          onChange={(items) => setFilter({ type: items })}
+        />
+      </Box>
+
+      <Box minW={{ base: '100%', lg: 'auto' }}>
+        <SearchField
+          icon="/icons/key.png"
+          label={getLocale('Ownership')}
+          placeholder={getLocale('Any')}
+          isSelect
+          value={filter.ownership}
+          options={PROPERTY_OWNERSHIP.map((o) => o.value)}
+          onChange={(items) => setFilter({ ownership: items })}
+        />
+      </Box>
+
+      <Box minW={{ base: '100%', lg: '400px' }}>
+        <PriceRange
+          label={getLocale('Price Range')}
+          placeholder={getLocale('Any')}
+          start={filter.price_start as number}
+          end={filter.price_end as number}
+          step={100000000}
+          onChange={([start, end]) =>
+            setFilter({ price_start: Number(start), price_end: Number(end) })
+          }
+        />
+      </Box>
     </Flex>
   )
 }
@@ -152,7 +174,7 @@ const Actions: React.FC = () => {
       >
         <Image src="/icons/search.png" alt="Search" width={24} height={24} />
         <Text className="cormorant" textTransform="uppercase">
-          {cta ?? getLocale('Search')}
+          {cta || getLocale('Search')}
         </Text>
       </Button>
 
@@ -170,7 +192,7 @@ const Actions: React.FC = () => {
       >
         <Image src="/icons/search.png" alt="Search" width={24} height={24} />
         <Text className="cormorant" textTransform="uppercase">
-          {cta ?? getLocale('Search Property')}
+          {cta || getLocale('Search Property')}
         </Text>
       </Button>
 
@@ -198,7 +220,7 @@ const Actions: React.FC = () => {
           >
             <Image src="/icons/search.png" alt="Search" width={24} height={24} />
             <Text className="cormorant" textTransform="uppercase">
-              {cta ?? getLocale('Search Property')}
+              {cta || getLocale('Search Property')}
             </Text>
           </Button>
         </VStack>

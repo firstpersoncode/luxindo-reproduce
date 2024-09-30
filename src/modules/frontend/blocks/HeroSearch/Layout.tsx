@@ -34,7 +34,7 @@ const Layout: React.FC = () => {
           textTransform="uppercase"
           className='cormorant'
         >
-          {title ?? getLocale('Your Gateway to Prestige Living')}
+          {title || getLocale('Your Gateway to Prestige Living')}
         </Text>
         <SearchForm />
       </Container>

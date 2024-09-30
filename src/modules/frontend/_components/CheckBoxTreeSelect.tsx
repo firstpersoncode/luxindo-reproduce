@@ -40,12 +40,7 @@ const CheckBoxTreeSelect: React.FC<{
   return (
     <Popover>
       <PopoverTrigger>
-        <Flex
-          mb="18px"
-          flexDirection="column"
-          flexGrow={1}
-          width={{ base: 'full', md: 'full', lg: 'auto' }}
-        >
+        <Box>
           {icon && (
             <Flex alignItems="start" gap="8px">
               <Image src={icon} alt="" width={16} height={16} />
@@ -121,7 +116,7 @@ const CheckBoxTreeSelect: React.FC<{
               height="20px"
             />
           </Flex>
-        </Flex>
+        </Box>
       </PopoverTrigger>
       <PopoverContent border="none" minW={{ base: '90vw', md: '80vw', lg: '50vw' }}>
         <PopoverArrow />
